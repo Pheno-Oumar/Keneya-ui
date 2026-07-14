@@ -1,0 +1,18 @@
+<aside class="sidebar">
+	<div class="logo">
+		<img src="assets/logo.png" alt="Logo" />
+	</div>
+
+	<nav class="menu">
+		@for (item of menuItems; track $index) {
+		<a [routerLink]="item.route" routerLinkActive="active" class="menu-item">
+			<mat-icon>{{item.icon}}</mat-icon>
+			<span>{{ item.label }}</span>
+		</a>
+		}
+	</nav>
+
+	<button class="deconnexion" type="button" (click)="deconnexion()">
+		Deconnexion
+	</button>
+</aside>

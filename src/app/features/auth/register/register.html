@@ -1,0 +1,55 @@
+<div class="main">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                <img matCardImage src="keneya-logo.png" alt="keneya-logo">
+                <strong>KENEYA</strong><strong class="kolochili"> KOLOCHILI</strong>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <h1> Créer un compte</h1>
+            <mat-hint>Rejoignez-nous et prenez soin de votre santé</mat-hint>
+            <form [formGroup]="form" (ngSubmit)="inscrire()">
+                <mat-form-field appearance="outline">
+                    <mat-label>Nom</mat-label>
+                    <input matInput type="text" placeholder="entrez votre nom" formControlName="nom">
+                    <mat-hint>Le nom doit avoir au moins 3 caracteres</mat-hint>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Prenom</mat-label>
+                    <input matInput type="text" placeholder="entrez votre prenom" formControlName="prenom">
+                    <mat-hint>Le prenom doit avoir au moins 3 caracteres</mat-hint>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="text" placeholder="entrez votre email" formControlName="email">
+                    <mat-hint>exemple: qwerty@exemple.com</mat-hint>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Mot de passe</mat-label>
+                    <input matInput type="password" placeholder="entrez votre email" formControlName="password">
+                    <mat-hint>Le mot de passe doit avoir au moins 5 caracteres</mat-hint>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Telephone</mat-label>
+                    <input matInput type="text" placeholder="entrez votre email" formControlName="telephone">
+                    <mat-hint>exemple: 70000000</mat-hint>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Date de naissance</mat-label>
+                    <input matInput type="date" placeholder="entrez votre email" formControlName="dateNaissance">
+                </mat-form-field>
+                <div  class="pheno">
+                    <button type="submit">
+                        S'inscrire
+                    </button>
+                </div>
+
+            </form>
+        </mat-card-content>
+        <mat-card-footer>
+            <strong style="font-size: 15px; margin-top: 5px;">Deja un compte? <a style="color: #43A37A; text-decoration: none;" routerLink="/login">se connecter</a></strong>
+        </mat-card-footer>
+        <br>
+    </mat-card>
+</div>

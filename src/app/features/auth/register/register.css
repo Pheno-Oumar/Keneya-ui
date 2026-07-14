@@ -1,0 +1,45 @@
+.kolochili {
+    color: #43A37A
+}
+
+.main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+mat-card {
+    margin-top: 30px;
+    max-width: 90%;
+    width: 500px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.pheno{
+display: flex;
+justify-content: center;
+}
+
+button{
+    width: 400px;
+    height: 40px;
+    border-radius: 20px;
+    border-style: none;
+    font-size: 20px;
+    color: #fff;
+    background-color: #43A37A;
+    cursor: pointer;
+}
+button :active{
+    cursor: progress;
+}
+mat-card-footer{
+    display: flex;
+    justify-content: center;
+}
