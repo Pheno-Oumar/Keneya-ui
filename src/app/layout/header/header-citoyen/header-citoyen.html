@@ -1,0 +1,25 @@
+<header class="page-header">
+	<div class="titres">
+		@if (titre) {
+		<h1>{{ titre }}</h1>
+		}
+		@if (titre) {
+		<p>{{ sousTitre }}</p>
+		}
+
+	</div>
+
+	<div class="actions">
+		<button class="notif-btn" type="button" aria-label="Notifications">
+			<i class="icon-bell"></i>
+			@if (nbNotifications > 0) {
+			<span class="badge">{{ nbNotifications }}</span>
+			}
+		</button>
+
+		<a routerLink="/profil" class="profil-link">
+			<i class="icon-user"></i>
+			<span>Mon profil</span>
+		</a>
+	</div>
+</header>

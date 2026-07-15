@@ -1,0 +1,12 @@
+.citoyen-dashboard-layout{
+    display: flex;
+    justify-content: flex-start;
+}
+.citoyen-dashboard-layout-sidebar{
+    flex: none;
+    width: 280px;
+
+}
+.citoyen-dashboard-layout-conteneur{
+    flex: 1;
+}
