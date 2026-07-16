@@ -1,0 +1,106 @@
+.dashboard-content {
+  padding: 24px 32px 40px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.grid-haut {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.6fr;
+  gap: 20px;
+}
+
+.carte {
+  background: #ffffff;
+  border: 1px solid #eef0ee;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.carte h3 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  color: #4a4a4a;
+}
+
+.carte-mini {
+  position: relative;
+  min-height: 150px;
+}
+
+.chiffre {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0;
+  color: #1f1f1f;
+}
+
+.label {
+  font-size: 13px;
+  color: #8a8a8a;
+}
+
+.icone-fond {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  font-size: 22px;
+  color: #d7ece0;
+}
+
+.carte-rappels {
+  display: flex;
+  flex-direction: column;
+}
+
+.rappel-ligne {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid #eef0ee;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.rappel-ligne .heure {
+  color: #4a4a4a;
+  min-width: 50px;
+}
+
+.rappel-ligne .medicament {
+  font-weight: 600;
+  color: #1f1f1f;
+}
+
+.etat-info {
+  font-size: 13px;
+  color: #8a8a8a;
+  margin-bottom: 10px;
+}
+
+.voir-tous {
+  align-self: center;
+  margin-top: 8px;
+  color: #3fae5c;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.grid-bas {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.carte-placeholder {
+  min-height: 140px;
+  background: #e6e6e6;
+  border: none;
+}
+
+.carte-large {
+  min-height: 160px;
+}
