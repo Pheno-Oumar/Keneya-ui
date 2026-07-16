@@ -36,3 +36,11 @@ body {
   margin: 0;
   height: 100%;
 }
+
+.custom-dialog-container {
+  .mat-mdc-dialog-container {
+    --mdc-dialog-container-shape: 16px; // Pour Angular Material 3 / MDC
+    border-radius: 25px !important; // Sécurité pour écraser les styles par défaut
+    overflow: hidden; // S'assure que le contenu ne dépasse pas des bords arrondis
+  }
+}

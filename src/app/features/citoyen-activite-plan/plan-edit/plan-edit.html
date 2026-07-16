@@ -1,0 +1,57 @@
+<div class="modal-container">
+  <div class="modal-header">
+    <h1>Modifier le plan d'activité</h1>
+    <mat-icon class="close-icon">close</mat-icon>
+  </div>
+
+  <div class="form-group">
+    <label>choisissez une activité</label>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-select value="run">
+        <mat-option value="run">Course à pieds</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="planning-section">
+    <div class="section-header">
+      <label>Plannings (jours et heures)</label>
+      <button mat-flat-button class="btn-add-session">
+        <mat-icon>add</mat-icon> Ajouter une séance
+      </button>
+    </div>
+
+    <div class="session-row">
+      <div class="input-box day-box">
+        <mat-icon>calendar_today</mat-icon> Lundi
+      </div>
+      <div class="input-box time-box">
+        <mat-icon>access_time</mat-icon> 08 h 00
+        <mat-icon class="delete-icon">delete_outline</mat-icon>
+      </div>
+      <div class="reorder-icons">
+        <mat-icon>expand_less</mat-icon>
+      </div>
+    </div>
+
+    <div class="session-row">
+      <div class="input-box day-box">
+        <mat-icon>calendar_today</mat-icon> Samedi
+      </div>
+      <div class="input-box time-box">
+        <mat-icon>access_time</mat-icon> 08 h 00
+        <mat-icon class="delete-icon">delete_outline</mat-icon>
+      </div>
+      <div class="reorder-icons">
+        <mat-icon>expand_more</mat-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-actions">
+    <button mat-button class="btn-annuler">Annuler</button>
+    <button mat-flat-button class="btn-enregistrer-active">
+       <mat-icon>check</mat-icon> Enregistrer
+    </button>
+  </div>
+</div>

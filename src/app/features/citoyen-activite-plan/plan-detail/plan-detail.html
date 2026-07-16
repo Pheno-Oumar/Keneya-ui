@@ -1,0 +1,31 @@
+<div class="modal-container detail-modal">
+  <div class="modal-header">
+    <div class="icon-header" [style.color]="data.color">
+        <mat-icon>{{data.icon}}</mat-icon>
+    </div>
+    <h1>Détails de l'activité</h1>
+    <mat-icon class="close-icon" (click)="close()">close</mat-icon>
+  </div>
+
+  <div class="detail-content">
+    <div class="activity-info">
+        <h2>{{data.name}}</h2>
+        <p class="session-count">{{data.sessions}} séances planifiées par semaine</p>
+    </div>
+
+    <div class="sessions-list">
+        <h3>Plannings actuels</h3>
+        <div class="session-item" *ngFor="let s of data.plannedSessions">
+            <div class="day-tag">{{s.day}}</div>
+            <div class="time-tag"><mat-icon>access_time</mat-icon> {{s.time}}</div>
+        </div>
+    </div>
+  </div>
+
+  <div class="modal-actions">
+    <button mat-stroked-button class="btn-secondary" (click)="close()">Fermer</button>
+    <button mat-flat-button class="btn-modify" (click)="onEdit()">
+       <mat-icon>edit</mat-icon> Modifier le plan
+    </button>
+  </div>
+</div>
