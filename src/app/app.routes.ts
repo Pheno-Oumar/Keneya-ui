@@ -3,7 +3,9 @@ import { App } from './app';
 import { Accueil } from './features/accueil/accueil';
 import { LoginComponent } from './features/auth/login/login-component';
 import { Register } from './features/auth/register/register';
-import { CitoyenSidenav } from './layout/sidenav/citoyen-sidenav/citoyen-sidenav';
+import { CitoyenLayout } from './layout/citoyen-layout/citoyen-layout/citoyen-layout';
+import { Citoyen } from './features/dashboard/citoyen/citoyen';
+import { Test } from './features/test/test';
 
 export const routes: Routes = [
     {
@@ -16,6 +18,14 @@ export const routes: Routes = [
         path: "register", component: Register
     },
     {
-        path: "citoyen", component: CitoyenSidenav
+        path: "citoyen", component: CitoyenLayout ,
+         children:[
+            {
+                path: "", component: Citoyen
+            }
+            ,{
+                path: "test" , component:Test
+            }
+        ]
     }
 ];
