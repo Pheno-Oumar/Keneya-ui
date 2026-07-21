@@ -1,9 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 
-body{
-padding: 0;
-margin: 0;
-box-sizing: border-box;
-width: 100%;
-height: 100%;
+html {
+  height: 100%;
 }
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+app-root {
+  display: block; /* app-root est un élément inline par défaut, sans ça height ne s'applique pas bien */
+  height: 100%;
+}
+	

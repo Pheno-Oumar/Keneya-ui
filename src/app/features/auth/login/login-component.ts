@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../../../core/services/auth-service';
-import { RouterLink, Router } from "@angular/router";
+import { RouterLink, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-component',
@@ -21,10 +21,10 @@ import { RouterLink, Router } from "@angular/router";
     MatButtonModule,
     MatIconModule,
     MatCardModule,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './login-component.html',
-  styleUrl: './login-component.css'
+  styleUrl: './login-component.css',
 })
 export class LoginComponent {
   loginForm: FormGroup;
@@ -33,12 +33,12 @@ export class LoginComponent {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,// On garde juste le service pour l'appel API
-    private router: Router
+    private authService: AuthService, // On garde juste le service pour l'appel API
+    private router: Router,
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
 
@@ -50,42 +50,40 @@ export class LoginComponent {
       this.authService.login(this.loginForm.value).subscribe({
         next: (response: any) => {
           this.isLoading = false;
-          localStorage.setItem("role", response.data);
+          localStorage.setItem('role', response.data);
           // ✅ On affiche juste la réponse du backend dans la console
           console.log('✅ Réponse du backend reçue :', response);
-          console.log(localStorage.getItem("role"))
+          console.log(localStorage.getItem('role'));
 
           if (response.success === true) {
-            console.log('🎉 Connexion réussie ! Le cookie de session est stocké par le navigateur.');
+            console.log(
+              '🎉 Connexion réussie ! Le cookie de session est stocké par le navigateur.',
+            );
             // Plus tard, on ajoutera : this.router.navigate(['/dashboard']);
           } else {
             // Si le backend renvoie success: false
             this.errorMessage = response.message || 'Identifiants incorrects.';
           }
-
-          if (response.data == "CITOYEN") {
+          if (response.data.role == 'CITOYEN') {
             this.router.navigate(['/citoyen']);
-          } else if (response.data == "ADMIN") {
+          } else if (response.data == 'ADMIN') {
             this.router.navigate(['/admin']);
-          }
-          else if (response.data == "AGENT") {
+          } else if (response.data == 'AGENT') {
+            this.router.navigate(['/agent']);
+          } else {
             this.router.navigate(['/agent']);
           }
-          else{
-            this.router.navigate(['/agent']);
-          }
-
         },
         error: (error: HttpErrorResponse) => {
           this.isLoading = false;
-          console.error('❌ Erreur de l\'appel HTTP :', error);
+          console.error("❌ Erreur de l'appel HTTP :", error);
 
           if (error.status === 401 || error.status === 403) {
             this.errorMessage = 'Email ou mot de passe incorrect.';
           } else {
             this.errorMessage = 'Erreur du serveur. Veuillez réessayer plus tard.';
           }
-        }
+        },
       });
     }
   }
