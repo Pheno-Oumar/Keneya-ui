@@ -1,31 +1,92 @@
-<div class="modal-container detail-modal">
-  <div class="modal-header">
-    <div class="icon-header" [style.color]="data.color">
-        <mat-icon>{{data.icon}}</mat-icon>
-    </div>
-    <h1>Détails de l'activité</h1>
-    <mat-icon class="close-icon" (click)="close()">close</mat-icon>
-  </div>
+<div class="modal-container">
 
-  <div class="detail-content">
-    <div class="activity-info">
-        <h2>{{data.name}}</h2>
-        <p class="session-count">{{data.sessions}} séances planifiées par semaine</p>
+    <div class="modal-header">
+
+        <h2>
+
+            {{data.nomActivite}}
+
+        </h2>
+
+        <button
+            mat-icon-button
+            (click)="close()">
+
+            <mat-icon>
+
+                close
+
+            </mat-icon>
+
+        </button>
+
     </div>
 
-    <div class="sessions-list">
-        <h3>Plannings actuels</h3>
-        <div class="session-item" *ngFor="let s of data.plannedSessions">
-            <div class="day-tag">{{s.day}}</div>
-            <div class="time-tag"><mat-icon>access_time</mat-icon> {{s.time}}</div>
+    <div class="modal-body">
+
+        <h3>
+
+            Plannings
+
+        </h3>
+
+        <div
+            class="planning-card"
+            *ngFor="let planning of data.plannings">
+
+            <div class="planning-day">
+
+                <mat-icon>
+
+                    calendar_today
+
+                </mat-icon>
+
+                {{planning.jour}}
+
+            </div>
+
+            <div class="planning-hour">
+
+                <mat-icon>
+
+                    access_time
+
+                </mat-icon>
+
+                {{planning.heure}}
+
+            </div>
+
         </div>
-    </div>
-  </div>
 
-  <div class="modal-actions">
-    <button mat-stroked-button class="btn-secondary" (click)="close()">Fermer</button>
-    <button mat-flat-button class="btn-modify" (click)="onEdit()">
-       <mat-icon>edit</mat-icon> Modifier le plan
-    </button>
-  </div>
+    </div>
+
+    <div class="modal-footer">
+
+        <button
+            mat-button
+            (click)="close()">
+
+            Fermer
+
+        </button>
+
+        <button
+            mat-flat-button
+            color="primary"
+            (click)="onEdit()">
+
+            <mat-icon>
+
+                edit
+
+            </mat-icon>
+
+            Modifier
+
+        </button>
+
+    </div>
+
 </div>

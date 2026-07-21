@@ -4,7 +4,7 @@ export interface CitoyenActivitePlanRequest {
 
     idCitoyen: number;
 
-    idActivité : number;
+    idActivite : number;
 
-    plannning: Planning[]; 
+    plannings: Planning[]; 
 }

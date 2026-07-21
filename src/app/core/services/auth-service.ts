@@ -10,7 +10,7 @@ export class AuthService {
     private http = inject(HttpClient);
 
 
-    private apiUrl = 'http://localhost:8090';
+    private apiUrl = 'http://localhost:8080';
 
     login(credentials: { email: string, password: string }): Observable<any> {
         // TRÈS IMPORTANT : on ajoute withCredentials pour gérer les cookies HttpSession
