@@ -6,6 +6,7 @@ import { Register } from './features/auth/register/register';
 import { CitoyenLayout } from './layout/citoyen-layout/citoyen-layout/citoyen-layout';
 import { Citoyen } from './features/dashboard/citoyen/citoyen';
 import { Test } from './features/test/test';
+import { PublicationComponent } from './features/publications/publication/publication';
 
 export const routes: Routes = [
     {
@@ -27,5 +28,8 @@ export const routes: Routes = [
                 path: "test" , component:Test
             }
         ]
-    }
+    },
+     {
+        path: "publication", component: PublicationComponent
+    },
 ];
