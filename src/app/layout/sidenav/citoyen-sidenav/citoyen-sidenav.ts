@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from '../../../core/services/auth-service';
 
 interface MenuItem {
   label: string;
@@ -15,14 +16,23 @@ interface MenuItem {
   styleUrl: './citoyen-sidenav.css',
 })
 export class CitoyenSidenav {
+  auth = inject(AuthService);
+  router = inject(Router);
   menuItems: MenuItem[] = [
-    { label: 'Tableau de board', icon: 'home', route: '/tableau-de-bord' },
-    { label: 'Rappels', icon: 'alarm', route: '/rappels' },
+    { label: 'Tableau de board', icon: 'home', route: '/citoyen' },
+    { label: 'Rappels', icon: 'alarm', route: 'rappels' },
     { label: 'Activités physiques', icon: 'local_activity', route: '/activites' },
     { label: 'Conseils', icon: 'shield', route: '/conseils' },
     { label: 'Publications', icon: 'book', route: '/publications' },
     { label: 'Statistiques', icon: 'bar_chart', route: '/statistiques' },
   ];
 
-  deconnexion(): void {}
+  deconnexion(): void {
+    this.auth.logout().subscribe({
+      next: (res) => {
+        this.router.navigate(['/login']);
+      },
+      error: (res) => console.log(res),
+    });
+  }
 }
