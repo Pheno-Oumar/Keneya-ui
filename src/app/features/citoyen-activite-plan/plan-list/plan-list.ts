@@ -48,19 +48,13 @@ export class PlanListComponent implements OnInit {
 
   loadPlans() {
 
-    this.service.getAll().subscribe({
-
-      next: (response: ApiResponse<CitoyenActivitePlan[]>) => {
-
-        this.plans = response.data;
-
-      },
-
-      error: console.error
-
-    });
-
-  }
+  this.service.getAll().subscribe({
+  next: (response) => {
+    this.plans = response.data;
+  },
+  error: console.error
+});
+}
 
   openAdd() {
 

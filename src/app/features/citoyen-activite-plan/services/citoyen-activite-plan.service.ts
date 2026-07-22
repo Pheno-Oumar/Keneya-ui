@@ -15,42 +15,42 @@ export class CitoyenActivitePlanService {
   private readonly http = inject(HttpClient);
   private readonly apiUrl = `${environment.apiUrl}/api/plans`;
 
-  getAll(): Observable<ApiResponse<CitoyenActivitePlan[]>> {
-    return this.http.get<ApiResponse<CitoyenActivitePlan[]>>(this.apiUrl);
-  }
+ getAll(): Observable<ApiResponse<CitoyenActivitePlan[]>> {
+  return this.http.get<ApiResponse<CitoyenActivitePlan[]>>(this.apiUrl);
+}
 
-  getById(id: number): Observable<ApiResponse<CitoyenActivitePlan>> {
-    return this.http.get<ApiResponse<CitoyenActivitePlan>>(
-      `${this.apiUrl}/${id}`
-    );
-  }
+getById(id: number): Observable<ApiResponse<CitoyenActivitePlan>> {
+  return this.http.get<ApiResponse<CitoyenActivitePlan>>(
+    `${this.apiUrl}/${id}`
+  );
+}
 
- 
-  create(
-    request: CitoyenActivitePlanRequest
-  ): Observable<ApiResponse<CitoyenActivitePlan>> {
-    return this.http.post<ApiResponse<CitoyenActivitePlan>>(
-      this.apiUrl,
-      request
-    );
-  }
+create(
+  request: CitoyenActivitePlanRequest
+): Observable<ApiResponse<CitoyenActivitePlan>> {
 
-  
-  update(
-    id: number,
-    request: CitoyenActivitePlanRequest
-  ): Observable<ApiResponse<CitoyenActivitePlan>> {
-    return this.http.put<ApiResponse<CitoyenActivitePlan>>(
-      `${this.apiUrl}/${id}`,
-      request
-    );
-  }
+  return this.http.post<ApiResponse<CitoyenActivitePlan>>(
+    this.apiUrl,
+    request
+  );
+}
 
- 
-  delete(id: number): Observable<ApiResponse<void>> {
-    return this.http.delete<ApiResponse<void>>(
-      `${this.apiUrl}/${id}`
-    );
-  }
+update(
+  id: number,
+  request: CitoyenActivitePlanRequest
+): Observable<ApiResponse<CitoyenActivitePlan>> {
+
+  return this.http.put<ApiResponse<CitoyenActivitePlan>>(
+    `${this.apiUrl}/${id}`,
+    request
+  );
+}
+
+delete(id: number): Observable<ApiResponse<void>> {
+
+  return this.http.delete<ApiResponse<void>>(
+    `${this.apiUrl}/${id}`
+  );
+}
 
 }
