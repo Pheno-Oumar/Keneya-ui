@@ -1,10 +1,9 @@
-
 <section class="dashboard-content">
 	<div class="grid-haut">
 		<!-- Carte Rappels du jour -->
 		<div class="carte carte-mini">
-			<h3>Rappels du jour</h3>
-			<p class="chiffre">{{ resume?.nbRappelsDuJour ?? 0 }}</p>
+			<h3>Rappels actif</h3>
+			<p class="chiffre">{{rappelsAVenir.length}}</p>
 			<span class="label">A faire</span>
 			<i class="icon-plus icone-fond"></i>
 		</div>
@@ -30,14 +29,14 @@
 
 			}
 
-			@for (rappel of rappelsAVenir; track $index) {
+			@for (rappel of rappelsAVenir | slice:0:2; track $index) {
 			<div class="rappel-ligne">
-				<span class="heure">{{ rappel.dateRappel }}</span>
+				<span class="heure">{{ rappel.dateRappel | date}}</span>
 				<span class="medicament">{{ rappel.nom_medicament }}</span>
 			</div>
 			}
-
-			<a routerLink="/rappels" class="voir-tous">Voir tous les rappels</a>
+			<a routerLink="/citoyen/rappels" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+				class="voir-tous">Voir tous les rappels</a>
 		</div>
 	</div>
 
