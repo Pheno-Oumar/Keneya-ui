@@ -18,7 +18,7 @@ export class AuthService {
   isAuthentificated = computed(() => this._user() != null);
   initialized = this._initialized.asReadonly();
 
-  private apiUrl = 'http://localhost:8080';
+  private apiUrl = 'http://localhost:8090';
 
   login(credentials: { email: string; password: string }): Observable<any> {
     return this.http

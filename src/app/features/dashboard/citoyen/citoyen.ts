@@ -8,7 +8,7 @@ import { RouterLink, RouterLinkActive } from "@angular/router";
 
 @Component({
   selector: 'app-citoyen',
-  imports: [HeaderCitoyen, SlicePipe, DatePipe, RouterLink, RouterLinkActive],
+  imports: [SlicePipe, DatePipe, RouterLink, RouterLinkActive],
   templateUrl: './citoyen.html',
   styleUrl: './citoyen.css',
 })

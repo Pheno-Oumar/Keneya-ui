@@ -64,15 +64,18 @@ export class LoginComponent {
             // Si le backend renvoie success: false
             this.errorMessage = response.message || 'Identifiants incorrects.';
           }
-          if (response.data.role == 'CITOYEN') {
+          if (response.data == "CITOYEN") {
             this.router.navigate(['/citoyen']);
-          } else if (response.data == 'ADMIN') {
-            this.router.navigate(['/admin']);
-          } else if (response.data == 'AGENT') {
-            this.router.navigate(['/agent']);
-          } else {
+          } else if (response.data == "ADMIN") {
+            this.router.navigate(['/admin/agents']);
+          }
+          else if (response.data == "AGENT") {
+            this.router.navigate(['/agent/publications']);
+          }
+          else {
             this.router.navigate(['/agent']);
           }
+
         },
         error: (error: HttpErrorResponse) => {
           this.isLoading = false;
