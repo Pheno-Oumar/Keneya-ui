@@ -1,0 +1,56 @@
+main{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.spacer{
+    flex:1;
+}
+.header{
+    width: 850px;
+    max-width: 90%;
+    height: 76px;
+    background-color: #43A37A;
+}
+.icon-account{
+    color: white;
+    width: 48px;
+    height: 48px;
+    font-size: 48px;
+}
+.titre{
+    font-weight: bold;
+}
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.icon{
+    color: #43A37A;
+    width: 48px;
+    height: 48px;
+    font-size: 48px;
+}
+.card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 180px;
+}
+.blaid{
+    display: flex;
+    gap: 20px;
+}
+mat-list :nth-child(n){
+    background-color: aliceblue;
+}
+.booby{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 20px;
+}

@@ -1,4 +1,5 @@
 <section class="dashboard-content">
+<<<<<<< HEAD
     <div class="grid-haut">
         <!-- Carte Rappels du jour -->
         <div class="carte carte-mini">
@@ -7,6 +8,16 @@
             <span class="label">A faire</span>
             <i class="icon-plus icone-fond"></i>
         </div>
+=======
+	<div class="grid-haut">
+		<!-- Carte Rappels du jour -->
+		<div class="carte carte-mini">
+			<h3>Rappels actif</h3>
+			<p class="chiffre">{{rappelsAVenir.length}}</p>
+			<span class="label">A faire</span>
+			<i class="icon-plus icone-fond"></i>
+		</div>
+>>>>>>> fe5e72181e2dd4a81360e6b5fa2283508068ae03
 
         <!-- Carte Activité -->
         <div class="carte carte-mini">
@@ -42,6 +53,7 @@
         </div>
     </div>
 
+<<<<<<< HEAD
     <div class="grid-bas">
         <div class="carte carte-placeholder"><!-- ex: graphique activité --></div>
     </div>
@@ -49,4 +61,24 @@
     <div class="grid-bas">
         <div class="carte carte-placeholder carte-large"><!-- ex: statistiques / conseils --></div>
     </div>
+=======
+			@for (rappel of rappelsAVenir | slice:0:2; track $index) {
+			<div class="rappel-ligne">
+				<span class="heure">{{ rappel.dateRappel | date}}</span>
+				<span class="medicament">{{ rappel.nom_medicament }}</span>
+			</div>
+			}
+			<a routerLink="/citoyen/rappels" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+				class="voir-tous">Voir tous les rappels</a>
+		</div>
+	</div>
+
+	<div class="grid-bas">
+		<div class="carte carte-placeholder"><!-- ex: graphique activité --></div>
+	</div>
+
+	<div class="grid-bas">
+		<div class="carte carte-placeholder carte-large"><!-- ex: statistiques / conseils --></div>
+	</div>
+>>>>>>> fe5e72181e2dd4a81360e6b5fa2283508068ae03
 </section>

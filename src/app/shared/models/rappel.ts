@@ -1,29 +1,30 @@
-export type FrequenceRappel = 'Fixe' | 'Variable';
 
-export type StatutRappel = 'a_prendre' | 'pris' | 'termine';
 
-export type OngletRappel = 'aujourdhui' | 'a_venir' | 'termines';
-
-export interface RappelMedical {
-  id: string;
-  nomMedicament: string;
-  dosage: string;
-  dateDebut: string;
-  dateFin?: string;
-  dateRappel: string;
-  heureRappel?: string;
-  frequence: FrequenceRappel;
-  intervalle: string;
-  statut: StatutRappel;
+export interface ResumeJour {
+  nbRappelsDuJour: number;
+  nbActivites: number;
+  activitesLabel: string; 
 }
 
-export interface RappelPayload {
-  nomMedicament: string;
-  dosage: string;
-  dateDebut: string;
-  dateFin?: string;
-  dateRappel: string;
-  heureRappel?: string;
-  frequence: FrequenceRappel;
-  intervalle: string;
+
+export interface Rappel {
+        nom_medicament: string;
+        dateDebut: Date;
+        dateFin: Date ;
+        dateRappel: Date ;
+        dateCreation: Date ;
+        archive: boolean,
+        frequence: "FIXE" |"VARIABLE",
+        intervalle: number,
+}
+export interface RappelResponse {
+        id:number;
+        nom_medicament: string;
+        dateDebut: Date;
+        dateFin: Date ;
+        dateRappel: Date ;
+        dateCreation: Date ;
+        archive: boolean,
+        frequence: "FIXE" |"VARIABLE",
+        intervalle: number,
 }
