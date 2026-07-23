@@ -1,7 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-<<<<<<< HEAD
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
-=======
 
 body{
 padding: 0;
@@ -10,4 +8,13 @@ box-sizing: border-box;
 width: 100%;
 height: 100%;
 }
->>>>>>> 63d71e5d0ee7eca998b4bbe1ca498dc70acbefb8
+
+.success-snackbar{
+    --mdc-snackbar-container-color:#2e7d32;
+    --mdc-snackbar-supporting-text-color:white;
+}
+
+.error-snackbar{
+    --mdc-snackbar-container-color:#d32f2f;
+    --mdc-snackbar-supporting-text-color:white;
+}

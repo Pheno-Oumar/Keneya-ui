@@ -2,21 +2,13 @@
 
     <div class="modal-header">
 
-        <h2>
-
-            {{data.nomActivite}}
-
-        </h2>
+        <h2>{{ data.nomActivite }}</h2>
 
         <button
             mat-icon-button
             (click)="close()">
 
-            <mat-icon>
-
-                close
-
-            </mat-icon>
+            <mat-icon>close</mat-icon>
 
         </button>
 
@@ -24,41 +16,31 @@
 
     <div class="modal-body">
 
-        <h3>
+        <h3>Plannings</h3>
 
-            Plannings
+        @for (planning of data.plannings; track planning.idPlanning) {
 
-        </h3>
+            <div class="planning-card">
 
-        <div
-            class="planning-card"
-            *ngFor="let planning of data.plannings">
+                <div class="planning-day">
 
-            <div class="planning-day">
+                    <mat-icon>calendar_today</mat-icon>
 
-                <mat-icon>
+                    {{ planning.jour }}
 
-                    calendar_today
+                </div>
 
-                </mat-icon>
+                <div class="planning-hour">
 
-                {{planning.jour}}
+                    <mat-icon>access_time</mat-icon>
 
-            </div>
+                    {{ planning.heure }}
 
-            <div class="planning-hour">
-
-                <mat-icon>
-
-                    access_time
-
-                </mat-icon>
-
-                {{planning.heure}}
+                </div>
 
             </div>
 
-        </div>
+        }
 
     </div>
 
@@ -77,11 +59,7 @@
             color="primary"
             (click)="onEdit()">
 
-            <mat-icon>
-
-                edit
-
-            </mat-icon>
+            <mat-icon>edit</mat-icon>
 
             Modifier
 

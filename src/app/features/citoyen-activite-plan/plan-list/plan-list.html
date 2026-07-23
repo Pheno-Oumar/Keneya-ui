@@ -3,41 +3,28 @@
   <main class="content">
 
     <div class="header">
-
       <div class="avatar">
-
         MT
-
       </div>
-
     </div>
 
     <div class="actions-bar">
 
       <mat-form-field appearance="outline" class="search-field">
-
         <input
           matInput
           placeholder="Rechercher...">
 
         <mat-icon matSuffix>
-
           search
-
         </mat-icon>
-
       </mat-form-field>
 
       <button
         mat-stroked-button
         class="filter-btn">
 
-        <mat-icon>
-
-          filter_list
-
-        </mat-icon>
-
+        <mat-icon>filter_list</mat-icon>
         Filtrer
 
       </button>
@@ -47,95 +34,88 @@
         class="add-plan-btn"
         (click)="openAdd()">
 
-        <mat-icon>
-
-          add
-
-        </mat-icon>
-
+        <mat-icon>add</mat-icon>
         Ajouter un plan
 
       </button>
 
     </div>
 
-<div class="cards-container">
+    @if (plans().length === 0) {
 
-    <mat-card
-        class="activity-card"
-        *ngFor="let plan of plans()">
+      <div class="empty-state">
 
-        <div
-            class="card-content"
-            (click)="openDetails(plan)">
+        <mat-icon>event_busy</mat-icon>
 
-            <div class="icon-container">
+        <h2>Aucun plan enregistré</h2>
+
+        <p>Cliquez sur "Ajouter un plan" pour commencer.</p>
+
+      </div>
+
+    } @else {
+
+      <div class="cards-container">
+
+        @for (plan of plans(); track plan.idCitoyenActivitePlan) {
+
+          <mat-card class="activity-card">
+
+            <div
+              class="card-content"
+              (click)="openDetails(plan)">
+
+              <div class="icon-container">
 
                 <mat-icon color="primary">
-
-                    directions_run
-
+                  directions_run
                 </mat-icon>
 
-            </div>
+              </div>
 
-            <div class="text-info">
+              <div class="text-info">
 
-                <h2>
+                <h2>{{ plan.nomActivite }}</h2>
 
-                    {{plan.nomActivite}}
+                <p>{{ plan.plannings.length }} séance(s)</p>
 
-                </h2>
+              </div>
 
-                <p>
-
-                    {{plan.plannings.length}} séance(s)
-
-                </p>
-
-            </div>
-
-            <mat-icon>
-
+              <mat-icon>
                 chevron_right
+              </mat-icon>
 
-            </mat-icon>
+            </div>
 
-        </div>
+            <div class="card-actions">
 
-        <div class="card-actions">
-
-            <button
+              <button
                 mat-icon-button
                 color="primary"
-                (click)="openEdit(plan);$event.stopPropagation()">
+                (click)="openEdit(plan); $event.stopPropagation()">
 
-                <mat-icon>
+                <mat-icon>edit</mat-icon>
 
-                    edit
+              </button>
 
-                </mat-icon>
-
-            </button>
-
-            <button
+              <button
                 mat-icon-button
                 color="warn"
-                (click)="deletePlan(plan.idCitoyenActivitePlan!);$event.stopPropagation()">
+                (click)="deletePlan(plan.idCitoyenActivitePlan!); $event.stopPropagation()">
 
-                <mat-icon>
+                <mat-icon>delete</mat-icon>
 
-                    delete
+              </button>
 
-                </mat-icon>
+            </div>
 
-            </button>
+          </mat-card>
 
-        </div>
+        }
 
-    </mat-card>
+      </div>
 
-</div>
+    }
 
   </main>
 
