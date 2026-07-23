@@ -1,27 +1,14 @@
 import { Component, Inject, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  FormArray,
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators
-} from '@angular/forms';
-
-import {
-  MAT_DIALOG_DATA,
-  MatDialogRef
-} from '@angular/material/dialog';
-
+import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-
 import { ActiviteService } from '../services/activite.service';
 import { CitoyenActivitePlanService } from '../services/citoyen-activite-plan.service';
-
 import { Activite } from '../models/activite.model';
 import { CitoyenActivitePlan } from '../models/citoyen-activite-plan.model';
 import { ApiResponse } from '../../../shared/models/api-response.model';
@@ -76,33 +63,42 @@ export class PlanEditComponent implements OnInit {
     this.loadActivites();
 
     this.loadPlannings();
+
   }
 
-  loadActivites() {
+  loadActivites(): void {
 
     this.activiteService.getAll().subscribe({
 
-      next:(response:ApiResponse<Activite[]>)=>{
+      next: (response: ApiResponse<Activite[]>) => {
 
-        this.activites=response.data;
+        this.activites = response.data;
 
-      }
+      },
+
+      error: console.error
 
     });
 
   }
 
-  loadPlannings(){
+  loadPlannings(): void {
 
-    this.data.plannings.forEach(p=>{
+    this.data.plannings.forEach(planning => {
 
       this.plannings.push(
 
         this.fb.group({
 
-          jour:[p.jour,Validators.required],
+          jour: [
+            planning.jour,
+            Validators.required
+          ],
 
-          heure:[p.heure,Validators.required]
+          heure: [
+            planning.heure,
+            Validators.required
+          ]
 
         })
 
@@ -112,21 +108,27 @@ export class PlanEditComponent implements OnInit {
 
   }
 
-  get plannings():FormArray{
+  get plannings(): FormArray {
 
     return this.form.get('plannings') as FormArray;
 
   }
 
-  addPlanning(){
+  addPlanning(): void {
 
     this.plannings.push(
 
       this.fb.group({
 
-        jour:['',Validators.required],
+        jour: [
+          '',
+          Validators.required
+        ],
 
-        heure:['',Validators.required]
+        heure: [
+          '',
+          Validators.required
+        ]
 
       })
 
@@ -134,21 +136,26 @@ export class PlanEditComponent implements OnInit {
 
   }
 
-  removePlanning(index:number){
+  removePlanning(index: number): void {
 
     this.plannings.removeAt(index);
 
   }
 
-  update(){
+  update(): void {
 
-    const request={
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
 
-      idCitoyen:2,
+    const request = {
 
-      idActivite:this.form.value.idActivite,
+      idCitoyen: 2, // à remplacer plus tard par le citoyen connecté
 
-      plannings:this.form.value.plannings
+      idActivite: this.form.value.idActivite,
+
+      plannings: this.form.value.plannings
 
     };
 
@@ -160,19 +167,19 @@ export class PlanEditComponent implements OnInit {
 
     ).subscribe({
 
-      next:()=>{
+      next: (response) => {
 
-        this.dialogRef.close(true);
+        this.dialogRef.close(response.data);
 
       },
 
-      error:console.error
+      error: console.error
 
     });
 
   }
 
-  close(){
+  close(): void {
 
     this.dialogRef.close();
 

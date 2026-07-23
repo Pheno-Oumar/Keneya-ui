@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MatCardModule } from '@angular/material/card';
@@ -38,7 +38,7 @@ export class PlanListComponent implements OnInit {
 
   private service = inject(CitoyenActivitePlanService);
 
-  plans: CitoyenActivitePlan[] = [];
+  plans = signal<CitoyenActivitePlan[]>([]);
 
   ngOnInit(): void {
 
@@ -50,7 +50,7 @@ export class PlanListComponent implements OnInit {
 
   this.service.getAll().subscribe({
   next: (response) => {
-    this.plans = response.data;
+    this.plans.set(response.data);
   },
   error: console.error
 });
@@ -64,13 +64,16 @@ export class PlanListComponent implements OnInit {
 
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(newPlan => {
 
-      if(result){
+      if(!newPlan)return;
 
-        this.loadPlans();
+        this.plans.update(plans => [
 
-      }
+          newPlan,
+          ...plans
+        ]);
+
 
     });
 
@@ -108,13 +111,25 @@ export class PlanListComponent implements OnInit {
 
     });
 
-    dialogRef.afterClosed().subscribe(result=>{
+    dialogRef.afterClosed().subscribe(updatedPlan => {
 
-      if(result){
+      if(!updatedPlan){
 
-        this.loadPlans();
+        return;
+     }
 
-      }
+    this.plans.update(plans =>
+
+      plans.map(plan =>
+
+        plan.idCitoyenActivitePlan === updatedPlan.idCitoyenActivitePlan
+
+        ? updatedPlan
+        
+        :plan
+      )
+
+    );
 
     });
 
@@ -132,7 +147,13 @@ export class PlanListComponent implements OnInit {
 
       next:()=>{
 
-        this.loadPlans();
+        this.plans.update(plans =>
+
+          plans.filter(
+
+            p => p.idCitoyenActivitePlan !== id
+          )
+        );
 
       },
 

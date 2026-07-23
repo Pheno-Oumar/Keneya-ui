@@ -124,9 +124,9 @@ export class PlanAddComponent implements OnInit {
 
     this.planService.create(request).subscribe({
 
-      next: () => {
+      next: (response) => {
 
-        this.dialogRef.close(true);
+        this.dialogRef.close(response.data);
 
       },
 
