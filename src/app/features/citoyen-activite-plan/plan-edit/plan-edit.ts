@@ -1,12 +1,6 @@
 import { Component, Inject, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  FormArray,
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators
-} from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
@@ -22,6 +16,7 @@ import { CitoyenActivitePlanService } from '../services/citoyen-activite-plan.se
 import { Activite } from '../models/activite.model';
 import { CitoyenActivitePlan } from '../models/citoyen-activite-plan.model';
 import { ApiResponse } from '../../../shared/models/api-response.model';
+import { NotificationService } from '../../../shared/services/notification.service'; 
 
 @Component({
   selector: 'app-plan-edit',
@@ -45,6 +40,8 @@ export class PlanEditComponent implements OnInit {
   private activiteService = inject(ActiviteService);
 
   private planService = inject(CitoyenActivitePlanService);
+
+  private notification = inject(NotificationService);
 
   dialogRef = inject(MatDialogRef<PlanEditComponent>);
 
@@ -179,11 +176,19 @@ export class PlanEditComponent implements OnInit {
 
       next: (response) => {
 
+        this.notification.success(
+          "Plan modifié avec succès"
+        );
+
         this.dialogRef.close(response.data);
 
       },
 
-      error: console.error
+      error:() => {
+        this.notification.error(
+          "La modification a échoué"
+        );
+      }
 
     });
 

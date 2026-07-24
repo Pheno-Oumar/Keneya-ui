@@ -49,6 +49,9 @@ export const routes: Routes = [
         path: 'rappels',
         component: RappelPage,
       },
+      {
+        path: "plan", component: PlanListComponent
+      }
     ],
   },
   {
@@ -66,10 +69,7 @@ export const routes: Routes = [
       {
         path: "agents", component: AgentComponent
       },
-      {
-        path: "plan", component: PlanListComponent
-      }
-
+      
     ]
   },
   {

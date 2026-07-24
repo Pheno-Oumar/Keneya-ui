@@ -15,6 +15,7 @@ import { PlanEditComponent } from '../plan-edit/plan-edit';
 import { CitoyenActivitePlanService } from '../services/citoyen-activite-plan.service';
 
 import { CitoyenActivitePlan } from '../models/citoyen-activite-plan.model';
+import { NotificationService } from '../../../shared/services/notification.service';
 
 @Component({
   selector: 'app-plan-list',
@@ -32,6 +33,8 @@ import { CitoyenActivitePlan } from '../models/citoyen-activite-plan.model';
   ]
 })
 export class PlanListComponent implements OnInit {
+
+  private notification = inject(NotificationService);
 
   private dialog = inject(MatDialog);
 
@@ -144,7 +147,7 @@ export class PlanListComponent implements OnInit {
 
     this.service.delete(id).subscribe({
 
-      next:()=>{
+      next:() => {
 
         this.plans.update(plans =>
 
@@ -154,9 +157,17 @@ export class PlanListComponent implements OnInit {
           )
         );
 
+        this.notification.success(
+          "Plan supprimé avec succès"
+        );
+
       },
 
-      error:console.error
+      error:() =>{
+        this.notification.error(
+          "Impossible de supprimer ce plan"
+        );
+      }
 
     });
 
