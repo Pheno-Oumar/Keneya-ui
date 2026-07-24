@@ -1,0 +1,116 @@
+<div class="modal-container">
+
+  <div class="modal-header">
+    <h2>Modifier un plan</h2>
+
+    <button mat-icon-button (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <form [formGroup]="form">
+
+    <mat-form-field appearance="outline" class="full-width">
+
+      <mat-label>Activité</mat-label>
+
+      <mat-select formControlName="idActivite">
+
+        @for (activite of activites; track activite.idActivites) {
+
+          <mat-option [value]="activite.idActivites">
+            {{ activite.nom }}
+          </mat-option>
+
+        }
+
+      </mat-select>
+
+    </mat-form-field>
+
+    <div formArrayName="plannings">
+
+      @for (planning of plannings.controls; track $index; let i = $index) {
+
+        <div [formGroupName]="i">
+
+          <mat-form-field appearance="outline">
+
+            <mat-label>Jour</mat-label>
+
+            <mat-select formControlName="jour">
+
+              <mat-option value="LUNDI">Lundi</mat-option>
+              <mat-option value="MARDI">Mardi</mat-option>
+              <mat-option value="MERCREDI">Mercredi</mat-option>
+              <mat-option value="JEUDI">Jeudi</mat-option>
+              <mat-option value="VENDREDI">Vendredi</mat-option>
+              <mat-option value="SAMEDI">Samedi</mat-option>
+              <mat-option value="DIMANCHE">Dimanche</mat-option>
+
+            </mat-select>
+
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+
+            <input
+              matInput
+              type="time"
+              formControlName="heure">
+
+          </mat-form-field>
+
+          <button
+            mat-icon-button
+            color="warn"
+            type="button"
+            (click)="removePlanning(i)">
+
+            <mat-icon>delete</mat-icon>
+
+          </button>
+
+        </div>
+
+      }
+
+    </div>
+
+    <button
+      mat-stroked-button
+      type="button"
+      (click)="addPlanning()">
+
+      <mat-icon>add</mat-icon>
+
+      Ajouter une séance
+
+    </button>
+
+    <div class="actions">
+
+      <button
+        mat-button
+        type="button"
+        (click)="close()">
+
+        Annuler
+
+      </button>
+
+      <button
+        mat-flat-button
+        color="primary"
+        type="button"
+        (click)="update()">
+
+        Mettre à jour
+
+      </button>
+
+    </div>
+
+  </form>
+
+</div>

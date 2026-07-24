@@ -16,6 +16,7 @@ import { AgentLayout } from './layout/agent-layout/agent-layout/agent-layout';
 import { ConseilComponent } from './shared/component/activite-component/activite-component';
 import { DahbordAdminComponent } from './shared/component/dahbord-admin-component/dahbord-admin-component';
 import { PublicationComponent } from './shared/component/publication-component/publication-component';
+import { PlanListComponent } from './features/citoyen-activite-plan/plan-list/plan-list';
 
 export const routes: Routes = [
   {
@@ -64,7 +65,11 @@ export const routes: Routes = [
       },
       {
         path: "agents", component: AgentComponent
+      },
+      {
+        path: "plan", component: PlanListComponent
       }
+
     ]
   },
   {
