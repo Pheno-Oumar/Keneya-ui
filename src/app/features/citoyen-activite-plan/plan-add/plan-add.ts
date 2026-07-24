@@ -1,12 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  FormArray,
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators
-} from '@angular/forms';
+
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -21,6 +16,8 @@ import { CitoyenActivitePlanService } from '../services/citoyen-activite-plan.se
 
 import { Activite } from '../models/activite.model';
 import { ApiResponse } from '../../../shared/models/api-response.model';
+
+import { NotificationService } from '../../../shared/services/notification.service';
 
 @Component({
   selector: 'app-plan-add',
@@ -44,6 +41,8 @@ export class PlanAddComponent implements OnInit {
   private activiteService = inject(ActiviteService);
 
   private planService = inject(CitoyenActivitePlanService);
+
+  private notification = inject(NotificationService);
 
   dialogRef = inject(MatDialogRef<PlanAddComponent>);
 
@@ -125,12 +124,23 @@ export class PlanAddComponent implements OnInit {
     this.planService.create(request).subscribe({
 
       next: (response) => {
+        this.notification.success(
+          "Plan ajouté avec succès"
+        );
+
+        
 
         this.dialogRef.close(response.data);
 
       },
 
-      error: console.error
+      error:() => {
+
+          this.notification.error(
+            "Impossible d'ajouter le plan"
+          );
+          
+        }
 
     });
 
