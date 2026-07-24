@@ -2,10 +2,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
-  RappelMedical,
-  RappelPayload,
-  StatutRappel,
-  OngletRappel,
+  // RappelMedical,
+  // StatutRappel,
+  // OngletRappel,
   Rappel,
   RappelResponse,
 } from '../../shared/models/rappel';
@@ -15,10 +14,10 @@ export class RappelService {
   private readonly baseUrl = '/api/rappels';
    private http = inject(HttpClient);
 
-  obtenirParOnglet(onglet: OngletRappel): Observable<RappelMedical[]> {
-    const params = new HttpParams().set('onglet', onglet);
-    return this.http.get<RappelMedical[]>(this.baseUrl, { params , withCredentials: true});
-  }
+  // obtenirParOnglet(onglet: OngletRappel): Observable<RappelMedical[]> {
+  //   const params = new HttpParams().set('onglet', onglet);
+  //   return this.http.get<RappelMedical[]>(this.baseUrl, { params , withCredentials: true});
+  // }
 
   obtenirTous(): Observable<RappelResponse[]> {
     return this.http.get<RappelResponse[]>(`${this.baseUrl}/rappel-actif`,{withCredentials: true});
@@ -44,9 +43,9 @@ export class RappelService {
     return this.http.delete<void>(`${this.baseUrl}/${id}`, {withCredentials: true});
   }
 
-  marquerCommePris(id: string): Observable<RappelMedical> {
-    return this.http.patch<RappelMedical>(`${this.baseUrl}/${id}/statut`, {
-      statut: 'pris' as StatutRappel,
-    }, {withCredentials: true});
-  }
+  // marquerCommePris(id: string): Observable<RappelMedical> {
+  //   return this.http.patch<RappelMedical>(`${this.baseUrl}/${id}/statut`, {
+  //     statut: 'pris' as StatutRappel,
+  //   }, {withCredentials: true});
+  // }
 }

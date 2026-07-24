@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { finalize } from 'rxjs';
-import { RappelMedical, OngletRappel } from '../../shared/models/rappel';
+import { RappelMedical } from '../../shared/models/rappel';
 import { RappelService } from '../../core/services/rappels';
 // import { RappelFormulaireDialogComponent } from '../rappel-formulaire-dialog/rappel-formulaire-dialog.component';
 import { CreateRappelsComponent } from '../create-rappels/create-rappels';
