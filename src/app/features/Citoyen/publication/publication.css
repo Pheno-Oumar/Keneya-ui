@@ -1,0 +1,14 @@
+.publications-list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.example-card {
+  flex: none;
+  min-width: 45%;
+  max-width: 450px;
+}
+
+.example-card-footer {
+  padding: 16px;
+}

@@ -69,7 +69,7 @@ export class LoginComponent {
           } else if (response.data == 'ADMIN') {
             this.router.navigate(['/admin']);
           } else if (response.data == 'AGENT') {
-            this.router.navigate(['/agent']);
+            this.router.navigate(['/agents']);
           } else {
             this.router.navigate(['/agent']);
           }

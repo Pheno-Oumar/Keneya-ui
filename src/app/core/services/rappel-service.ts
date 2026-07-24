@@ -17,7 +17,12 @@ export class RappelService {
     });
   }
   getRappelsdus(): Observable<RappelResponse[]> {
-    return this.httpclient.get<RappelResponse[]>(`${this.baseUrl}/rappels/dus`, {
+    return this.httpclient.get<RappelResponse[]>(`${this.baseUrl}/notification`, {
+      withCredentials: true,
+    });
+  }
+  marqueCommeLus(id: number): Observable<void> {
+    return this.httpclient.post<void>(`${this.baseUrl}/notification/${id}`, {
       withCredentials: true,
     });
   }

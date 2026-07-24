@@ -8,6 +8,8 @@ import { Citoyen } from './features/dashboard/citoyen/citoyen';
 import { Test } from './features/test/test';
 import { RappelPage } from './features/rappel-page/rappel-page';
 import { authGuardGuard } from './core/guards/auth.guard-guard';
+import { Publication } from './features/Citoyen/publication/publication';
+import { Conseil } from './features/Citoyen/conseil/conseil';
 
 export const routes: Routes = [
   {
@@ -40,6 +42,12 @@ export const routes: Routes = [
         path: 'rappels',
         component: RappelPage,
       },
+	  {
+		path:"publications" , component: Publication
+	  },
+	  {
+		path:"conseils", component:Conseil
+	  }
     ],
   },
 ];
