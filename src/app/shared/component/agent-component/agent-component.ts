@@ -13,7 +13,7 @@ import { AgentResponseInterface } from '../../models/agent';
 @Component({
   selector: 'app-agent-component',
   imports: [
-    MatButtonModule, 
+    MatButtonModule,
     MatDialogModule,
     MatTableModule,
     MatToolbarModule,
@@ -27,10 +27,10 @@ import { AgentResponseInterface } from '../../models/agent';
 export class AgentComponent {
   private dialog = inject(MatDialog);
   private service = inject(AgentService);
-  
+
   displayedColumns: string[] = ['id', 'nom', 'prenom', 'email', 'telephone', 'actions'];
   dataSource = new MatTableDataSource<AgentResponseInterface>([]);
-  
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   get agents(): AgentResponseInterface[] {
@@ -45,19 +45,16 @@ export class AgentComponent {
   }
 
   ngOnInit() {
-    this.service.getAll().subscribe({
-      next: response => {
-        this.agents = response.data;
-      },
-      error: error => {
-        console.error('Erreur lors du chargement des agents', error);
-      }
-    });
-  }
+  this.service.getAll().subscribe({
+    next: response => {
+      this.dataSource.data = response.data;
+    }
+  });
+}
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
+ngAfterViewInit() {
+  this.dataSource.paginator = this.paginator;
+}
 
   ajouter() {
     this.dialog.open(AgentFormDialog, {
