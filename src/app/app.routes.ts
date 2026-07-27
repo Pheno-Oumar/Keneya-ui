@@ -16,6 +16,8 @@ import { AgentLayout } from './layout/agent-layout/agent-layout/agent-layout';
 import { ConseilComponent } from './shared/component/activite-component/activite-component';
 import { DahbordAdminComponent } from './shared/component/dahbord-admin-component/dahbord-admin-component';
 import { PublicationComponent } from './shared/component/publication-component/publication-component';
+import { ProfileAdmin } from './features/profil_admin/profil_admin';
+import { ProfilCitoyen } from './features/profile_citoyen/profile_citoyen';
 import { PlanListComponent } from './features/citoyen-activite-plan/plan-list/plan-list';
 
 export const routes: Routes = [
@@ -49,6 +51,9 @@ export const routes: Routes = [
         path: 'rappels',
         component: RappelPage,
       },
+       {
+    path : "profile", component: ProfilCitoyen
+  }
       {
         path: "plan", component: PlanListComponent
       }
@@ -84,7 +89,20 @@ export const routes: Routes = [
       {
         path: "categories-conseil", component: CategorieConseilComponent
       },
+       {
+       path : "profile", component: ProfilCitoyen
+     } 
      
     ]
+  },
+
+  {
+    path : "Profile_Admin", component: ProfileAdmin
+  },
+
+
+  {
+    path : "Profile_Citoyen", component: ProfilCitoyen
   }
+
 ];
