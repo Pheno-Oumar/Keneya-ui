@@ -56,19 +56,16 @@ export class AuthService {
       );
   }
 
-//  modifierCitoyen(id:number,infoCitoyen:CitoyenProfil):Observable<any>{
-//  return this.http
-//        .put(`${this.apiUrl}/citoyens/${id}`,infoCitoyen, {
-//          withCredentials: true,
-//        })
+  modifierCitoyen(id: number, infoCitoyen: CitoyenProfil): Observable<any> {
+    return this.http.put(`${this.apiUrl}/citoyens/${id}`, infoCitoyen, {
+      withCredentials: true,
+    });
+  }
 
-// }
-//   citoyenById(id:number): Observable<any>{
-//         return this.http
-//       .get(`${this.apiUrl}/citoyens/${id}`,  {
-//         withCredentials: true,
-//       })
-
-//   } 
+  citoyenById(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/citoyens/${id}`, {
+      withCredentials: true,
+    });
+  }
 
 }

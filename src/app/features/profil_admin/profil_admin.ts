@@ -15,8 +15,6 @@ import { Component } from '@angular/core';
   selector: 'app-profile_admin',
   standalone: true,
   imports: [
-    RouterOutlet,
-    AdminSidenav,
     RouterModule,
     CommonModule,
     FormsModule,
@@ -25,9 +23,9 @@ import { Component } from '@angular/core';
     MatIconModule,
     MatCardModule
   ],
-  templateUrl:'./profil_admin.html',
+  templateUrl: './profil_admin.html',
   styleUrls: ['./profil_admin.css']
 })
 
- export class ProfileAdmin{
+export class ProfileAdmin {
 }

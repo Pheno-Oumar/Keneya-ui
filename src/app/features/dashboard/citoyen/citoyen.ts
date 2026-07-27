@@ -1,7 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router'; // 1. AJOUT de l'import pour le lien
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Utilisateur } from '../../../shared/models/utilisateur';
-import { RappelMedical } from '../../../shared/models/rappel';
+import { RappelResponse } from '../../../shared/models/rappel';
 import { RappelService } from '../../../core/services/rappels';
 
 @Component({
@@ -13,7 +13,7 @@ import { RappelService } from '../../../core/services/rappels';
 export class Citoyen implements OnInit {
   utilisateur?: Utilisateur;
   resume?: any; // Gardé en 'any' car commenté dans vos modèles
-  rappelsAVenir: RappelMedical[] = [];
+  rappelsAVenir: RappelResponse[] = [];
   chargementEnCours = true;
   private cdr = inject(ChangeDetectorRef);
 

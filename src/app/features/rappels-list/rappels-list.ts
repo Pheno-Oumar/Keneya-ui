@@ -5,15 +5,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { finalize } from 'rxjs';
-import { RappelMedical } from '../../shared/models/rappel';
+import { RappelMedical, OngletRappel } from '../../shared/models/rappel';
 import { RappelService } from '../../core/services/rappels';
 // import { RappelFormulaireDialogComponent } from '../rappel-formulaire-dialog/rappel-formulaire-dialog.component';
 import { CreateRappelsComponent } from '../create-rappels/create-rappels';
-  
+
 @Component({
   selector: 'app-rappels-list',
   standalone: true,
-  imports: [CommonModule, MatTabsModule, MatButtonModule, MatIconModule, CreateRappelsComponent],
+  imports: [CommonModule, MatTabsModule, MatButtonModule, MatIconModule],
   templateUrl: './rappels-list.html',
   styleUrls: ['./rappels-list.css'],
 })
@@ -31,7 +31,7 @@ export class RappelsList implements OnInit {
   constructor(
     private rappelService: RappelService,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.chargerRappels();

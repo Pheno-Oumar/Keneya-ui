@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { finalize } from 'rxjs';
-import { RappelMedical } from '../../shared/models/rappel';
+import { RappelResponse } from '../../shared/models/rappel';
 import { RappelService } from '../../core/services/rappels';
 import { CreateRappelsComponent } from '../create-rappels/create-rappels';
 @Component({
@@ -16,22 +16,22 @@ import { CreateRappelsComponent } from '../create-rappels/create-rappels';
   styleUrl: './update-rappels.css',
 })
 export class UpdateRappelsComponent implements OnInit {
-  rappels: RappelMedical[] = [];
+  rappels: RappelResponse[] = [];
   chargement = false;
 
   readonly colonnesAffichees = [
-    'nomMedicament',
+    'nom_medicament',
     'dateDebut',
     'dateRappel',
     'frequence',
     'intervalle',
-    'statut',
+    'archive',
   ];
 
   constructor(
     private rappelService: RappelService,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.chargerRappels();

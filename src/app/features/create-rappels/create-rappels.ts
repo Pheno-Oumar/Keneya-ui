@@ -36,14 +36,14 @@ export class CreateRappelsComponent {
     dateDebut: [null as Date | null, Validators.required],
     dateFin: [null as Date | null],
     dateRappel: [null as Date | null, Validators.required],
-    intervalle: ['', Validators.required],
+    intervalle: [null as number | null, Validators.required],
     frequence: ['', Validators.required],
   });
 
   constructor(
     private rappelService: RappelService,
     private dialogRef: MatDialogRef<CreateRappelsComponent>
-  ) {}
+  ) { }
 
   annuler(): void {
     this.dialogRef.close(false);
@@ -63,7 +63,7 @@ export class CreateRappelsComponent {
       dateFin: valeur.dateFin ? this.versDateIso(valeur.dateFin) : undefined,
       dateRappel: this.versDateIso(valeur.dateRappel!),
       frequence: valeur.frequence as 'Fixe' | 'Variable',
-      intervalle: valeur.intervalle!,
+      intervalle: Number(valeur.intervalle!),
     };
 
     this.enregistrement = true;
