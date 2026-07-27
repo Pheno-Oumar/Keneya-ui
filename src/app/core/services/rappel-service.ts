@@ -9,7 +9,7 @@ import { APIResponse, Rappel, RappelResponse } from '../../shared/models/rappel'
 export class RappelService {
   private httpclient = inject(HttpClient);
 
-  private baseUrl = 'http://localhost:8090';
+  private baseUrl = 'http://localhost:8080';
 
   getMyrappel(): Observable<RappelResponse[]> {
     return this.httpclient.get<RappelResponse[]>(`${this.baseUrl}/rappels/rappel-actif`, {
