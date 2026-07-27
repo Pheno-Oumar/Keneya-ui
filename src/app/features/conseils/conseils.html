@@ -1,0 +1,82 @@
+<mat-sidenav-container class="container-principal">
+  
+  <mat-sidenav mode="side" opened class="sidebar">
+    <div class="logo-container">
+      <mat-icon class="logo-icon">favorite_border</mat-icon>
+      <span class="logo-text">HealthiCare</span>
+    </div>
+
+    <mat-nav-list class="menu-list">
+      <a mat-list-item href="#">
+        <!-- Correction de mat-list-icon vers matListItemIcon -->
+        <mat-icon matListItemIcon>home</mat-icon>
+        <span class="menu-text">Tableau de bord</span>
+      </a>
+      <a mat-list-item href="#">
+        <mat-icon matListItemIcon>notifications_none</mat-icon>
+        <span class="menu-text">Rappels</span>
+      </a>
+      <a mat-list-item href="#">
+        <mat-icon matListItemIcon>fitness_center</mat-icon>
+        <span class="menu-text">Activité physique</span>
+      </a>
+      <a mat-list-item href="#" class="active-link">
+        <mat-icon matListItemIcon>assignment_turned_in</mat-icon>
+        <span class="menu-text">Conseils</span>
+      </a>
+      <a mat-list-item href="#">
+        <mat-icon matListItemIcon>grid_view</mat-icon>
+        <span class="menu-text">Publications</span>
+      </a>
+      <a mat-list-item href="#">
+        <mat-icon matListItemIcon>show_chart</mat-icon>
+        <span class="menu-text">Statistiques</span>
+      </a>
+      <a mat-list-item href="#">
+        <mat-icon matListItemIcon>person_outline</mat-icon>
+        <span class="menu-text">Profil</span>
+      </a>
+      <a mat-list-item href="#">
+        <mat-icon matListItemIcon>settings</mat-icon>
+        <span class="menu-text">Paramètres</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="contenu-principal">
+    <h1 class="page-title">Conseils</h1>
+
+    <div class="filtres-container">
+      <button *ngFor="let cat of categories" 
+              class="filter-pill"
+              [class.pill-active]="categorieSelectionnee === cat"
+              (click)="selectCategorie(cat)">
+        {{ cat }}
+      </button>
+    </div>
+
+    <div class="white-box-container">
+      <div *ngFor="let conseil of conseilsFiltres; let last = last" class="conseil-row">
+        
+        <div class="conseil-img-wrapper">
+          <img [src]="conseil.image" [alt]="conseil.titre" class="conseil-img">
+        </div>
+
+        <div class="conseil-info">
+          <h2 class="conseil-titre">{{ conseil.titre }}</h2>
+          <p class="conseil-description">{{ conseil.contenu }}</p>
+        </div>
+
+        <div class="badge-container">
+          <!-- Normalisation sécurisée du nom de la classe CSS pour la catégorie -->
+          <span class="badge" [ngClass]="'badge-' + conseil.categorie.toLowerCase().replace('é', 'e').replace('ê', 'e')">
+            {{ conseil.categorie }}
+          </span>
+        </div>
+
+        <hr *ngIf="!last" class="row-separator">
+      </div>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
