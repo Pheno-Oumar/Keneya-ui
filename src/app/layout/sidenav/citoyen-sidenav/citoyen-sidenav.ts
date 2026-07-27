@@ -24,7 +24,6 @@ export class CitoyenSidenav {
     { label: 'Activités physiques', icon: 'local_activity', route: 'activites' },
     { label: 'Conseils', icon: 'shield', route: 'conseils' },
     { label: 'Publications', icon: 'book', route: 'publications' },
-    { label: 'Statistiques', icon: 'bar_chart', route: 'statistiques' },
   ];
 
   deconnexion(): void {

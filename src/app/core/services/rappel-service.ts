@@ -32,4 +32,9 @@ export class RappelService {
       withCredentials: true,
     });
   }
+  rappelTerminer(): Observable<RappelResponse[]> {
+    return this.httpclient.get<RappelResponse[]>(`${this.baseUrl}/rappels/rappels-terminer`, {
+      withCredentials: true,
+    });
+  }
 }

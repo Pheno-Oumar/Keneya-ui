@@ -4,32 +4,93 @@
 		<button class="new-reminder" (click)="onOpenForm()">+ Nouveau rappel</button>
 	</div>
 
+	<mat-tab-group>
+		<mat-tab class="card-section" label="A venir">
+			@for(rappel of rappelsAVenir(); track rappel.dateCreation) {
 
-	@for(rappel of rappelsAVenir; track rappel.dateCreation) {
-	<div class="card upcoming">
-		<div class="info">
-			<h3>{{ rappel.nom_medicament}}</h3>
-			<p>Intervalle de prise : {{rappel.intervalle }} heures </p>
-		</div>
-		<div class="status">
-			<p>Prochaine prise : {{rappel.dateRappel | date : 'short'}}</p>
-			<span class="label "> Archivé : {{rappel.archive === true ? 'Oui' : 'Non'}}</span>
-			<!-- <button class="action green">Marquer comme pris</button> -->
-		</div>
-	</div>
-	}
+
+			<mat-card appearance="outlined" class="rappel-mini-card" [class.rappel-mini-card--done]="rappel.terminer">
+				<mat-card-header>
+					<div mat-card-avatar class="rappel-mini-card__avatar">
+						<mat-icon>medication</mat-icon>
+					</div>
+
+					<mat-card-title>{{ rappel.nom_medicament }}</mat-card-title>
+
+					<mat-card-subtitle>
+						{{ rappel.frequence }} • {{ rappel.intervalle }}h
+					</mat-card-subtitle>
+				</mat-card-header>
+
+				<mat-card-content>
+					<div class="rappel-dates">
+						<p><strong>Début :</strong> {{ rappel.dateDebut | date:'dd/MM/yyyy ' }}</p>
+						<p><strong>Fin :</strong> {{ rappel.dateFin | date:'dd/MM/yyyy ' }}</p>
+					</div>
+					<p><strong>État :</strong> {{ rappel.terminer ? 'Terminé' : 'En cours' }}</p>
+				</mat-card-content>
+
+
+			</mat-card>
+			}
+		</mat-tab>
+		<mat-tab class="card-section" label="Terminer">
+			<div class="card-section">
+				@for(rappel of rappelTerminer(); track rappel.dateCreation) {
+
+
+				<mat-card appearance="outlined" class="rappel-mini-card"
+					[class.rappel-mini-card--done]="rappel.terminer">
+					<mat-card-header>
+						<div mat-card-avatar class="rappel-mini-card__avatar">
+							<mat-icon>medication</mat-icon>
+						</div>
+
+						<mat-card-title>{{ rappel.nom_medicament }}</mat-card-title>
+
+						<mat-card-subtitle>
+							{{ rappel.frequence }} • {{ rappel.intervalle }}h
+						</mat-card-subtitle>
+					</mat-card-header>
+
+					<mat-card-content>
+						<div class="rappel-dates">
+							<p><strong>Début :</strong> {{ rappel.dateDebut | date:'dd/MM/yyyy ' }}</p>
+							<p><strong>Fin :</strong> {{ rappel.dateFin | date:'dd/MM/yyyy ' }}</p>
+						</div>
+						<p><strong>État :</strong> {{ rappel.terminer ? 'Terminé' : 'En cours' }}</p>
+					</mat-card-content>
+
+
+				</mat-card>
+				}
+			</div>
+		</mat-tab>
+	</mat-tab-group>
+
+
 </section>
+@if (notifications().length > 0) {
+  <div class="notifications-overlay">
+    <div class="notifications">
+      @for (n of notifications(); track n.id) {
+        <div class="notification">
+          <div class="notification-content">
+            <div class="notification-icon">⏰</div>
 
-@if (notifications.length > 0) {
-<div class="notifications">
-	@for (n of notifications; track $index) {
-	<div class="notification">
-		⏰ C'est l'heure de prendre : {{ n.nom_medicament }}
-		<button (click)="fermerNotification(n.id)">✕</button>
-	</div>
-	}
+            <div class="notification-text">
+              <p class="notification-title">Rappel médicament</p>
+              <p class="notification-message">
+                C'est l'heure de prendre : <strong>{{ n.nom_medicament }}</strong>
+              </p>
+            </div>
+          </div>
 
-</div>
+          <button class="notification-close" (click)="fermerNotification(n.id)">✕</button>
+        </div>
+      }
+    </div>
+  </div>
 }
 
 @if (showForm ){

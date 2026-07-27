@@ -1,1 +1,54 @@
-<p>conseil works!</p>
+<div class="container">
+  <main class="conseils-list">
+    @for (conseil of [
+      {
+        id: 1,
+        nomConseil: 'Hydratation',
+        source: 'Prévention',
+        symptome: 'Boire de l’eau régulièrement aide à garder le corps en bonne santé.',
+        conseilPreventif: 'Il est recommandé de boire souvent dans la journée, surtout pendant la chaleur, après un effort ou quand on ressent de la fatigue.',
+        dateCreation: '20 Jul 2026'
+      },
+      {
+        id: 2,
+        nomConseil: 'Hygiène des mains',
+        source: 'Santé publique',
+        symptome: 'Le lavage des mains réduit fortement le risque de transmission.',
+        conseilPreventif: 'Lave-toi les mains avant de manger, après les toilettes et après avoir touché des surfaces partagées.',
+        dateCreation: '22 Jul 2026'
+      },
+      {
+        id: 3,
+        nomConseil: 'Sommeil',
+        source: 'Bien-être',
+        symptome: 'Un bon sommeil améliore l’énergie, l’humeur et la concentration.',
+        conseilPreventif: 'Essaie de dormir à heures fixes, évite les écrans avant de te coucher et garde une routine calme le soir.',
+        dateCreation: '24 Jul 2026'
+      }
+    ]; track conseil.id) {
+      <mat-card class="conseil-card" appearance="outlined">
+        <mat-card-header>
+          <div class="header-row">
+            <mat-card-title>{{ conseil.nomConseil }}</mat-card-title>
+            <span class="source-badge">{{ conseil.source }}</span>
+          </div>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p class="symptome-line">
+            <mat-icon inline>sick</mat-icon>
+            {{ conseil.symptome }}
+          </p>
+
+          <p class="conseil-preview">
+            {{ conseil.conseilPreventif }}
+          </p>
+        </mat-card-content>
+
+        <mat-card-footer class="card-footer">
+          <span class="date">{{ conseil.dateCreation }}</span>
+        </mat-card-footer>
+      </mat-card>
+    }
+  </main>
+</div>

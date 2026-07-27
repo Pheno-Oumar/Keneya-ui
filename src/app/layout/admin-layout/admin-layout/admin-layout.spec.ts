@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Publication } from './publication';
+import { CitoyenLayout } from './admin-layout';
 
-describe('Publication', () => {
-  let component: Publication;
-  let fixture: ComponentFixture<Publication>;
+describe('CitoyenLayout', () => {
+  let component: CitoyenLayout;
+  let fixture: ComponentFixture<CitoyenLayout>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Publication],
+      imports: [CitoyenLayout],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Publication);
+    fixture = TestBed.createComponent(CitoyenLayout);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
