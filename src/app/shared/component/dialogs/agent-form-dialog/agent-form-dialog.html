@@ -1,6 +1,7 @@
-<form [formGroup]="form" (ngSubmit)="inscrire()">
-    <h1 mat-dialog-title> Créer un compte</h1>
-    <mat-hint>Rejoignez-nous et prenez soin de votre santé</mat-hint>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <h1 mat-dialog-title>
+        {{ data?.mode === 'edit' ? 'Modifier un agent' : 'Créer un agent' }}
+    </h1> <mat-hint>Rejoignez-nous et prenez soin de votre santé</mat-hint>
     <mat-dialog-content>
         <mat-form-field appearance="outline">
             <mat-label>Nom</mat-label>
@@ -34,6 +35,6 @@
 
     </mat-dialog-content>
     <mat-dialog-actions>
-            <button type="submit"> Save</button>
+        <button type="submit"> Enregistrer</button>
     </mat-dialog-actions>
 </form>

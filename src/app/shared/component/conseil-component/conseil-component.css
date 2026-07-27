@@ -1,4 +1,5 @@
-/* Import des thèmes Material */
+/* Import du thème Material */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
 
 /* Conteneur principal */
 .container {
@@ -12,9 +13,9 @@
 /* Toolbar personnalisé */
 .header-toolbar {
   border-radius: 8px 8px 0 0;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   padding: 0 24px;
-  background: linear-gradient(135deg, #43A37A 100%);
+  background: linear-gradient(135deg, #43A37A 0%, #43A37A 100%);
 }
 
 .toolbar-title {
@@ -27,7 +28,7 @@
   flex: 1 1 auto;
 }
 
-/* Bouton ajouter dans la toolbar */
+/* Bouton ajouter */
 .add-button {
   display: flex;
   align-items: center;
@@ -36,7 +37,8 @@
   height: 44px;
   font-weight: 500;
   background: white;
-  color: #43A37A !important;
+  color: #3f51b5 !important;
+  transition: all 0.3s ease;
 }
 
 .add-button:hover {
@@ -50,6 +52,34 @@
   width: 20px;
   height: 20px;
   line-height: 20px;
+}
+
+/* Section des filtres */
+.filter-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding: 16px 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.search-field {
+  flex: 2;
+  min-width: 200px;
+}
+
+.filter-field {
+  flex: 1;
+  min-width: 150px;
+}
+
+.archive-toggle {
+  margin-left: auto;
+  padding: 8px 0;
 }
 
 /* Wrapper du tableau */
@@ -69,14 +99,14 @@ mat-table {
 mat-header-cell {
   font-weight: 600;
   color: #1a237e;
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 0.3px;
   background: #f8f9fa;
   border-bottom: 2px solid #e0e0e0;
 }
 
 mat-cell {
-  font-size: 14px;
+  font-size: 13px;
   color: #424242;
   padding: 12px 16px;
 }
@@ -88,11 +118,27 @@ mat-row {
 
 mat-row:hover {
   background: #f5f7ff;
-  cursor: pointer;
 }
 
 mat-row:last-child {
   border-bottom: none;
+}
+
+/* Styles des titres */
+.conseil-title {
+  font-weight: 500;
+  color: #1a237e;
+}
+
+/* Badges de catégorie */
+.categorie-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: #e3f2fd;
+  color: #1565c0;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 /* Conteneur des actions */
@@ -105,9 +151,9 @@ mat-row:last-child {
 
 /* Mini FAB Buttons */
 .mat-mini-fab {
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
   transition: all 0.2s ease;
 }
 
@@ -117,23 +163,17 @@ mat-row:last-child {
 }
 
 .mat-mini-fab mat-icon {
-  font-size: 20px;
-  width: 20px;
-  height: 20px;
-  line-height: 20px;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
 }
 
-/* Couleurs des boutons Material */
-.mat-mini-fab.mat-primary {
-  background: #1976d2;
-}
-
-.mat-mini-fab.mat-accent {
-  background: #ff9800;
-}
-
-.mat-mini-fab.mat-warn {
-  background: #f44336;
+/* Couleurs des chips */
+mat-chip {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 12px;
 }
 
 /* État vide */
@@ -185,6 +225,24 @@ mat-paginator {
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+  .filter-section {
+    gap: 12px;
+  }
+
+  .search-field {
+    flex: 1 1 100%;
+  }
+
+  .filter-field {
+    flex: 1 1 45%;
+  }
+
+  .archive-toggle {
+    margin-left: 0;
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 12px;
@@ -215,14 +273,25 @@ mat-paginator {
     line-height: 18px;
   }
 
+  .filter-section {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px 16px;
+  }
+
+  .search-field, .filter-field {
+    width: 100%;
+    min-width: 0;
+  }
+
   mat-header-cell {
-    font-size: 12px;
-    padding: 8px 12px;
+    font-size: 11px;
+    padding: 8px 10px;
   }
 
   mat-cell {
-    font-size: 12px;
-    padding: 8px 12px;
+    font-size: 11px;
+    padding: 8px 10px;
   }
 
   .actions-container {
@@ -230,16 +299,16 @@ mat-paginator {
   }
 
   .mat-mini-fab {
-    width: 32px;
-    height: 32px;
-    line-height: 32px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
   }
 
   .mat-mini-fab mat-icon {
-    font-size: 16px;
-    width: 16px;
-    height: 16px;
-    line-height: 16px;
+    font-size: 15px;
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
   }
 
   .empty-state {
@@ -255,6 +324,10 @@ mat-paginator {
   .empty-state h3 {
     font-size: 18px;
   }
+
+  mat-paginator {
+    font-size: 11px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -267,7 +340,7 @@ mat-paginator {
   }
 
   .toolbar-title {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .add-button {
@@ -295,24 +368,34 @@ mat-paginator {
   }
 
   .mat-mini-fab {
-    width: 28px;
-    height: 28px;
-    line-height: 28px;
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
   }
 
   .mat-mini-fab mat-icon {
-    font-size: 14px;
-    width: 14px;
-    height: 14px;
-    line-height: 14px;
+    font-size: 13px;
+    width: 13px;
+    height: 13px;
+    line-height: 13px;
+  }
+
+  .categorie-badge {
+    font-size: 10px;
+    padding: 2px 8px;
+  }
+
+  mat-chip {
+    font-size: 10px;
+    padding: 2px 8px;
   }
 
   mat-paginator {
-    font-size: 11px;
+    font-size: 10px;
   }
 }
 
-/* Animation pour les lignes */
+/* Animation des lignes */
 @keyframes slideIn {
   from {
     opacity: 0;

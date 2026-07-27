@@ -13,9 +13,10 @@ import { CategorieActiviteComponent } from './shared/component/categorie-activit
 import { CategorieConseilComponent } from './shared/component/categorie-conseil-component/categorie-conseil-component';
 import { AgentComponent } from './shared/component/agent-component/agent-component';
 import { AgentLayout } from './layout/agent-layout/agent-layout/agent-layout';
-import { ConseilComponent } from './shared/component/activite-component/activite-component';
-import { DahbordAdminComponent } from './shared/component/dahbord-admin-component/dahbord-admin-component';
+import { ConseilComponent } from './shared/component/conseil-component/conseil-component';
 import { PublicationComponent } from './shared/component/publication-component/publication-component';
+import { ActiviteComponent } from './shared/component/activite-component/activite-component';
+import { DahbordAdminComponent } from './shared/component/dahbord-admin-component/dahbord-admin-component';
 import { ProfileAdmin } from './features/profil_admin/profil_admin';
 import { ProfilCitoyen } from './features/profile_citoyen/profile_citoyen';
 import { PlanListComponent } from './features/citoyen-activite-plan/plan-list/plan-list';
@@ -63,7 +64,7 @@ export const routes: Routes = [
     path: "admin", component: AdminLayout,
     children: [
       {
-        path: "", component: Citoyen
+        path: "", component: DahbordAdminComponent
       }
       , {
         path: "categories-activite", component: CategorieActiviteComponent
@@ -87,8 +88,12 @@ export const routes: Routes = [
         path: "publications", component: PublicationComponent
       },
       {
-        path: "categories-conseil", component: CategorieConseilComponent
+        path: "conseils", component: ConseilComponent
       },
+       {
+        path: "activites", component: ActiviteComponent
+      },
+
        {
        path : "profile", component: ProfilCitoyen
      } 
