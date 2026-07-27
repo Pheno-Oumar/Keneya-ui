@@ -1,50 +1,52 @@
 <section class="dashboard-content">
-	<div class="grid-haut">
-		<!-- Carte Rappels du jour -->
-		<div class="carte carte-mini">
-			<h3>Rappels actif</h3>
-			<p class="chiffre">{{rappelsAVenir.length}}</p>
-			<span class="label">A faire</span>
-			<i class="icon-plus icone-fond"></i>
-		</div>
+    <div class="grid-haut">
+        <!-- Carte Rappels du jour -->
+        <div class="carte carte-mini">
+            <h3>Rappels du jour</h3>
+            <p class="chiffre">{{ resume?.nbRappelsDuJour ?? 0 }}</p>
+            <span class="label">A faire</span>
+            <i class="icon-plus icone-fond"></i>
+        </div>
 
-		<!-- Carte Activité -->
-		<div class="carte carte-mini">
-			<h3>Activité</h3>
-			<p class="chiffre">{{ resume?.nbActivites ?? 0 }}</p>
-			<span class="label">{{ resume?.activitesLabel ?? '' }}</span>
-		</div>
+        <!-- Carte Activité -->
+        <div class="carte carte-mini">
+            <h3>Activité</h3>
+            <p class="chiffre">{{ resume?.nbActivites ?? 0 }}</p>
+            <span class="label">{{ resume?.activitesLabel ?? '' }}</span>
+        </div>
 
-		<!-- Carte Rappels à venir -->
-		<div class="carte carte-rappels">
-			<h3>Rappel à venir</h3>
-			@if (chargementEnCours) {
+        <!-- Carte Rappels à venir -->
+        <div class="carte carte-rappels">
+            <h3>Rappel à venir</h3>
+            
+            @if (chargementEnCours) {
+                <div class="etat-info">Chargement…</div>
+            }
+            
+            <!-- CORRECTION : !chargementEnCours au lieu de chargementEnCours -->
+            @if (!chargementEnCours && rappelsAVenir.length === 0) {
+                <div class="etat-info">
+                    Aucun rappel à venir
+                </div>
+            }
 
-			<div class="etat-info">Chargement…</div>
-			}
-			@if (chargementEnCours && rappelsAVenir.length === 0) {
-			<div class="etat-info">
-				Aucun rappel à venir
-			</div>
+            @for (rappel of rappelsAVenir; track $index) {
+                <div class="rappel-ligne">
+                    <span class="heure">{{ rappel.dateRappel }}</span>
+                    <!-- CORRECTION : nomMedicament au lieu de nom_medicament -->
+                    <span class="medicament">{{ rappel.nomMedicament }}</span>
+                </div>
+            }
 
-			}
+            <a routerLink="/rappels" class="voir-tous">Voir tous les rappels</a>
+        </div>
+    </div>
 
-			@for (rappel of rappelsAVenir | slice:0:2; track $index) {
-			<div class="rappel-ligne">
-				<span class="heure">{{ rappel.dateRappel | date}}</span>
-				<span class="medicament">{{ rappel.nom_medicament }}</span>
-			</div>
-			}
-			<a routerLink="/citoyen/rappels" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-				class="voir-tous">Voir tous les rappels</a>
-		</div>
-	</div>
+    <div class="grid-bas">
+        <div class="carte carte-placeholder"><!-- ex: graphique activité --></div>
+    </div>
 
-	<div class="grid-bas">
-		<div class="carte carte-placeholder"><!-- ex: graphique activité --></div>
-	</div>
-
-	<div class="grid-bas">
-		<div class="carte carte-placeholder carte-large"><!-- ex: statistiques / conseils --></div>
-	</div>
+    <div class="grid-bas">
+        <div class="carte carte-placeholder carte-large"><!-- ex: statistiques / conseils --></div>
+    </div>
 </section>

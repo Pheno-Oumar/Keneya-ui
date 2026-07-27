@@ -1,0 +1,125 @@
+<div class="mat-typography container">
+    <!-- En-tête avec Material Design -->
+    <mat-toolbar color="primary" class="header-toolbar">
+        <span class="toolbar-title">Gestion des Conseils</span>
+        <span class="spacer"></span>
+        <button mat-raised-button color="accent" (click)="ajouter()" class="add-button">
+            <mat-icon>add</mat-icon>
+            Ajouter un conseil
+        </button>
+    </mat-toolbar>
+
+    <!-- Filtres et recherche -->
+    <div class="filter-section">
+        <mat-form-field appearance="outline" class="search-field">
+            <mat-label>Rechercher un conseil</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Titre, catégorie..." #input>
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="filter-field">
+            <mat-label>Filtrer par type</mat-label>
+            <mat-select (selectionChange)="filterByType($event.value)">
+                <mat-option value="">Tous les types</mat-option>
+                <mat-option value="CONSEIL">CONSEIL</mat-option>
+                <mat-option value="RECOMMANDATION">RECOMMANDATION</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-slide-toggle (change)="toggleArchived($event.checked)" class="archive-toggle">
+            Afficher les archivés
+        </mat-slide-toggle>
+    </div>
+
+    <!-- Tableau Material -->
+    <div class="table-wrapper">
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+
+            <!-- Colonne ID -->
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+                <mat-cell *matCellDef="let conseil"> {{conseil.id}} </mat-cell>
+            </ng-container>
+
+            <!-- Colonne Titre -->
+            <ng-container matColumnDef="titre">
+                <mat-header-cell *matHeaderCellDef> Titre </mat-header-cell>
+                <mat-cell *matCellDef="let conseil">
+                    <span class="conseil-title">{{conseil.titre}}</span>
+                </mat-cell>
+            </ng-container>
+
+            <!-- Colonne Type -->
+            <ng-container matColumnDef="typeConseil">
+                <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+                <mat-cell *matCellDef="let conseil">
+                    <mat-chip [color]="getTypeColor(conseil.typeConseil)" selected>
+                        {{conseil.typeConseil}}
+                    </mat-chip>
+                </mat-cell>
+            </ng-container>
+
+            <!-- Colonne Catégorie -->
+            <ng-container matColumnDef="categorieNom">
+                <mat-header-cell *matHeaderCellDef> Catégorie </mat-header-cell>
+                <mat-cell *matCellDef="let conseil">
+                    <span class="categorie-badge">{{conseil.categorieNom}}</span>
+                </mat-cell>
+            </ng-container>
+
+
+
+            <!-- Colonne Statut -->
+            <ng-container matColumnDef="archive">
+                <mat-header-cell *matHeaderCellDef> Statut </mat-header-cell>
+                <mat-cell *matCellDef="let conseil">
+                    <mat-chip [color]="conseil.archive ? 'warn' : 'primary'" selected>
+                        {{conseil.archive ? 'Archivé' : 'Actif'}}
+                    </mat-chip>
+                </mat-cell>
+            </ng-container>
+
+            <!-- Colonne Actions -->
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                <mat-cell *matCellDef="let conseil">
+                    <div class="actions-container">
+                        <button mat-mini-fab color="primary" (click)="modifier(conseil)" matTooltip="Modifier"
+                            aria-label="Modifier le conseil">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-mini-fab color="accent" (click)="detail(conseil)" matTooltip="Détail"
+                            aria-label="Voir les détails">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                        <button mat-mini-fab color="warn" (click)="supprimer(conseil)" matTooltip="Supprimer"
+                            aria-label="Supprimer le conseil">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </div>
+
+    <!-- État vide avec Material Design -->
+    @if(dataSource.data.length === 0){
+    <div class="empty-state mat-elevation-z1">
+        <mat-icon class="empty-icon">lightbulb_outline</mat-icon>
+        <h3>Aucun conseil trouvé</h3>
+        <p>Commencez par ajouter un nouveau conseil</p>
+        <button mat-raised-button color="primary" (click)="ajouter()">
+            <mat-icon>add</mat-icon>
+            Ajouter un conseil
+        </button>
+    </div>
+    }
+
+    <!-- Pagination -->
+    <mat-paginator *ngIf="dataSource.data.length > 0" [length]="dataSource.data.length" [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Sélectionner la page">
+    </mat-paginator>
+</div>

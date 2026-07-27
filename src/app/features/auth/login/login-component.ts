@@ -1,14 +1,21 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router, RouterLink } from '@angular/router';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import { HttpErrorResponse } from '@angular/common/http';
+
 import { AuthService } from '../../../core/services/auth-service';
-import { RouterLink, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-component',
@@ -16,75 +23,145 @@ import { RouterLink, Router } from '@angular/router';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    RouterLink,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatCardModule,
-    RouterLink,
+    MatCardModule
   ],
   templateUrl: './login-component.html',
   styleUrl: './login-component.css',
 })
 export class LoginComponent {
+
   loginForm: FormGroup;
   isLoading = false;
   errorMessage = '';
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService, // On garde juste le service pour l'appel API
-    private router: Router,
+    private authService: AuthService,
+    private router: Router
   ) {
+
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email,
+          Validators.maxLength(100)
+        ]
+      ],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(64)
+        ]
+      ]
     });
+
   }
 
-  login() {
-    if (this.loginForm.valid) {
-      this.isLoading = true;
-      this.errorMessage = '';
+  login(): void {
 
-      this.authService.login(this.loginForm.value).subscribe({
-        next: (response: any) => {
-          this.isLoading = false;
-          localStorage.setItem('role', response.data);
-          // ✅ On affiche juste la réponse du backend dans la console
-          console.log('✅ Réponse du backend reçue :', response);
-          console.log(localStorage.getItem('role'));
+    this.errorMessage = '';
 
-          if (response.success === true) {
-            console.log(
-              '🎉 Connexion réussie ! Le cookie de session est stocké par le navigateur.',
-            );
-            // Plus tard, on ajoutera : this.router.navigate(['/dashboard']);
-          } else {
-            // Si le backend renvoie success: false
-            this.errorMessage = response.message || 'Identifiants incorrects.';
-          }
-          if (response.data.role == 'CITOYEN') {
-            this.router.navigate(['/citoyen']);
-          } else if (response.data == 'ADMIN') {
-            this.router.navigate(['/admin']);
-          } else if (response.data == 'AGENT') {
-            this.router.navigate(['/agent']);
-          } else {
-            this.router.navigate(['/agent']);
-          }
-        },
-        error: (error: HttpErrorResponse) => {
-          this.isLoading = false;
-          console.error("❌ Erreur de l'appel HTTP :", error);
-
-          if (error.status === 401 || error.status === 403) {
-            this.errorMessage = 'Email ou mot de passe incorrect.';
-          } else {
-            this.errorMessage = 'Erreur du serveur. Veuillez réessayer plus tard.';
-          }
-        },
-      });
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
     }
+
+    this.isLoading = true;
+
+    const credentials = {
+      email: this.loginForm.value.email.trim().toLowerCase(),
+      password: this.loginForm.value.password
+    };
+
+    this.authService.login(credentials).subscribe({
+
+      next: (response: any) => {
+
+        this.isLoading = false;
+
+        console.log('Réponse du backend :', response);
+
+        if (!response.success) {
+          this.errorMessage = response.message ?? 'Connexion impossible.';
+          return;
+        }
+
+        // Sauvegarde du rôle
+        localStorage.setItem('role', response.data);
+
+        switch (response.data) {
+
+          case 'ADMIN':
+            this.router.navigate(['/admin/agents']);
+            break;
+
+          case 'AGENT':
+            this.router.navigate(['/agent/publications']);
+            break;
+
+          case 'CITOYEN':
+            this.router.navigate(['/citoyen']);
+            break;
+
+          default:
+            this.errorMessage = 'Rôle inconnu.';
+        }
+
+      },
+
+      error: (error: HttpErrorResponse) => {
+
+        this.isLoading = false;
+
+        switch (error.status) {
+
+          case 0:
+            this.errorMessage = 'Impossible de contacter le serveur.';
+            break;
+
+          case 400:
+            this.errorMessage = 'Veuillez vérifier les informations saisies.';
+            break;
+
+          case 401:
+            this.errorMessage = 'Email ou mot de passe incorrect.';
+            break;
+
+          case 403:
+            this.errorMessage = "Votre compte n'est pas autorisé.";
+            break;
+
+          case 404:
+            this.errorMessage = 'Service introuvable.';
+            break;
+
+          case 429:
+            this.errorMessage = 'Trop de tentatives. Réessayez plus tard.';
+            break;
+
+          case 500:
+            this.errorMessage = 'Erreur interne du serveur.';
+            break;
+
+          default:
+            this.errorMessage = 'Une erreur inattendue est survenue.';
+        }
+
+        console.error(error);
+
+      }
+
+    });
+
   }
+
 }

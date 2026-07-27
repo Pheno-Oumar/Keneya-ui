@@ -58,6 +58,9 @@
 }
 
 .deconnexion {
+  display: flex;
+  align-items: center;
+  gap: 2px;
   background: none;
   border: none;
   color: #4a4a4a;

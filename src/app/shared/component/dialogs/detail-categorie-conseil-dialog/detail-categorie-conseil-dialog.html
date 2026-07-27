@@ -1,0 +1,25 @@
+<div>
+    <div class="header">
+        <h2 mat-dialog-title>Details de la categorie <strong>{{data.libelle}}</strong></h2>
+        <span class="spacer"></span>
+        <button mat-icon-button (click)="close()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <mat-dialog-content>
+        <strong>Nom: </strong>{{data.nom}} <br>
+        <div> <strong>Description: </strong>{{data.description}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat dolore deleniti reiciendis praesentium totam asperiores officia cupiditate perspiciatis maxime odio architecto porro voluptates soluta corrupti ullam, eius earum sapiente ab!</div>
+        <strong>archive: </strong> {{data.archive}}
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-stroked-button (click)="close()">
+            <mat-icon>close</mat-icon>
+            Fermer
+        </button>
+        <button mat-raised-button>
+            <mat-icon>edit</mat-icon>
+            Modifier
+        </button>
+    </mat-dialog-actions>
+</div>

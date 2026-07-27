@@ -6,40 +6,31 @@ import { Register } from './features/auth/register/register';
 import { CitoyenLayout } from './layout/citoyen-layout/citoyen-layout/citoyen-layout';
 import { Citoyen } from './features/dashboard/citoyen/citoyen';
 import { Test } from './features/test/test';
-import { RappelPage } from './features/rappel-page/rappel-page';
-import { authGuardGuard } from './core/guards/auth.guard-guard';
+import { RappelsList } from './features/rappels-list/rappels-list';
 
 export const routes: Routes = [
-  {
-    path: '',
-    component: Accueil,
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'register',
-    component: Register,
-  },
-  {
-    path: 'citoyen',
-    component: CitoyenLayout,
-    canActivate: [authGuardGuard],
-
-    children: [
-      {
-        path: '',
-        component: Citoyen,
-      },
-      {
-        path: 'test',
-        component: Test,
-      },
-      {
-        path: 'rappels',
-        component: RappelPage,
-      },
-    ],
-  },
+    {
+        path: '', component: Accueil
+    },
+    {
+        path: "login", component: LoginComponent
+    },
+    {
+        path: "register", component: Register
+    },
+    {
+        path: "citoyen", component: CitoyenLayout ,
+         children:[
+            {
+                path: "", component: Citoyen
+            }
+            ,{
+                path: "test" , component:Test
+            }
+            
+        ]
+        },{ 
+                path: 'rappels', 
+                component: RappelsList 
+            },
 ];
