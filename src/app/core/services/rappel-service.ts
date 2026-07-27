@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, Service } from '@angular/core';
 import { Observable } from 'rxjs';
-import { APIResponse, Rappel, RappelResponse } from '../../shared/models/rappel';
+import { Rappel, RappelResponse } from '../../shared/models/rappel';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ import { APIResponse, Rappel, RappelResponse } from '../../shared/models/rappel'
 export class RappelService {
   private httpclient = inject(HttpClient);
 
-  private baseUrl = 'http://localhost:8090';
+  private baseUrl = 'http://localhost:8080';
 
   getMyrappel(): Observable<RappelResponse[]> {
     return this.httpclient.get<RappelResponse[]>(`${this.baseUrl}/rappels/rappel-actif`, {
