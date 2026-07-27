@@ -1,0 +1,7 @@
+.header{
+    display: flex;
+}
+mat-dialog-content{
+    display: flex;
+    gap: 20px;
+}

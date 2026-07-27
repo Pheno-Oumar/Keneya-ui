@@ -1,0 +1,34 @@
+
+<!-- Overlay + Card -->
+<div class="overlay">
+	<div class="form-card">
+		<h2>Nouveau rappel</h2>
+
+		<form [formGroup]="formRappel" (ngSubmit)="onSubmit()">
+
+			<label>Nom du médicament</label>
+			<input type="text" formControlName="nom_medicament" placeholder="Ex: Doliprane">
+
+			<label>Fréquence</label>
+			<select formControlName="frequence">
+				<option value="FIXE">Fixe</option>
+				<option value="VARIABLE">Variable</option>
+			</select>
+
+			<label>Intervalle (heures)</label>
+			<input type="number" formControlName="intervalle" min="1">
+
+			<label>Date de début</label>
+			<input type="datetime-local" formControlName="dateDebut">
+
+			<label>Date de fin</label>
+			<input type="datetime-local" formControlName="dateFin">
+
+			<div class="actions">
+				<button type="submit" class="green">Enregistrer</button>
+				<button type="button" class="gray" (click)="onCloseCreateRappel()">Annuler</button>
+			</div>
+
+		</form>
+	</div>
+</div>

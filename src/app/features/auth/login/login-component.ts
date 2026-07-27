@@ -31,14 +31,12 @@ import { AuthService } from '../../../core/services/auth-service';
     MatCardModule
   ],
   templateUrl: './login-component.html',
-  styleUrl: './login-component.css'
+  styleUrl: './login-component.css',
 })
 export class LoginComponent {
 
   loginForm: FormGroup;
-
   isLoading = false;
-
   errorMessage = '';
 
   constructor(
@@ -48,7 +46,6 @@ export class LoginComponent {
   ) {
 
     this.loginForm = this.fb.group({
-
       email: [
         '',
         [
@@ -57,7 +54,6 @@ export class LoginComponent {
           Validators.maxLength(100)
         ]
       ],
-
       password: [
         '',
         [
@@ -66,7 +62,6 @@ export class LoginComponent {
           Validators.maxLength(64)
         ]
       ]
-
     });
 
   }
@@ -76,21 +71,15 @@ export class LoginComponent {
     this.errorMessage = '';
 
     if (this.loginForm.invalid) {
-
       this.loginForm.markAllAsTouched();
-
       return;
-
     }
 
     this.isLoading = true;
 
     const credentials = {
-
       email: this.loginForm.value.email.trim().toLowerCase(),
-
       password: this.loginForm.value.password
-
     };
 
     this.authService.login(credentials).subscribe({
@@ -99,44 +88,32 @@ export class LoginComponent {
 
         this.isLoading = false;
 
-        console.log("Réponse :", response);
+        console.log('Réponse du backend :', response);
 
         if (!response.success) {
-
-          this.errorMessage = response.message ?? "Connexion impossible.";
-
+          this.errorMessage = response.message ?? 'Connexion impossible.';
           return;
-
         }
 
-        // stockage du rôle
-
-        localStorage.setItem("role", response.data);
+        // Sauvegarde du rôle
+        localStorage.setItem('role', response.data);
 
         switch (response.data) {
 
-          case "ADMIN":
-
-            this.router.navigate(['/admin']);
-
+          case 'ADMIN':
+            this.router.navigate(['/admin/agents']);
             break;
 
-          case "AGENT":
-
-            this.router.navigate(['/agent']);
-
+          case 'AGENT':
+            this.router.navigate(['/agent/publications']);
             break;
 
-          case "CITOYEN":
-
+          case 'CITOYEN':
             this.router.navigate(['/citoyen']);
-
             break;
 
           default:
-
-            this.errorMessage = "Rôle inconnu.";
-
+            this.errorMessage = 'Rôle inconnu.';
         }
 
       },
@@ -148,59 +125,35 @@ export class LoginComponent {
         switch (error.status) {
 
           case 0:
-
-            this.errorMessage =
-              "Impossible de contacter le serveur.";
-
+            this.errorMessage = 'Impossible de contacter le serveur.';
             break;
 
           case 400:
-
-            this.errorMessage =
-              "Veuillez vérifier les informations saisies.";
-
+            this.errorMessage = 'Veuillez vérifier les informations saisies.';
             break;
 
           case 401:
-
-            this.errorMessage =
-              "Email ou mot de passe incorrect.";
-
+            this.errorMessage = 'Email ou mot de passe incorrect.';
             break;
 
           case 403:
-
-            this.errorMessage =
-              "Votre compte n'est pas autorisé.";
-
+            this.errorMessage = "Votre compte n'est pas autorisé.";
             break;
 
           case 404:
-
-            this.errorMessage =
-              "Service introuvable.";
-
+            this.errorMessage = 'Service introuvable.';
             break;
 
           case 429:
-
-            this.errorMessage =
-              "Trop de tentatives. Réessayez plus tard.";
-
+            this.errorMessage = 'Trop de tentatives. Réessayez plus tard.';
             break;
 
           case 500:
-
-            this.errorMessage =
-              "Erreur interne du serveur.";
-
+            this.errorMessage = 'Erreur interne du serveur.';
             break;
 
           default:
-
-            this.errorMessage =
-              "Une erreur inattendue est survenue.";
-
+            this.errorMessage = 'Une erreur inattendue est survenue.';
         }
 
         console.error(error);

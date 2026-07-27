@@ -1,12 +1,17 @@
-.citoyen-dashboard-layout{
-    display: flex;
-    justify-content: flex-start;
+.citoyen-dashboard-layout {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
-.citoyen-dashboard-layout-sidebar{
-    flex: none;
-    width: 280px;
-
+.citoyen-dashboard-layout-sidebar {
+  flex: none;
+  width: 280px;
+  height: 100%;
 }
-.citoyen-dashboard-layout-conteneur{
-    flex: 1;
+.citoyen-dashboard-layout-conteneur {
+  flex: 1;
+  height: 100%;
+  overflow: scroll;
 }

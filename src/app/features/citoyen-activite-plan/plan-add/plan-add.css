@@ -1,0 +1,82 @@
+.modal-container { 
+    padding: 30px; 
+    background: white; 
+    border-radius: 20px; 
+    max-width: 600px; 
+    position: relative; 
+}
+
+.modal-header { 
+    text-align: center; 
+    margin-bottom: 30px; 
+}
+
+.close-icon {
+
+    position: absolute;
+    right: 20px; 
+    top: 20px; 
+    cursor: pointer; 
+    font-size: 30px; 
+}
+
+.full-width { 
+    width: 100%; 
+    margin-top: 10px; 
+}
+
+.section-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 20px; 
+}
+
+.btn-add-session { 
+    background-color: #b5dcc4 !important;
+    color: white !important;
+    border-radius: 8px; 
+}
+
+.empty-state { 
+    text-align: center;
+    padding: 40px; 
+    color: #555; 
+}
+
+.empty-icon-bg { 
+    background: #b5dcc4; 
+    width: 80px; 
+    height: 80px; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    margin: 0 auto 15px; 
+    color: white; 
+}
+
+.empty-icon-bg mat-icon {
+    font-size: 40px; 
+    width: 40px; 
+    height: 40px; 
+}
+
+.modal-actions { 
+    display: flex; 
+    justify-content: center; 
+    gap: 20px; 
+    margin-top: 30px; 
+}
+
+.btn-annuler { 
+    border: 1px solid #ddd; 
+    width: 150px; 
+}
+
+.btn-enregistrer {
+    background-color: #b5dcc4 !important;
+    width: 150px; 
+    color: white; 
+}
+
