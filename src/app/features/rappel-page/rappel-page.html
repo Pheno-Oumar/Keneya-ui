@@ -71,26 +71,26 @@
 
 </section>
 @if (notifications().length > 0) {
-  <div class="notifications-overlay">
-    <div class="notifications">
-      @for (n of notifications(); track n.id) {
-        <div class="notification">
-          <div class="notification-content">
-            <div class="notification-icon">⏰</div>
+<div class="notifications-overlay">
+	<div class="notifications">
+		@for (n of notifications(); track n.id) {
+		<div class="notification">
+			<div class="notification-content">
+				<div class="notification-icon">⏰</div>
 
-            <div class="notification-text">
-              <p class="notification-title">Rappel médicament</p>
-              <p class="notification-message">
-                C'est l'heure de prendre : <strong>{{ n.nom_medicament }}</strong>
-              </p>
-            </div>
-          </div>
+				<div class="notification-text">
+					<p class="notification-title">Rappel médicament</p>
+					<p class="notification-message">
+						C'est l'heure de prendre : <strong>{{ n.rappel.nom_medicament }}</strong>
+					</p>
+				</div>
+			</div>
 
-          <button class="notification-close" (click)="fermerNotification(n.id)">✕</button>
-        </div>
-      }
-    </div>
-  </div>
+			<button class="notification-close" (click)="fermerNotification(n.id)">✕</button>
+		</div>
+		}
+	</div>
+</div>
 }
 
 @if (showForm ){

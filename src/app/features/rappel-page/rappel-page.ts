@@ -22,6 +22,7 @@ import {
   MatCardTitle,
 } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
+import { NotificationResponse } from '../../shared/models/Notification';
 
 @Component({
   selector: 'app-rappel-page',
@@ -43,7 +44,7 @@ import { MatIcon } from '@angular/material/icon';
 })
 export class RappelPage implements OnInit, OnDestroy {
   rappelsAVenir = signal<RappelResponse[] | []>([]);
-  notifications = signal<RappelResponse[] | []>([]);
+  notifications = signal<NotificationResponse<RappelResponse>[] | []>([]);
   rappelTerminer = signal<RappelResponse[] | []>([]);
   showForm = false;
 
@@ -79,7 +80,7 @@ export class RappelPage implements OnInit, OnDestroy {
     });
   }
 
-  demarrerPolling(intervalMs: number = 6000) {
+  demarrerPolling(intervalMs: number = 60000) {
     this.pollingHandle = setInterval(() => {
       this.rappelService.getRappelsdus().subscribe({
         next: (dus) => {
@@ -89,6 +90,7 @@ export class RappelPage implements OnInit, OnDestroy {
           }
         },
         error: (err) => console.error(err),
+        complete: () => console.log(this.notifications()),
       });
     }, intervalMs);
   }
