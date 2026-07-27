@@ -8,15 +8,16 @@
         <img src="assets/Femme.jpg" alt="Photo de profil" class="profile-avatar" />
 
         <div class="user-name-email">
-          <h2>{{ profilForm.value.nom }} {{ profilForm.value.prenom }}</h2>
-          <p>{{ profilForm.value.email }}</p>
+          <h2>{{ profilForm.get('nom')?.value }} {{ profilForm.get('prenom')?.value }}</h2>
+          <p>{{ profilForm.get('email')?.value }}</p>
         </div>
       </div>
     </div>
 
     <h3 class="section-title">Informations personnelles</h3>
 
-    <form [formGroup]="profilForm" (ngSubmit)="modifier()">
+    <!-- [formGroup] et (ngSubmit) ajoutés ici -->
+    <form [formGroup]="profilForm" (ngSubmit)="onSubmit()">
 
       <div class="info-grid">
 
@@ -44,8 +45,6 @@
           <label>Téléphone</label>
           <input type="text" formControlName="telephone" class="info-box">
         </div>
-
-      
 
       </div>
 

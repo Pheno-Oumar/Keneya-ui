@@ -18,7 +18,6 @@ import { DahbordAdminComponent } from './shared/component/dahbord-admin-componen
 import { PublicationComponent } from './shared/component/publication-component/publication-component';
 import { ProfileAdmin } from './features/profil_admin/profil_admin';
 import { ProfilCitoyen } from './features/profile_citoyen/profile_citoyen';
-
 export const routes: Routes = [
   {
     path: '',
@@ -36,7 +35,6 @@ export const routes: Routes = [
     path: 'citoyen',
     component: CitoyenLayout,
     canActivate: [authGuardGuard],
-
     children: [
       {
         path: '',
@@ -50,57 +48,66 @@ export const routes: Routes = [
         path: 'rappels',
         component: RappelPage,
       },
-       {
-    path : "profile", component: ProfilCitoyen
-  }
+      {
+        path: 'profilCitoyen',
+        component: ProfilCitoyen,
+      },
     ],
   },
   {
-    path: "admin", component: AdminLayout,
+    path: 'admin',
+    component: AdminLayout,
     children: [
       {
-        path: "", component: Citoyen
-      }
-      , {
-        path: "categories-activite", component: CategorieActiviteComponent
+        path: '',
+        component: Citoyen,
       },
       {
-        path: "categories-conseil", component: CategorieConseilComponent
+        path: 'categories-activite',
+        component: CategorieActiviteComponent,
       },
       {
-        path: "agents", component: AgentComponent
+        path: 'categories-conseil',
+        component: CategorieConseilComponent,
       },
-       {
-    path : "profile", component: ProfilCitoyen
-  }
-    ]
+      {
+        path: 'agents',
+        component: AgentComponent,
+      },
+      {
+        path: 'profile',
+        component: ProfilCitoyen,
+      },
+    ],
   },
   {
-    path: "agent", component: AgentLayout,
+    path: 'agent',
+    component: AgentLayout,
     children: [
       {
-        path: "", component: Citoyen
-      }
-      , {
-        path: "publications", component: PublicationComponent
+        path: '',
+        component: Citoyen,
       },
       {
-        path: "categories-conseil", component: CategorieConseilComponent
+        path: 'publications',
+        component: PublicationComponent,
       },
-       {
-       path : "profile", component: ProfilCitoyen
-     } 
-     
-    ]
+      {
+        path: 'categories-conseil',
+        component: CategorieConseilComponent,
+      },
+      {
+        path: 'profile',
+        component: ProfilCitoyen,
+      },
+    ],
   },
-
   {
-    path : "Profile_Admin", component: ProfileAdmin
+    path: 'Profile_Admin',
+    component: ProfileAdmin,
   },
-
-
   {
-    path : "Profile_Citoyen", component: ProfilCitoyen
-  }
-
+    path: 'Profile_Citoyen',
+    component: ProfilCitoyen,
+  },
 ];
