@@ -18,6 +18,7 @@ import { DahbordAdminComponent } from './shared/component/dahbord-admin-componen
 import { PublicationComponent } from './shared/component/publication-component/publication-component';
 import { ProfileAdmin } from './features/profil_admin/profil_admin';
 import { ProfilCitoyen } from './features/profile_citoyen/profile_citoyen';
+import { PlanListComponent } from './features/citoyen-activite-plan/plan-list/plan-list';
 
 export const routes: Routes = [
   {
@@ -53,6 +54,9 @@ export const routes: Routes = [
        {
     path : "profile", component: ProfilCitoyen
   }
+      {
+        path: "plan", component: PlanListComponent
+      }
     ],
   },
   {
@@ -70,9 +74,7 @@ export const routes: Routes = [
       {
         path: "agents", component: AgentComponent
       },
-       {
-    path : "profile", component: ProfilCitoyen
-  }
+      
     ]
   },
   {
