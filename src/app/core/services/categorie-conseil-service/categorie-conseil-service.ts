@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CategorieConseilInterface } from '../../../shared/models/CategorieConseil';
 import { Observable } from 'rxjs';
-import { CategorieConseilResponseInterface } from '../../../shared/models/CategorieConseilResponse';
+import { CategorieConseil, CategorieConseilResponseInterface } from '../../../shared/models/CategorieConseilResponse';
 
 @Injectable({
     providedIn: 'root'
@@ -16,8 +16,8 @@ export class CategorieConseilService {
         return this.http.post(`${this.apiUrl}`, categorie, { withCredentials: true })
     }
 
-    getCategories(): Observable<CategorieConseilResponseInterface> {
-            return this.http.get<CategorieConseilResponseInterface>(`${this.apiUrl}`, { withCredentials: true })
+    getCategories(): Observable<CategorieConseil[]> {
+            return this.http.get<CategorieConseil[]>(`${this.apiUrl}`, { withCredentials: true })
         }
     
         delete(id: number) {

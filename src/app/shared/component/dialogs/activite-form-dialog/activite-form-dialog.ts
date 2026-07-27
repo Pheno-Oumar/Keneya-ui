@@ -5,13 +5,13 @@ import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from "@angular/material/button";
 import { AgentService } from '../../../../core/services/agent/agent-service';
-import { AgentInterface } from '../../../models/agent';
+import { AgentRequestInterface } from '../../../models/agent';
 import { Router } from '@angular/router';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatSelect, MatOption } from "@angular/material/select";
 import { CategorieActiviteService } from '../../../../core/services/categorie-activite/categorie-activite-service';
 import { CategorieActivite } from '../../../models/CategorieActiviteResponse';
-import { activiteService } from '../../../../core/services/activite/activite-service';
+import { ActiviteService } from '../../../../core/services/activite/activite-service';
 import { ActiviteInterface } from '../../../models/Activite';
 
 
@@ -23,7 +23,7 @@ import { ActiviteInterface } from '../../../models/Activite';
 })
 export class ActivitetFormDialog {
   private dilogRef = inject(MatDialogRef<ActivitetFormDialog>);
-  private activiteService = inject(activiteService);
+  private activiteService = inject(ActiviteService);
   private categorieService = inject(CategorieActiviteService);
   private response: object | undefined;
   private router = inject(Router);
