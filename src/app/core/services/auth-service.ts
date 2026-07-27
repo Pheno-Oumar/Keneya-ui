@@ -4,6 +4,8 @@ import { catchError, Observable, of, tap } from 'rxjs';
 import { RegisterInterface } from '../../shared/models/register';
 import { Utilisateur } from '../../shared/models/utilisateur';
 import { APIResponse } from '../../shared/models/APIResponse';
+import { Citoyen } from '../../features/dashboard/citoyen/citoyen';
+import { CitoyenProfil } from '../../shared/models/CitoyenProfil';
 
 @Injectable({
   providedIn: 'root',
@@ -53,4 +55,20 @@ export class AuthService {
         tap(() => this._initialized.set(true)),
       );
   }
+
+//  modifierCitoyen(id:number,infoCitoyen:CitoyenProfil):Observable<any>{
+//  return this.http
+//        .put(`${this.apiUrl}/citoyens/${id}`,infoCitoyen, {
+//          withCredentials: true,
+//        })
+
+// }
+//   citoyenById(id:number): Observable<any>{
+//         return this.http
+//       .get(`${this.apiUrl}/citoyens/${id}`,  {
+//         withCredentials: true,
+//       })
+
+//   } 
+
 }
