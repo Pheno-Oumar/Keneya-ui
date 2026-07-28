@@ -5,7 +5,8 @@
 
 	<nav class="menu">
 		@for (item of menuItems; track $index) {
-		<a [routerLink]="item.route" routerLinkActive="active" class="menu-item">
+		<a [routerLink]="item.route" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}"
+			class="menu-item">
 			<mat-icon>{{item.icon}}</mat-icon>
 			<span>{{ item.label }}</span>
 		</a>
@@ -13,6 +14,8 @@
 	</nav>
 
 	<button class="deconnexion" type="button" (click)="deconnexion()">
-		Deconnexion
+					<mat-icon>logout</mat-icon>
+		        	<span>Deconnexion</span>
+
 	</button>
 </aside>

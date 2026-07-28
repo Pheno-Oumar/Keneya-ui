@@ -1,0 +1,332 @@
+.categories-container {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Header Card */
+.categories-container .header-card {
+  margin-bottom: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  padding: 16px 24px;
+}
+
+.categories-container .header-card mat-card-header {
+  padding: 0;
+  margin-bottom: 16px;
+}
+
+.categories-container .header-card mat-card-header .mat-card-title {
+  font-size: 24px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #333;
+}
+
+.categories-container .header-card mat-card-header .mat-card-title .title-icon {
+  font-size: 28px;
+  height: 28px;
+  width: 28px;
+  color: #3f51b5;
+}
+
+.categories-container .header-card mat-card-header .mat-card-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.categories-container .header-card mat-card-content {
+  padding: 0;
+}
+
+.categories-container .header-card mat-card-content .search-add-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.categories-container .header-card mat-card-content .search-add-container .search-field {
+  flex: 1;
+  min-width: 200px;
+}
+
+.categories-container .header-card mat-card-content .search-add-container .search-field .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+.categories-container .header-card mat-card-content .search-add-container .search-field .mat-form-field-outline {
+  background: #f8f9fa;
+  border-radius: 4px;
+}
+
+.categories-container .header-card mat-card-content .search-add-container .search-field input {
+  font-size: 14px;
+}
+
+.categories-container .header-card mat-card-content .search-add-container .add-button {
+  padding: 0 24px;
+  height: 48px;
+  border-radius: 4px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.categories-container .header-card mat-card-content .search-add-container .add-button mat-icon {
+  margin-right: 8px;
+}
+
+.categories-container .header-card mat-card-content .search-add-container .add-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(63, 81, 181, 0.3);
+}
+
+/* Table Card */
+.categories-container .table-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  padding: 0;
+  overflow: hidden;
+}
+
+.categories-container .table-card mat-card-content {
+  padding: 0;
+}
+
+.categories-container .table-card .table-container {
+  overflow-x: auto;
+  padding: 16px;
+}
+
+.categories-container .table-card .table-container table {
+  width: 100%;
+}
+
+/* En-tête du tableau */
+.categories-container .table-card .table-container table .mat-header-row {
+  background: #f8f9fa;
+}
+
+.categories-container .table-card .table-container table .mat-header-row .mat-header-cell {
+  font-weight: 600;
+  color: #444;
+  font-size: 14px;
+  padding: 16px 12px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+/* Lignes du tableau */
+.categories-container .table-card .table-container table .mat-row {
+  transition: background-color 0.2s ease;
+  min-height: 52px;
+}
+
+.categories-container .table-card .table-container table .mat-row:hover {
+  background-color: #f8f9fa;
+}
+
+.categories-container .table-card .table-container table .mat-row .mat-cell {
+  padding: 12px;
+  font-size: 14px;
+  color: #555;
+}
+
+.categories-container .table-card .table-container table .mat-row .mat-cell .category-name {
+  font-weight: 500;
+  color: #333;
+}
+
+.categories-container .table-card .table-container table .mat-row .mat-cell .category-description {
+  color: #666;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+}
+
+/* Actions */
+.categories-container .table-card .table-container table .action-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.categories-container .table-card .table-container table .action-buttons button {
+  transition: transform 0.2s ease;
+}
+
+.categories-container .table-card .table-container table .action-buttons button:hover {
+  transform: scale(1.1);
+}
+
+.categories-container .table-card .table-container table .action-buttons button mat-icon {
+  font-size: 20px;
+}
+
+/* Empty State */
+.categories-container .table-card .table-container table .empty-state {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.categories-container .table-card .table-container table .empty-state mat-icon {
+  font-size: 48px;
+  height: 48px;
+  width: 48px;
+  color: #ccc;
+  margin-bottom: 16px;
+}
+
+.categories-container .table-card .table-container table .empty-state p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 16px;
+}
+
+.categories-container .table-card .table-container table .empty-state button mat-icon {
+  margin-right: 8px;
+}
+
+/* Paginator */
+.categories-container .table-card mat-paginator {
+  border-top: 1px solid #e0e0e0;
+  padding: 8px 16px;
+  background: #fafafa;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Styles pour le scrollbar */
+.categories-container .table-card .table-container::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.categories-container .table-card .table-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.categories-container .table-card .table-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.categories-container .table-card .table-container::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .categories-container {
+    padding: 12px;
+  }
+
+  .categories-container .header-card {
+    padding: 12px 16px;
+  }
+
+  .categories-container .header-card mat-card-header .mat-card-title {
+    font-size: 20px;
+  }
+
+  .categories-container .header-card mat-card-header .mat-card-title .title-icon {
+    font-size: 24px;
+    height: 24px;
+    width: 24px;
+  }
+
+  .categories-container .header-card mat-card-content .search-add-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .categories-container .header-card mat-card-content .search-add-container .search-field {
+    min-width: 100%;
+  }
+
+  .categories-container .header-card mat-card-content .search-add-container .add-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .categories-container .table-card .table-container {
+    padding: 8px;
+  }
+
+  .categories-container .table-card .table-container table .mat-header-row .mat-header-cell {
+    font-size: 12px;
+    padding: 12px 8px;
+  }
+
+  .categories-container .table-card .table-container table .mat-row .mat-cell {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .categories-container .table-card .table-container table .mat-row .mat-cell .category-description {
+    max-width: 150px;
+  }
+
+  .categories-container .table-card .table-container table .action-buttons {
+    gap: 2px;
+  }
+
+  .categories-container .table-card .table-container table .action-buttons button mat-icon {
+    font-size: 18px;
+  }
+
+  .categories-container .table-card mat-paginator {
+    padding: 4px 8px;
+  }
+
+  .categories-container .table-card mat-paginator .mat-paginator-container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .categories-container {
+    padding: 8px;
+  }
+
+  .categories-container .header-card mat-card-header .mat-card-title {
+    font-size: 18px;
+    flex-wrap: wrap;
+  }
+
+  .categories-container .header-card mat-card-header .mat-card-subtitle {
+    font-size: 12px;
+  }
+
+  .categories-container .table-card .table-container table .mat-row .mat-cell .category-description {
+    max-width: 100px;
+    font-size: 12px;
+  }
+
+  .categories-container .table-card mat-paginator .mat-paginator-range-label {
+    font-size: 12px;
+  }
+
+  .categories-container .table-card mat-paginator .mat-paginator-page-size {
+    font-size: 12px;
+  }
+}

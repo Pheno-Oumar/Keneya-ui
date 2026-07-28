@@ -6,6 +6,7 @@ import { Register } from './features/auth/register/register';
 import { CitoyenLayout } from './layout/citoyen-layout/citoyen-layout/citoyen-layout';
 import { Citoyen } from './features/dashboard/citoyen/citoyen';
 import { Test } from './features/test/test';
+import { RappelsList } from './features/rappels-list/rappels-list';
 
 export const routes: Routes = [
     {
@@ -26,6 +27,10 @@ export const routes: Routes = [
             ,{
                 path: "test" , component:Test
             }
+            
         ]
-    }
+        },{ 
+                path: 'rappels', 
+                component: RappelsList 
+            },
 ];

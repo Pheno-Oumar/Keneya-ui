@@ -1,19 +1,30 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, Service } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Rappel } from '../../shared/models/rappel';
+import { Rappel, RappelResponse } from '../../shared/models/rappel';
 
-@Injectable(
-    {
-        providedIn:"root"
-    }
-)
+@Injectable({
+  providedIn: 'root',
+})
 export class RappelService {
-    private httpclient = inject(HttpClient)
+  private httpclient = inject(HttpClient);
 
-    private baseUrl = "http://localhost:8080"
+  private baseUrl = 'http://localhost:8080';
 
-    getMyrappel ():Observable<Rappel>{
-     return this.httpclient.get<Rappel>(`${this.baseUrl}/rappels/read`,{withCredentials:true})
-    }
+  getMyrappel(): Observable<RappelResponse[]> {
+    return this.httpclient.get<RappelResponse[]>(`${this.baseUrl}/rappels/rappel-actif`, {
+      withCredentials: true,
+    });
+  }
+  getRappelsdus(): Observable<RappelResponse[]> {
+    return this.httpclient.get<RappelResponse[]>(`${this.baseUrl}/rappels/dus`, {
+      withCredentials: true,
+    });
+  }
+
+  createRappel(rappel: Rappel): Observable<RappelResponse> {
+    return this.httpclient.post<RappelResponse>(`${this.baseUrl}/rappels/create`, rappel, {
+      withCredentials: true,
+    });
+  }
 }

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RappelService } from './rappel-service';
+import { Profil } from './profil';
 
-describe('RappelService', () => {
-  let service: RappelService;
+describe('Profil', () => {
+  let service: Profil;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(RappelService);
+    service = TestBed.inject(Profil);
   });
 
   it('should be created', () => {

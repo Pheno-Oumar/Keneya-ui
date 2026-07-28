@@ -1,0 +1,25 @@
+<div>
+    <div class="header">
+        <h2 mat-dialog-title>Voulez vous supprimer la categorie <strong style="color: brown;">{{data.nom}}</strong></h2>
+        <span class="spacer"></span>
+        <button mat-icon-button (click)="close()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <mat-dialog-content>
+        <strong>Nom: </strong>{{data.nom}} <br>
+        <div> <strong>Description: </strong>{{data.description}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat dolore deleniti reiciendis praesentium totam asperiores officia cupiditate perspiciatis maxime odio architecto porro voluptates soluta corrupti ullam, eius earum sapiente ab!</div>
+        <strong>archive: </strong> {{data.archive}}
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-stroked-button (click)="close()">
+            <mat-icon>close</mat-icon>
+            Fermer
+        </button>
+        <button mat-raised-button style="color: brown;" (click)="supprimer(data.id)">
+            <mat-icon>delete</mat-icon>
+            supprimer
+        </button>
+    </mat-dialog-actions>
+</div>

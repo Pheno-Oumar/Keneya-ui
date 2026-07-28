@@ -1,0 +1,82 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+
+.new-reminder {
+  background-color: #2d7ff9;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
+
+main {
+  padding: 30px;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+.card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.label {
+  display: inline-block;
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+.action {
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+}
+
+.green {
+  background-color: #4caf50;
+}
+.blue {
+  background-color: #2d7ff9;
+}
+.orange {
+  background-color: #ff9800;
+}
+.gray {
+  background-color: #ccc;
+  color: #333;
+}
+
+.notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  padding: 15px 20px;
+  width: 280px;
+}
+
+.notif-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}

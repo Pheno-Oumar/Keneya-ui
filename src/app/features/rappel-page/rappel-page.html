@@ -1,0 +1,37 @@
+<section class="reminders">
+	<div class="header">
+		<h2>Mes rappels</h2>
+		<button class="new-reminder" (click)="onOpenForm()">+ Nouveau rappel</button>
+	</div>
+
+
+	@for(rappel of rappelsAVenir; track rappel.dateCreation) {
+	<div class="card upcoming">
+		<div class="info">
+			<h3>{{ rappel.nom_medicament}}</h3>
+			<p>Intervalle de prise : {{rappel.intervalle }} heures </p>
+		</div>
+		<div class="status">
+			<p>Prochaine prise : {{rappel.dateRappel | date : 'short'}}</p>
+			<span class="label "> Archivé : {{rappel.archive === true ? 'Oui' : 'Non'}}</span>
+			<!-- <button class="action green">Marquer comme pris</button> -->
+		</div>
+	</div>
+	}
+</section>
+
+@if (notifications.length > 0) {
+<div class="notifications">
+	@for (n of notifications; track $index) {
+	<div class="notification">
+		⏰ C'est l'heure de prendre : {{ n.nom_medicament }}
+		<button (click)="fermerNotification(n.id)">✕</button>
+	</div>
+	}
+
+</div>
+}
+
+@if (showForm ){
+<app-forms-rappel (onCloseForm)="onCloseForm($event)" (onSubmitForm)="onSubmitRappel($event)"></app-forms-rappel>
+}
