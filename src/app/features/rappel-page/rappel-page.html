@@ -10,6 +10,10 @@
 
 
 			<mat-card appearance="outlined" class="rappel-mini-card" [class.rappel-mini-card--done]="rappel.terminer">
+				<button mat-icon-button class="rappel-mini-card__delete" (click)="supprimerRappel(rappel.id)">
+					<mat-icon>delete</mat-icon>
+				</button>
+
 				<mat-card-header>
 					<div mat-card-avatar class="rappel-mini-card__avatar">
 						<mat-icon>medication</mat-icon>
@@ -27,10 +31,18 @@
 						<p><strong>Début :</strong> {{ rappel.dateDebut | date:'dd/MM/yyyy ' }}</p>
 						<p><strong>Fin :</strong> {{ rappel.dateFin | date:'dd/MM/yyyy ' }}</p>
 					</div>
+
+					<div class="rappel-badge-wrapper">
+						<div class="rappel-badge">
+							<mat-icon class="rappel-badge__icon">notifications_active</mat-icon>
+							<span class="rappel-badge__date">
+								{{ rappel.dateRappel | date:'dd/MM à HH:mm' }}
+							</span>
+						</div>
+					</div>
+
 					<p><strong>État :</strong> {{ rappel.terminer ? 'Terminé' : 'En cours' }}</p>
 				</mat-card-content>
-
-
 			</mat-card>
 			}
 		</mat-tab>
@@ -41,6 +53,10 @@
 
 				<mat-card appearance="outlined" class="rappel-mini-card"
 					[class.rappel-mini-card--done]="rappel.terminer">
+
+					<button mat-icon-button class="rappel-mini-card__delete" (click)="supprimerRappel(rappel.id)">
+						<mat-icon>delete</mat-icon>
+					</button>
 					<mat-card-header>
 						<div mat-card-avatar class="rappel-mini-card__avatar">
 							<mat-icon>medication</mat-icon>

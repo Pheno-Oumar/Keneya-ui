@@ -35,6 +35,12 @@ export class RappelService {
     );
   }
 
+  suprimerRappel(id: number): Observable<void> {
+    return this.httpclient.delete<void>(`${this.baseUrl}/rappels/delete/${id}`, {
+      withCredentials: true,
+    });
+  }
+
   createRappel(rappel: Rappel): Observable<RappelResponse> {
     return this.httpclient.post<RappelResponse>(`${this.baseUrl}/rappels/create`, rappel, {
       withCredentials: true,

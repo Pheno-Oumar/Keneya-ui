@@ -80,7 +80,7 @@ export class RappelPage implements OnInit, OnDestroy {
     });
   }
 
-  demarrerPolling(intervalMs: number = 60000) {
+  demarrerPolling(intervalMs: number = 30000) {
     this.pollingHandle = setInterval(() => {
       this.rappelService.getRappelsdus().subscribe({
         next: (dus) => {
@@ -90,7 +90,6 @@ export class RappelPage implements OnInit, OnDestroy {
           }
         },
         error: (err) => console.error(err),
-        complete: () => console.log(this.notifications()),
       });
     }, intervalMs);
   }
@@ -121,6 +120,7 @@ export class RappelPage implements OnInit, OnDestroy {
     this.rappelService.createRappel(rappelData).subscribe({
       next: () => {
         console.log('rappel created successfully');
+        this.showForm = false;
       },
       error: (err) => {
         console.log('error creating rappel', err);
@@ -128,6 +128,16 @@ export class RappelPage implements OnInit, OnDestroy {
       complete: () => {
         this.cdr.detectChanges();
       },
+    });
+  }
+
+  supprimerRappel(id: number) {
+    this.rappelService.suprimerRappel(id).subscribe({
+      next: (res) => {
+        this.chargerRappelsActifs();
+        this.chargerRappelsTerminer();
+      },
+      error: (err) => console.log(err),
     });
   }
 
