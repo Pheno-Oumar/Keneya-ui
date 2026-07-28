@@ -13,7 +13,7 @@ import { CategorieActiviteComponent } from './shared/component/categorie-activit
 import { CategorieConseilComponent } from './shared/component/categorie-conseil-component/categorie-conseil-component';
 import { AgentComponent } from './shared/component/agent-component/agent-component';
 import { AgentLayout } from './layout/agent-layout/agent-layout/agent-layout';
-import { ConseilComponent } from './shared/component/activite-component/activite-component';
+// import { ConseilComponent } from './shared/component/activite-component/activite-component';
 import { DahbordAdminComponent } from './shared/component/dahbord-admin-component/dahbord-admin-component';
 import { PublicationComponent } from './shared/component/publication-component/publication-component';
 import { ProfileAdmin } from './features/profil_admin/profil_admin';
@@ -110,4 +110,33 @@ export const routes: Routes = [
     path: 'Profile_Citoyen',
     component: ProfilCitoyen,
   },
+];
+
+import { RappelsList } from './features/rappels-list/rappels-list';
+
+export const route: Routes = [
+    {
+        path: '', component: Accueil
+    },
+    {
+        path: "login", component: LoginComponent
+    },
+    {
+        path: "register", component: Register
+    },
+    {
+        path: "citoyen", component: CitoyenLayout ,
+         children:[
+            {
+                path: "", component: Citoyen
+            }
+            ,{
+                path: "test" , component:Test
+            }
+            
+        ]
+        },{ 
+                path: 'rappels', 
+                component: RappelsList 
+            },
 ];

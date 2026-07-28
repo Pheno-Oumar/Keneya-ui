@@ -20,7 +20,7 @@ export class AuthService {
   isAuthentificated = computed(() => this._user() != null);
   initialized = this._initialized.asReadonly();
 
-  private apiUrl = 'http://localhost:8090';
+  private apiUrl = 'http://localhost:8080';
 
   login(credentials: { email: string; password: string }): Observable<any> {
     return this.http
@@ -56,19 +56,16 @@ export class AuthService {
       );
   }
 
-//  modifierCitoyen(id:number,infoCitoyen:CitoyenProfil):Observable<any>{
-//  return this.http
-//        .put(`${this.apiUrl}/citoyens/${id}`,infoCitoyen, {
-//          withCredentials: true,
-//        })
+  modifierCitoyen(id: number, infoCitoyen: CitoyenProfil): Observable<any> {
+    return this.http.put(`${this.apiUrl}/citoyens/${id}`, infoCitoyen, {
+      withCredentials: true,
+    });
+  }
 
-// }
-//   citoyenById(id:number): Observable<any>{
-//         return this.http
-//       .get(`${this.apiUrl}/citoyens/${id}`,  {
-//         withCredentials: true,
-//       })
-
-//   } 
+  citoyenById(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/citoyens/${id}`, {
+      withCredentials: true,
+    });
+  }
 
 }

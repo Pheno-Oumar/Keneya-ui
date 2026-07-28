@@ -16,7 +16,7 @@
 
     <h3 class="section-title">Informations personnelles</h3>
 
-    <!-- [formGroup] et (ngSubmit) ajoutés ici -->
+  
     <form [formGroup]="profilForm" (ngSubmit)="onSubmit()">
 
       <div class="info-grid">
@@ -24,11 +24,13 @@
         <div class="form-group">
           <label>Nom</label>
           <input type="text" formControlName="nom" class="info-box">
+        
         </div>
 
         <div class="form-group">
           <label>Prénom</label>
           <input type="text" formControlName="prenom" class="info-box">
+        
         </div>
 
         <div class="form-group">

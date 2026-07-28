@@ -1,0 +1,51 @@
+<div class="page-liste-rappels">
+  <header class="entete-liste-rappels">
+    <h1>Rappels médicaux</h1>
+    <button mat-flat-button color="primary" class="bouton-ajouter" (click)="ouvrirDialogAjout()">
+      <mat-icon>add</mat-icon>
+      Ajouter un rappel
+    </button>
+  </header>
+
+  <mat-tab-group (selectedIndexChange)="changerOnglet($event)" animationDuration="0ms">
+    @for (onglet of onglets; track onglet.cle) {
+      <mat-tab [label]="onglet.libelle"></mat-tab>
+    }
+  </mat-tab-group>
+
+  @if (chargement) {
+    <p class="etat-chargement">Chargement des rappels...</p>
+  } @else {
+    <div class="liste-rappels">
+      @for (rappel of rappels; track rappel.id) {
+        <div class="rappel-item">
+          <button
+            class="cercle-validation"
+            type="button"
+            [class.coche]="rappel.statut === 'pris'"
+            (click)="marquerCommePris(rappel)"
+            [attr.aria-label]="'Marquer ' + rappel.nomMedicament + ' comme pris'"
+          ></button>
+
+          <div class="rappel-heure">{{ rappel.heureRappel }}</div>
+
+          <div class="rappel-info">
+            <div class="rappel-nom">{{ rappel.nomMedicament }}</div>
+            <div class="rappel-dosage">{{ rappel.dosage }}</div>
+          </div>
+
+          <span class="badge-statut" [class.statut-a-prendre]="rappel.statut === 'a_prendre'">
+            {{ rappel.statut === 'a_prendre' ? 'A prendre' : (rappel.statut === 'pris' ? 'Pris' : 'Terminé') }}
+          </span>
+        </div>
+      } @empty {
+        <p class="etat-vide">Aucun rappel pour cet onglet.</p>
+      }
+    </div>
+  }
+
+  <div class="encart-conseil">
+    <strong>Conseil</strong>
+    <p>Pensez à prendre vos médicaments à heures régulières pour de meilleurs résultats</p>
+  </div>
+</div>

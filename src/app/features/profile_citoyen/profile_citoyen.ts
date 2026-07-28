@@ -17,6 +17,10 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './profile_citoyen.css'
 })
 export class ProfilCitoyen implements OnInit {
+  
+  
+
+
   profilForm!: FormGroup;
 
   constructor(private fb: FormBuilder) {}
@@ -28,6 +32,7 @@ export class ProfilCitoyen implements OnInit {
       email: [''],
       password: [''],
       telephone: ['']
+  
     });
   }
 
