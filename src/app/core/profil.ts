@@ -1,27 +1,26 @@
-import { Service } from '@angular/core';
-import { Injectable, computed, inject, signal } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Citoyen } from '../features/dashboard/citoyen/citoyen';
-import { catchError, Observable, of, tap } from 'rxjs';
+import { CitoyenProfil } from '../shared/models/CitoyenProfil';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
-@Service()
+@Injectable({
+  providedIn: 'root'
+})
 export class Profil {
-
   private http = inject(HttpClient);
+  private apiUrl = environment.apiUrl;
 
-private apiUrl = 'http://localhost:8090';
-modifierCitoyen(id:number,infoCitoyen:Citoyen){
- return this.http
-       .get(`${this.apiUrl}/citoyen/${id},${infoCitoyen}`, {
-         withCredentials: true,
-       })
+  modifierCitoyen(id: number, infoCitoyen: CitoyenProfil) {
+    return this.http.put(`${this.apiUrl}/citoyens/${id}`, infoCitoyen, {
+      withCredentials: true,
+    });
+  }
 
-}
-  citoyenById(id:number): Observable<any>{
-        return this.http
-      .get(`${this.apiUrl}/citoyen/${id}`,  {
-        withCredentials: true,
-      })
-
+  citoyenById(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/citoyens/${id}`, {
+      withCredentials: true,
+    });
   }
 }
+

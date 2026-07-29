@@ -1,35 +1,54 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router'; // 1. AJOUT de l'import pour le lien
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Utilisateur } from '../../../shared/models/utilisateur';
 import { RappelMedical } from '../../../shared/models/rappel';
-import { RappelService } from '../../../core/services/rappels';
+import { RappelService } from '../../../core/services/rappel-service/rappels';
 
 @Component({
   selector: 'app-citoyen',
   imports: [RouterLink],
   templateUrl: './citoyen.html',
-  styleUrl: './citoyen.css',
+  styleUrls: ['./citoyen.css'],
 })
 export class Citoyen implements OnInit {
+
   utilisateur?: Utilisateur;
-  resume?: any; // Gardé en 'any' car commenté dans vos modèles
+  resume?: any;
   rappelsAVenir: RappelMedical[] = [];
-  chargementEnCours = true;
+  chargementEnCours = false;
+
   private cdr = inject(ChangeDetectorRef);
 
+  // Conservé pour plus tard
   private rappelService = inject(RappelService);
 
   ngOnInit(): void {
+
+    console.log('✅ Dashboard citoyen chargé');
+
+    // ============================
+    // AUDIT : appels API désactivés
+    // ============================
+
+    
+    this.chargementEnCours = true;
+
     this.rappelService.obtenirTous().subscribe({
       next: (response) => {
-        console.log("chargement complet", response);
-        this.rappelsAVenir = response; // 3. CORRECTION : On stocke les données reçues
-        this.chargementEnCours = false; // 4. CORRECTION : On coupe le chargement
+        console.log('Chargement rappels OK', response);
+        this.rappelsAVenir = response;
+        this.chargementEnCours = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
-        console.log("chargement failed", err);
+        console.error('Erreur chargement rappels', err);
         this.chargementEnCours = false;
       }
     });
+    
+
   }
+
 }
+
+

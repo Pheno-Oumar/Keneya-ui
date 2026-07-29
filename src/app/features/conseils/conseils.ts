@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 // 1. Importer le service et l'interface
-import { ConseilService, ConseilItem } from '../../services/conseil.service';
+import { ConseilService, ConseilItem } from '../../core/services/conseil/conseil-service';
 
 @Component({
   selector: 'app-conseils',

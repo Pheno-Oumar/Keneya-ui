@@ -23,7 +23,6 @@
                 <div class="etat-info">Chargement…</div>
             }
             
-            <!-- CORRECTION : !chargementEnCours au lieu de chargementEnCours -->
             @if (!chargementEnCours && rappelsAVenir.length === 0) {
                 <div class="etat-info">
                     Aucun rappel à venir
@@ -33,8 +32,7 @@
             @for (rappel of rappelsAVenir; track $index) {
                 <div class="rappel-ligne">
                     <span class="heure">{{ rappel.dateRappel }}</span>
-                    <!-- CORRECTION : nomMedicament au lieu de nom_medicament -->
-                    <span class="medicament">{{ rappel.nomMedicament }}</span>
+                    <span class="medicament">{{ rappel.nom_medicament }}</span>
                 </div>
             }
 

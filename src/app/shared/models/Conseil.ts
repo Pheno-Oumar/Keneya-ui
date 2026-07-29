@@ -23,3 +23,4 @@ export interface ConseilResponseInterface {
     data: ConseilResponse[]; 
     date: string;
 }
+

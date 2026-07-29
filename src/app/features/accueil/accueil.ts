@@ -9,6 +9,9 @@ import { RouterModule } from '@angular/router';
   selector: 'app-accueil',
   imports: [CommonModule,RouterModule,MatButtonModule,MatIconModule,MatCardModule],
   templateUrl: './accueil.html',
-  styleUrl: './accueil.css',
+  styleUrls: ['./accueil.css'],
 })
 export class Accueil { }
+
+
+

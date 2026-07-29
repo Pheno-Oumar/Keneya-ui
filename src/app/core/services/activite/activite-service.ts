@@ -2,10 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { ActiviteInterface, ActiviteResponseInterface } from '../../../shared/models/Activite';
 import { Observable } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 
 @Service()
 export class ActiviteService {
-    private apiUrl = "http://localhost:8090/activites";
+    private apiUrl = `${environment.apiUrl}/activites`;
 
     private http = inject(HttpClient);
 
@@ -25,3 +26,4 @@ export class ActiviteService {
         return this.http.put(`${this.apiUrl}/${id}`, categorie, { withCredentials: true })
     }
 }
+

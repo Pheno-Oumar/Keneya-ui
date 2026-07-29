@@ -2,6 +2,7 @@ import { Injectable ,inject} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AgentRequestInterface, AgentResponse } from '../../../shared/models/agent';
 import { Observable } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 
 
 @Injectable({
@@ -9,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class AgentService {
     private http = inject(HttpClient);
-    private baseUrl: string = "http://localhost:8090/agents";
+    private baseUrl: string = `${environment.apiUrl}/agents`;
 
     ajouterAgent(agent: AgentRequestInterface){
         console.log("agent avant l'insertion "+agent)
@@ -27,3 +28,4 @@ export class AgentService {
         return this.http.put(`${this.baseUrl}/${id}`,agent, {withCredentials: true})
     }
 }
+

@@ -7,3 +7,4 @@ export interface Utilisateur {
   email: string;
   role: 'CITOYEN' | 'ADMIN' | 'AGENT';
 }
+

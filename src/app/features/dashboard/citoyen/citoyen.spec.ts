@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router'; // Pour simuler le routeur
 import { of } from 'rxjs'; // Pour simuler une réponse d'API
 import { Citoyen } from './citoyen';
-import { RappelService } from '../../../core/services/rappels';
+import { RappelService } from '../../../core/services/rappel-service/rappels';
 
 describe('Citoyen', () => {
   let component: Citoyen;

@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { CategorieConseilInterface } from '../../../shared/models/CategorieConseil';
 import { Observable } from 'rxjs';
 import { CategorieConseil, CategorieConseilResponseInterface } from '../../../shared/models/CategorieConseilResponse';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CategorieConseilService {
-    private apiUrl = "http://localhost:8090/categories-conseils";
+    private apiUrl = `${environment.apiUrl}/categories-conseils`;
 
     private http = inject(HttpClient);
 
@@ -29,3 +30,4 @@ export class CategorieConseilService {
             return this.http.put(`${this.apiUrl}/${id}`,categorie, { withCredentials: true })
         }
 }
+
