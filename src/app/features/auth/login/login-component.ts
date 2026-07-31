@@ -33,12 +33,17 @@ export class LoginComponent {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService, // On garde juste le service pour l'appel API
+    private authService: AuthService,
     private router: Router,
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      password: ['', [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(64)
+        
+      ]],
     });
   }
 
@@ -51,26 +56,22 @@ export class LoginComponent {
         next: (response: any) => {
           this.isLoading = false;
           localStorage.setItem('role', response.data);
-          // ✅ On affiche juste la réponse du backend dans la console
-          console.log('✅ Réponse du backend reçue :', response);
           console.log(localStorage.getItem('role'));
 
           if (response.success === true) {
-            console.log(
-              '🎉 Connexion réussie ! Le cookie de session est stocké par le navigateur.',
+            console.log(' Connexion réussie ! Le cookie de session est stocké par le navigateur.',
             );
-            // Plus tard, on ajoutera : this.router.navigate(['/dashboard']);
           } else {
-            // Si le backend renvoie success: false
             this.errorMessage = response.message || 'Identifiants incorrects.';
           }
-          if (response.data == "CITOYEN") {
+          const role = response.data.role
+          if (role == "CITOYEN") {
             this.router.navigate(['/citoyen']);
-          } else if (response.data == "ADMIN") {
-            this.router.navigate(['/admin/agents']);
+          } else if (role == "ADMIN") {
+            this.router.navigate(['/admin']);
           }
-          else if (response.data == "AGENT") {
-            this.router.navigate(['/agent/publications']);
+          else if (role== "AGENT") {
+            this.router.navigate(['/agent']);
           }
           else {
             this.router.navigate(['/agent']);
@@ -79,7 +80,6 @@ export class LoginComponent {
         },
         error: (error: HttpErrorResponse) => {
           this.isLoading = false;
-          console.error("❌ Erreur de l'appel HTTP :", error);
 
           if (error.status === 401 || error.status === 403) {
             this.errorMessage = 'Email ou mot de passe incorrect.';

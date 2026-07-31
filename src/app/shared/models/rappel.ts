@@ -25,6 +25,7 @@ export interface RappelResponse {
   archive: boolean;
   frequence: 'FIXE' | 'VARIABLE';
   intervalle: number;
+  terminer: boolean;
 }
 
 export interface APIResponse<T> {

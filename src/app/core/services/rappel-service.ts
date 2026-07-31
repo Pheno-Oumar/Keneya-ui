@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, Service } from '@angular/core';
 import { Observable } from 'rxjs';
 import { APIResponse, Rappel, RappelResponse } from '../../shared/models/rappel';
+import { NotificationResponse } from '../../shared/models/Notification';
 
 @Injectable({
   providedIn: 'root',
@@ -16,14 +17,37 @@ export class RappelService {
       withCredentials: true,
     });
   }
-  getRappelsdus(): Observable<RappelResponse[]> {
-    return this.httpclient.get<RappelResponse[]>(`${this.baseUrl}/rappels/dus`, {
+  getRappelsdus(): Observable<NotificationResponse<RappelResponse>[]> {
+    return this.httpclient.get<NotificationResponse<RappelResponse>[]>(
+      `${this.baseUrl}/notification`,
+      {
+        withCredentials: true,
+      },
+    );
+  }
+  marqueCommeLus(id: number): Observable<void> {
+    return this.httpclient.post<void>(
+      `${this.baseUrl}/notification/${id}`,
+      {},
+      {
+        withCredentials: true,
+      },
+    );
+  }
+
+  suprimerRappel(id: number): Observable<void> {
+    return this.httpclient.delete<void>(`${this.baseUrl}/rappels/delete/${id}`, {
       withCredentials: true,
     });
   }
 
   createRappel(rappel: Rappel): Observable<RappelResponse> {
     return this.httpclient.post<RappelResponse>(`${this.baseUrl}/rappels/create`, rappel, {
+      withCredentials: true,
+    });
+  }
+  rappelTerminer(): Observable<RappelResponse[]> {
+    return this.httpclient.get<RappelResponse[]>(`${this.baseUrl}/rappels/rappels-terminer`, {
       withCredentials: true,
     });
   }

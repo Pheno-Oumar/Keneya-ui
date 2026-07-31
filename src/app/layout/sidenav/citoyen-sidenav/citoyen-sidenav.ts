@@ -21,10 +21,11 @@ export class CitoyenSidenav {
   menuItems: MenuItem[] = [
     { label: 'Tableau de board', icon: 'home', route: '/citoyen' },
     { label: 'Rappels', icon: 'alarm', route: 'rappels' },
-    { label: 'Activités physiques', icon: 'local_activity', route: '/activites' },
-    { label: 'Conseils', icon: 'shield', route: '/conseils' },
-    { label: 'Publications', icon: 'book', route: '/publications' },
-    { label: 'Statistiques', icon: 'bar_chart', route: '/statistiques' },
+    { label: 'Conseils', icon: 'shield', route: '/citoyen/conseils' },
+    { label: 'Publications', icon: 'book', route: '/citoyen/publications' },
+    { label: 'Activites', icon: 'list', route: '/citoyen/activites' },
+    { label: 'Activite planning', icon: 'bar_chart', route: '/citoyen/activites-planning' },
+    { label: 'Plans', icon: 'assignment', route: '/citoyen/plans' },
   ];
 
   deconnexion(): void {

@@ -1,0 +1,158 @@
+<mat-toolbar color="primary" class="dialog-header">
+    <span class="dialog-title">
+        <mat-icon>event_note</mat-icon>
+        Détails de l'activité
+    </span>
+    <span class="spacer"></span>
+    <button mat-icon-button (click)="close()" aria-label="Fermer">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-toolbar>
+
+<mat-dialog-content class="dialog-content">
+    <div class="detail-container">
+
+        <!-- En-tête avec le nom de l'activité -->
+        <div class="detail-header">
+            <div class="header-left">
+                <h2 class="activite-title">{{ data.activite.nom }}</h2>
+                <div class="header-badges">
+                    <mat-chip [color]="getNiveauColor(data.activite.niveau)" selected>
+                        <mat-icon>star</mat-icon>
+                        {{ getNiveauLabel(data.activite.niveau) }}
+                    </mat-chip>
+                    <mat-chip color="primary" selected>
+                        <mat-icon>category</mat-icon>
+                        {{ data.activite.categorieActivite }}
+                    </mat-chip>
+                    <mat-chip color="accent" selected>
+                        <mat-icon>timer</mat-icon>
+                        {{ formatDuree(data.activite.duree) }}
+                    </mat-chip>
+                </div>
+            </div>
+            <div class="header-right">
+                <span class="activite-id">#{{ data.activite.idActivites }}</span>
+            </div>
+        </div>
+
+        <!-- Informations sur l'agent -->
+        <mat-card class="detail-card agent-card">
+            <mat-card-title>
+                <mat-icon>person</mat-icon>
+                Agent responsable
+            </mat-card-title>
+            <mat-card-content>
+                <div class="agent-info">
+                    <div class="agent-avatar">
+                        <span class="avatar-text">{{ getInitials(data.activite.prenomAgent, data.activite.nomAgent)
+                            }}</span>
+                    </div>
+                    <div class="agent-details">
+                        <span class="agent-name">{{ data.activite.prenomAgent }} {{ data.activite.nomAgent }}</span>
+                        <span class="agent-label">Agent</span>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <!-- Grille d'informations principales -->
+        <mat-card class="detail-card">
+            <mat-card-title>
+                <mat-icon>info</mat-icon>
+                Informations générales
+            </mat-card-title>
+            <mat-card-content>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <mat-icon class="info-icon">event</mat-icon>
+                        <div class="info-content">
+                            <span class="info-label">Date</span>
+                            <span class="info-value">{{ formatDate(data.activite.date) }}</span>
+                            <span class="info-sub">{{ formatHeure(data.activite.date) }}</span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <mat-icon class="info-icon">timer</mat-icon>
+                        <div class="info-content">
+                            <span class="info-label">Durée</span>
+                            <span class="info-value">{{ formatDuree(data.activite.duree) }}</span>
+                            <span class="info-sub">minutes</span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <mat-icon class="info-icon">category</mat-icon>
+                        <div class="info-content">
+                            <span class="info-label">Catégorie</span>
+                            <span class="info-value">{{ data.activite.categorieActivite }}</span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <mat-icon class="info-icon">star</mat-icon>
+                        <div class="info-content">
+                            <span class="info-label">Niveau</span>
+                            <span class="info-value">{{ getNiveauLabel(data.activite.niveau) }}</span>
+                        </div>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <!-- Description -->
+        <mat-card class="detail-card" *ngIf="data.activite.description">
+            <mat-card-title>
+                <mat-icon>description</mat-icon>
+                Description
+            </mat-card-title>
+            <mat-card-content>
+                <div class="description-wrapper">
+                    <p class="description-text">{{ data.activite.description }}</p>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <!-- Métadonnées -->
+        <mat-card class="detail-card metadata-card">
+            <mat-card-title>
+                <mat-icon>settings</mat-icon>
+                Métadonnées
+            </mat-card-title>
+            <mat-card-content>
+                <div class="metadata-grid">
+                    <div class="metadata-item">
+                        <span class="metadata-label">ID Activité</span>
+                        <span class="metadata-value">#{{ data.activite.idActivites }}</span>
+                    </div>
+                    <div class="metadata-item">
+                        <span class="metadata-label">Agent</span>
+                        <span class="metadata-value">{{ data.activite.prenomAgent }} {{ data.activite.nomAgent }}</span>
+                    </div>
+                    <div class="metadata-item">
+                        <span class="metadata-label">Niveau</span>
+                        <span class="metadata-value">{{ getNiveauLabel(data.activite.niveau) }}</span>
+                    </div>
+                    <div class="metadata-item">
+                        <span class="metadata-label">Durée</span>
+                        <span class="metadata-value">{{ formatDuree(data.activite.duree) }}</span>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="dialog-actions" align="end">
+    <button mat-button (click)="close()" class="close-btn">
+        <mat-icon>close</mat-icon>
+        Fermer
+    </button>
+    <button mat-raised-button color="primary" (click)="modifier()" *ngIf="!data.readonly">
+        <mat-icon>edit</mat-icon>
+        Modifier
+    </button>
+    <button mat-raised-button color="warn" (click)="supprimer()" *ngIf="!data.readonly">
+        <mat-icon>delete</mat-icon>
+        Supprimer
+    </button>
+</mat-dialog-actions>

@@ -21,7 +21,7 @@ export class SupprimerCategorieActiviteDialog {
 
   supprimer(id: number) {
     console.log(`l'id de la categorie est ${id}`)
-    this.service.delete(id).subscribe();
+    this.service.archiver(id).subscribe();
     this.dialogRef.close(true);
   }
 

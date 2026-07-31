@@ -1,0 +1,177 @@
+<div class="mat-typography container">
+    <!-- En-tête avec Material Design -->
+    <mat-toolbar color="primary" class="header-toolbar">
+        <span class="toolbar-title">
+            <mat-icon>event_note</mat-icon>
+            Activités disponibles
+        </span>
+        <span class="spacer"></span>
+        <span class="toolbar-stats">
+            {{ totalActivites }} activité{{ totalActivites > 1 ? 's' : '' }} disponible{{ totalActivites > 1 ? 's' : ''
+            }}
+        </span>
+    </mat-toolbar>
+
+    <!-- Section de recherche et filtres -->
+    <div class="filter-section">
+        <!-- Barre de recherche -->
+        <mat-form-field appearance="outline" class="search-field">
+            <mat-label>Rechercher une activité</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Titre, description..." #searchInput>
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+        <div class="filters-group">
+            <!-- Filtre par catégorie -->
+            <mat-form-field appearance="outline" class="filter-field">
+                <mat-label>Catégorie</mat-label>
+                <mat-select (selectionChange)="filterByCategorie($event.value)">
+                    <mat-option value="">Toutes les catégories</mat-option>
+                    <mat-option *ngFor="let categorie of categories" [value]="categorie">
+                        {{ categorie }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- Filtre par niveau -->
+            <mat-form-field appearance="outline" class="filter-field">
+                <mat-label>Niveau</mat-label>
+                <mat-select (selectionChange)="filterByNiveau($event.value)">
+                    <mat-option value="">Tous les niveaux</mat-option>
+                    <mat-option value="DEBUTANT">Débutant</mat-option>
+                    <mat-option value="INTERMEDIAIRE">Intermédiaire</mat-option>
+                    <mat-option value="AVANCE">Avancé</mat-option>
+                    <mat-option value="EXPERT">Expert</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- Filtre par date -->
+            <mat-form-field appearance="outline" class="filter-field">
+                <mat-label>Période</mat-label>
+                <mat-select (selectionChange)="filterByPeriode($event.value)">
+                    <mat-option value="">Toutes</mat-option>
+                    <mat-option value="today">Aujourd'hui</mat-option>
+                    <mat-option value="week">Cette semaine</mat-option>
+                    <mat-option value="month">Ce mois</mat-option>
+                    <mat-option value="weekend">Ce week-end</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <!-- Bouton réinitialiser -->
+        <button mat-stroked-button color="primary" (click)="resetFilters()" class="reset-btn">
+            <mat-icon>refresh</mat-icon>
+            Réinitialiser
+        </button>
+    </div>
+
+    <!-- Résultats de la recherche -->
+    <div class="results-info" *ngIf="filteredActivites.length > 0">
+        <span>{{ filteredActivites.length }} résultat{{ filteredActivites.length > 1 ? 's' : '' }}</span>
+        <span class="result-separator">|</span>
+        <span class="result-label">{{ getActiveFiltersCount() }} filtre{{ getActiveFiltersCount() > 1 ? 's' : '' }}
+            actif{{ getActiveFiltersCount() > 1 ? 's' : '' }}</span>
+    </div>
+
+    <!-- Grille des activités -->
+    <div class="activites-grid" *ngIf="filteredActivites.length > 0; else emptyState">
+        <mat-card class="activite-card" *ngFor="let activite of filteredActivites" [class.selected]="activite.selected">
+            <!-- Badge de sélection -->
+            <div class="selection-badge" *ngIf="activite.selected">
+                <mat-icon>check_circle</mat-icon>
+                Sélectionné
+            </div>
+
+            <!-- En-tête de la carte -->
+            <div class="card-header">
+                <div class="card-header-left">
+                    <mat-chip [color]="getNiveauColor(activite.niveau)" selected class="niveau-chip">
+                        {{ getNiveauLabel(activite.niveau) }}
+                    </mat-chip>
+                    <mat-chip color="primary" selected class="categorie-chip">
+                        {{ activite.categorieActivite }}
+                    </mat-chip>
+                </div>
+                <div class="card-header-right">
+                    <span class="activite-id">#{{ activite.idActivites }}</span>
+                </div>
+            </div>
+
+            <!-- Contenu de la carte -->
+            <mat-card-content class="card-content">
+                <h3 class="activite-title">{{ activite.nom }}</h3>
+
+                <div class="activite-details">
+                    <div class="detail-item">
+                        <mat-icon>person</mat-icon>
+                        <span>{{ activite.prenomAgent }} {{ activite.nomAgent }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <mat-icon>event</mat-icon>
+                        <span>{{ formatDate(activite.date) }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <mat-icon>timer</mat-icon>
+                        <span>{{ formatDuree(activite.duree) }}</span>
+                    </div>
+                </div>
+
+                <p class="activite-description" *ngIf="activite.description">
+                    {{ truncateDescription(activite.description) }}
+                </p>
+            </mat-card-content>
+
+            <!-- Actions de la carte -->
+            <mat-card-actions class="card-actions">
+                <button mat-button color="primary" (click)="voirDetails(activite)" class="detail-btn">
+                    <mat-icon>visibility</mat-icon>
+                    Voir détails
+                </button>
+                <button mat-raised-button [color]="activite.selected ? 'accent' : 'primary'"
+                    (click)="selectionner(activite)" class="select-btn">
+                    <mat-icon>{{ activite.selected ? 'check_circle' : 'add_circle' }}</mat-icon>
+                    {{ activite.selected ? 'Sélectionné' : 'Sélectionner' }}
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+    <!-- État vide -->
+    <ng-template #emptyState>
+        <div class="empty-state mat-elevation-z1">
+            <mat-icon class="empty-icon">event_busy</mat-icon>
+            <h3>Aucune activité trouvée</h3>
+            <p *ngIf="hasActiveFilters()">
+                Aucune activité ne correspond à vos critères de recherche.
+                <br>
+                Essayez de modifier vos filtres.
+            </p>
+            <p *ngIf="!hasActiveFilters()">
+                Aucune activité n'est disponible pour le moment.
+                <br>
+                Revenez plus tard pour découvrir de nouvelles activités.
+            </p>
+            <button mat-stroked-button color="primary" (click)="resetFilters()" *ngIf="hasActiveFilters()">
+                <mat-icon>refresh</mat-icon>
+                Réinitialiser les filtres
+            </button>
+        </div>
+    </ng-template>
+
+    <!-- Chargement -->
+    <div class="loading-spinner" *ngIf="isLoading">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Chargement des activités...</p>
+    </div>
+</div>
+
+<!-- Notification toast -->
+<div class="toast-container" *ngIf="showToast">
+    <div class="toast-message" [class]="toastType">
+        <mat-icon>{{ toastIcon }}</mat-icon>
+        <span>{{ toastMessage }}</span>
+        <button mat-icon-button (click)="hideToast()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</div>

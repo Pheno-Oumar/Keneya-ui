@@ -1,0 +1,42 @@
+<div class="custom-dialog">
+	<div class="dialog-header">
+		<div class="dialog-icon">
+			<mat-icon>local_hospital</mat-icon>
+		</div>
+
+		<div class="dialog-title-group">
+			<h2 mat-dialog-title class="dialog-title">{{ data.nomMaladie }}</h2>
+			<p class="dialog-subtitle">Informations médicales et conseils préventifs</p>
+		</div>
+
+
+	</div>
+
+	<mat-divider></mat-divider>
+
+	<mat-dialog-content class="dialog-content">
+		<div class="info-card symptomes">
+			<div class="info-label">
+				<mat-icon>monitor_heart</mat-icon>
+				<span>Symptômes</span>
+			</div>
+			<p>{{ data.symptome }}</p>
+		</div>
+
+		<div class="info-card conseil">
+			<div class="info-label">
+				<mat-icon>health_and_safety</mat-icon>
+				<span>Conseil préventif</span>
+			</div>
+			<p>{{ data.conseilPreventif }}</p>
+		</div>
+
+		<div class="source-box">
+			<mat-icon>source</mat-icon>
+			<p><em>Source : {{ data.source }}</em></p>
+		</div>
+
+	</mat-dialog-content>
+
+
+</div>

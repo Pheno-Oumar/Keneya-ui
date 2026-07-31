@@ -1,7 +1,10 @@
-<form [formGroup]="form" (ngSubmit)="ajouter()">
+<form [formGroup]="form" (ngSubmit)="enregistrer()">
     <div class="header">
-        <h2 mat-dialog-title>Creation d'une categorie d'activite</h2>
-        <button mat-icon-button (click)="close()">
+        <h2 mat-dialog-title>
+            {{ data?.mode === 'edit'
+            ? "Modifier une catégorie d'activite"
+            : "Création d'une catégorie d'activite" }}
+        </h2> <button mat-icon-button (click)="close()">
             <mat-icon>close</mat-icon>
         </button>
     </div>
@@ -13,18 +16,22 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Description</mat-label>
-            <input matInput type="text" placeholder="Entrez la description de la categorie" formControlName="description">
+            <input matInput type="text" placeholder="Entrez la description de la categorie"
+                formControlName="description">
             <mat-hint>Minimum 3 caracteres</mat-hint>
         </mat-form-field>
     </mat-dialog-content>
     <mat-dialog-actions>
         <mat-action-list>
-            <button mat-stroked-button type="reset" (click)="close()">
-                retour
+            <button mat-stroked-button type="button" (click)="close()">
+                Retour
             </button>
             <button mat-raised-button type="submit">
-                <mat-icon>save</mat-icon>
-                ajouter
+                <mat-icon>
+                    {{ data?.mode === 'edit' ? 'edit' : 'save' }}
+                </mat-icon>
+
+                {{ data?.mode === 'edit' ? 'Modifier' : 'Ajouter' }}
             </button>
         </mat-action-list>
     </mat-dialog-actions>

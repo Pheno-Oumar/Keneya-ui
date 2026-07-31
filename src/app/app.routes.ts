@@ -17,6 +17,14 @@ import { ConseilComponent } from './shared/component/conseil-component/conseil-c
 import { PublicationComponent } from './shared/component/publication-component/publication-component';
 import { ActiviteComponent } from './shared/component/activite-component/activite-component';
 import { DahbordAdminComponent } from './shared/component/dahbord-admin-component/dahbord-admin-component';
+import { DahbordAgentComponent } from './shared/component/dahbord-agent-component/dahbord-agent-component';
+import { PublicationAdminComponent } from './shared/component/publication-admin-component/publication-admin-component';
+import { ConseilAdminComponent } from './shared/component/conseil-admin-component/conseil-admin-component';
+import { ActiviteCitoyenComponent } from './shared/component/activite-citoyen-component/activite-citoyen-component';
+import { ActivitePanierComponent } from './shared/component/activite-panier-component/activite-panier-component';
+import { CitoyenPublication } from './shared/component/citoyen-publication/citoyen-publication';
+import { Conseil } from './shared/component/conseil/conseil';
+
 
 export const routes: Routes = [
   {
@@ -34,7 +42,6 @@ export const routes: Routes = [
   {
     path: 'citoyen',
     component: CitoyenLayout,
-    canActivate: [authGuardGuard],
 
     children: [
       {
@@ -42,12 +49,24 @@ export const routes: Routes = [
         component: Citoyen,
       },
       {
-        path: 'test',
-        component: Test,
+        path: 'activites',
+        component: ActiviteCitoyenComponent
       },
       {
         path: 'rappels',
-        component: RappelPage,
+        component: RappelPage
+      },
+      {
+        path: 'conseils',
+        component: Conseil
+      },
+      {
+        path: 'publications',
+        component: CitoyenPublication
+      },
+      {
+        path: 'activites-planning',
+        component: ActivitePanierComponent
       },
     ],
   },
@@ -65,6 +84,12 @@ export const routes: Routes = [
       },
       {
         path: "agents", component: AgentComponent
+      },
+      {
+        path: "publications", component: PublicationAdminComponent
+      },
+      {
+        path: "conseils", component: ConseilAdminComponent
       }
     ]
   },
@@ -72,7 +97,7 @@ export const routes: Routes = [
     path: "agent", component: AgentLayout,
     children: [
       {
-        path: "", component: Citoyen
+        path: "", component: DahbordAgentComponent
       }
       , {
         path: "publications", component: PublicationComponent
@@ -80,7 +105,7 @@ export const routes: Routes = [
       {
         path: "conseils", component: ConseilComponent
       },
-       {
+      {
         path: "activites", component: ActiviteComponent
       },
 
