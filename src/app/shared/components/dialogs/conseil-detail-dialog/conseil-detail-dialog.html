@@ -1,0 +1,109 @@
+<mat-toolbar color="primary" class="dialog-header">
+    <span class="dialog-title">
+        <mat-icon>info_outline</mat-icon>
+        Détails du conseil
+    </span>
+    <span class="spacer"></span>
+    <button mat-icon-button (click)="close()" aria-label="Fermer">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-toolbar>
+
+<mat-dialog-content class="dialog-content">
+    <div class="detail-container">
+
+        <!-- En-tête avec le titre -->
+        <div class="detail-header">
+            <h2 class="conseil-title">{{ data.conseil.titre }}</h2>
+            <mat-chip [color]="getStatusColor(data.conseil.archive)" selected>
+                {{ data.conseil.archive ? 'Archivé' : 'Actif' }}
+            </mat-chip>
+        </div>
+
+        <!-- Informations générales -->
+        <mat-card class="detail-card">
+            <mat-card-title>
+                <mat-icon>description</mat-icon>
+                Informations générales
+            </mat-card-title>
+            <mat-card-content>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">ID :</span>
+                        <span class="info-value">{{ data.conseil.id }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Type :</span>
+                        <mat-chip [color]="getTypeColor(data.conseil.typeConseil)" selected>
+                            {{ data.conseil.typeConseil }}
+                        </mat-chip>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Catégorie :</span>
+                        <span class="info-value categorie-value">{{ data.conseil.categorieNom }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Utilisateur :</span>
+                        <span class="info-value">#{{ data.conseil.userId }}</span>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <!-- Dates -->
+        <mat-card class="detail-card">
+            <mat-card-title>
+                <mat-icon>schedule</mat-icon>
+                Dates
+            </mat-card-title>
+            <mat-card-content>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Date de création :</span>
+                        <span class="info-value">
+                            <mat-icon class="date-icon">event</mat-icon>
+                            {{ data.conseil.dateCreation | date:'dd MMMM yyyy à HH:mm' }}
+                        </span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Dernière modification :</span>
+                        <span class="info-value">
+                            <mat-icon class="date-icon">update</mat-icon>
+                            {{ data.conseil.dateModif | date:'dd MMMM yyyy à HH:mm' }}
+                        </span>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <!-- Contenu (si disponible) -->
+        <mat-card class="detail-card" *ngIf="data.conseil.contenu">
+            <mat-card-title>
+                <mat-icon>article</mat-icon>
+                Contenu
+            </mat-card-title>
+            <mat-card-content>
+                <div class="contenu-wrapper">
+                    <p class="contenu-text">{{ data.conseil.contenu }}</p>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        
+
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="dialog-actions" align="end">
+    <button mat-button (click)="close()" class="close-btn">
+        <mat-icon>close</mat-icon>
+        Fermer
+    </button>
+    <button mat-raised-button color="primary" (click)="modifier()" *ngIf="!data.readonly">
+        <mat-icon>edit</mat-icon>
+        Modifier
+    </button>
+    <button mat-raised-button color="warn" (click)="supprimer()" *ngIf="!data.readonly">
+        <mat-icon>delete</mat-icon>
+        Supprimer
+    </button>
+</mat-dialog-actions>

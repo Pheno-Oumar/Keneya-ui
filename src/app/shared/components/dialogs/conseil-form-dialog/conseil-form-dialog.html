@@ -1,0 +1,47 @@
+<form [formGroup]="form" (ngSubmit)="inscrire()">
+
+    <h1 mat-dialog-title>Créer un conseil</h1>
+
+    <mat-dialog-content>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Titre</mat-label>
+            <input matInput formControlName="titre">
+            <mat-hint>Le titre doit avoir 3 caracteres</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Contenu</mat-label>
+            <textarea matInput formControlName="contenu"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Type de Conseil</mat-label>
+            <mat-select formControlName="typeConseil" placeholder="choississez le type de conseil">
+                <mat-option value="CONSEIL">
+                    CONSEIL
+                </mat-option>
+                <mat-option value="RECOMMANDATION">
+                    RECOMMANDATION
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Catégorie</mat-label>
+            <mat-select formControlName="nomCategorie" placeholder="choississez une categorie">
+                @for (item of categories; track $index) {
+                <mat-option [value]="item.nom">
+                    {{item.nom}}
+                </mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+        <button type="submit"> Save</button>
+    </mat-dialog-actions>
+
+</form>

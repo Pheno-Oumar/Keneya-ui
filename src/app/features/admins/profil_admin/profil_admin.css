@@ -1,0 +1,131 @@
+/* Style de la page complète */
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: sans-serif;
+  background-color: #ffffff;
+}
+
+/* Bannière grise du haut */
+.profile-banner {
+  height: 120px;
+  background-color: #d9d9d9;
+  width: 100%;
+}
+
+/* Zone de contenu */
+.profile-content {
+  padding: 20px 40px;
+  max-width: 1000px; /* Centre et limite la largeur pour que ce soit joli sur grand écran */
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #000000;
+}
+
+/* Grande carte avec la photo et le bouton */
+.profile-card {
+  border: 1px solid #4caf50;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  box-sizing: border-box;
+}
+
+.user-info-header { 
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.profile-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  /* border: 1px solid #000000; */
+  object-fit: cover;
+  
+}
+
+.user-name-email h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.user-name-email p {
+  margin: 5px 0 0 0;
+  font-size: 18px;
+  color: #333333;
+}
+
+/* Bouton Modifier le profil */
+.btn-edit-profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: white;
+  border: 1px solid #4caf50;
+  color: #000000;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.btn-edit-profile mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+/* Titre Informations personnelles */
+.section-title {
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 25px;
+  color: #000000;
+}
+
+/* Grille de 2 colonnes pour les formulaires */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 80px;
+  row-gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000000;
+}
+
+/* Les rectangles verts qui contiennent les textes */
+.info-box {
+  border: 1px solid #a5d6a7;
+  padding: 10px 15px;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: #ffffff;
+  min-height: 22px;
+}

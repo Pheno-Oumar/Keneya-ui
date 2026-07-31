@@ -2,65 +2,122 @@
 
     <div class="left">
 
-        <img src="keneya-logo.png">
+        <img src="keneya-logo.png" alt="Keneya logo">
 
     </div>
+
 
     <div class="right">
 
         <mat-card>
 
-            <img class="logo" src="keneya-logo.png">
+            <img 
+                class="logo" 
+                src="keneya-logo.png" 
+                alt="Keneya logo">
+
 
             <h1>Connexion</h1>
 
-            <p>Bienvenue ! Connectez-vous pour continuer.</p>
 
-            <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <p>
+                Bienvenue ! Connectez-vous pour continuer.
+            </p>
+
+
+            <!-- Message erreur -->
+            <p 
+                class="error" 
+                *ngIf="errorMessage">
+                {{ errorMessage }}
+            </p>
+
+
+            <form 
+                [formGroup]="loginForm" 
+                (ngSubmit)="login()">
+
+
+                <!-- Email -->
 
                 <mat-form-field appearance="outline">
 
                     <mat-label>Email</mat-label>
 
                     <input
-                    matInput
-                    formControlName="email">
+                        matInput
+                        type="email"
+                        formControlName="email"
+                        placeholder="exemple@gmail.com">
 
                 </mat-form-field>
+
+
+
+                <!-- Mot de passe -->
 
                 <mat-form-field appearance="outline">
 
                     <mat-label>Mot de passe</mat-label>
 
                     <input
-                    matInput
-                    type="password"
-                    formControlName="password">
+                        matInput
+                        type="password"
+                        formControlName="password"
+                        placeholder="Votre mot de passe">
 
                 </mat-form-field>
 
-                <a class="forgot">
+
+
+                <a 
+                    class="forgot"
+                    href="#">
                     Mot de passe oublié ?
                 </a>
 
-                <button
-                mat-raised-button
-                color="primary"
-                class="btn">
 
-                    Se connecter
+
+                <button
+                    type="submit"
+                    mat-raised-button
+                    color="primary"
+                    class="btn"
+                    [disabled]="isLoading">
+
+
+                    <span *ngIf="!isLoading">
+                        Se connecter
+                    </span>
+
+
+                    <span *ngIf="isLoading">
+                        Connexion...
+                    </span>
+
 
                 </button>
 
+
             </form>
 
+
+
             <p class="register">
+
                 Pas de compte ?
-                <a routerLink="/register">S'inscrire</a>
+
+                <a routerLink="/register">
+                    S'inscrire
+                </a>
+
             </p>
+
 
         </mat-card>
 
+
     </div>
+
 
 </div>

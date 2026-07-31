@@ -10,3 +10,4 @@ export interface CategorieActivite {
     libelle: string;
     description: string;
 }
+

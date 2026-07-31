@@ -1,0 +1,74 @@
+.page-tableau-rappels {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px 28px;
+}
+
+.entete-tableau-rappels {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.entete-tableau-rappels h1 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.entete-tableau-rappels .bouton-ajouter {
+  background-color: #22c55e;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.entete-tableau-rappels .bouton-ajouter mat-icon {
+  margin-right: 4px;
+}
+
+.tableau-rappels {
+  width: 100%;
+}
+
+.tableau-rappels .nom-medicament {
+  font-weight: 500;
+}
+
+.tableau-rappels .dosage-medicament {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.badge-statut {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.badge-statut.statut-a-prendre {
+  color: #22c55e;
+}
+
+.etat-chargement {
+  color: #6b7280;
+  padding: 24px 0;
+  text-align: center;
+}
+
+.encart-conseil {
+  margin-top: 20px;
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 13px;
+}
+
+.encart-conseil strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.encart-conseil p {
+  margin: 0;
+  color: #6b7280;
+}

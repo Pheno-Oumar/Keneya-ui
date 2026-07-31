@@ -4,3 +4,4 @@ export interface APIResponse<T> {
   data: T;
   date: string;
 }
+

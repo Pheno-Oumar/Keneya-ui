@@ -1,0 +1,81 @@
+<div class="mat-typography container">
+    <mat-toolbar color="primary" class="header-toolbar">
+        <span class="toolbar-title">Gestion des Agents</span>
+        <span class="spacer"></span>
+        <button mat-raised-button  (click)="ajouter()" class="add-button">
+            <mat-icon>add</mat-icon>
+            Ajouter un agent
+        </button>
+    </mat-toolbar>
+
+    <div class="table-wrapper">
+        <mat-table [dataSource]="agents" class="mat-elevation-z2">
+
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+                <mat-cell *matCellDef="let agent"> {{agent.id}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="nom">
+                <mat-header-cell *matHeaderCellDef> Nom </mat-header-cell>
+                <mat-cell *matCellDef="let agent"> {{agent.nom}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="prenom">
+                <mat-header-cell *matHeaderCellDef> Prénom </mat-header-cell>
+                <mat-cell *matCellDef="let agent"> {{agent.prenom}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+                <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+                <mat-cell *matCellDef="let agent"> {{agent.email}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="telephone">
+                <mat-header-cell *matHeaderCellDef> Téléphone </mat-header-cell>
+                <mat-cell *matCellDef="let agent"> {{agent.telephone}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                <mat-cell *matCellDef="let agent">
+                    <div class="actions-container">
+                        <button mat-mini-fab color="primary" (click)="modifier(agent)" matTooltip="Modifier"
+                            aria-label="Modifier l'agent">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-mini-fab color="accent" (click)="detail(agent)" matTooltip="Détail"
+                            aria-label="Voir les détails">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                        <button mat-mini-fab color="warn" (click)="supprimer(agent)" matTooltip="Supprimer"
+                            aria-label="Supprimer l'agent">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </div>
+
+    <!-- État vide avec Material Design -->
+    @if(!agents || agents.length === 0){
+    <div class="empty-state mat-elevation-z1">
+        <mat-icon class="empty-icon">people_outline</mat-icon>
+        <h3>Aucun agent trouvé</h3>
+        <p>Commencez par ajouter un nouvel agent</p>
+        <button mat-raised-button color="primary" (click)="ajouter()">
+            <mat-icon>add</mat-icon>
+            Ajouter un agent
+        </button>
+    </div>
+    }
+
+    <!-- Pagination (optionnel) -->
+    <mat-paginator *ngIf="agents && agents.length > 0" [length]="agents.length" [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Sélectionner la page">
+    </mat-paginator>
+</div>

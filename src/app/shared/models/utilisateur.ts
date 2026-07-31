@@ -5,5 +5,6 @@ export interface Utilisateur {
   photoUrl?: string;
   nbNotifications?: number;
   email: string;
-  phone: 'CITOYEN' | 'ADMIN' | 'AGENT';
+  role: 'CITOYEN' | 'ADMIN' | 'AGENT';
 }
+

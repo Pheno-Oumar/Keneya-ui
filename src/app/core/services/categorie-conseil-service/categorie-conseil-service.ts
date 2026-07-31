@@ -2,13 +2,14 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CategorieConseilInterface } from '../../../shared/models/CategorieConseil';
 import { Observable } from 'rxjs';
-import { CategorieConseilResponseInterface } from '../../../shared/models/CategorieConseilResponse';
+import { CategorieConseil, CategorieConseilResponseInterface } from '../../../shared/models/CategorieConseilResponse';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CategorieConseilService {
-    private apiUrl = "http://localhost:8090/categories-conseils";
+    private apiUrl = `${environment.apiUrl}/categories-conseils`;
 
     private http = inject(HttpClient);
 
@@ -16,8 +17,8 @@ export class CategorieConseilService {
         return this.http.post(`${this.apiUrl}`, categorie, { withCredentials: true })
     }
 
-    getCategories(): Observable<CategorieConseilResponseInterface> {
-            return this.http.get<CategorieConseilResponseInterface>(`${this.apiUrl}`, { withCredentials: true })
+    getCategories(): Observable<CategorieConseil[]> {
+            return this.http.get<CategorieConseil[]>(`${this.apiUrl}`, { withCredentials: true })
         }
     
         delete(id: number) {
@@ -29,3 +30,4 @@ export class CategorieConseilService {
             return this.http.put(`${this.apiUrl}/${id}`,categorie, { withCredentials: true })
         }
 }
+

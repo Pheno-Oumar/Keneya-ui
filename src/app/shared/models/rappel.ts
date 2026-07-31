@@ -4,31 +4,43 @@ export interface ResumeJour {
   activitesLabel: string;
 }
 
+export type StatutRappel = 'a_prendre' | 'pris' | 'termine';
+export type OngletRappel = 'aujourdhui' | 'a_venir' | 'termines';
+
 export interface Rappel {
   nom_medicament: string;
-  dateDebut: Date;
-  dateFin: Date;
-  dateRappel: Date;
-  dateCreation: Date;
+  dateDebut: string;
+  dateFin: string;
+  dateRappel: string;
+  dateCreation: string;
   archive: boolean;
-  frequence: 'FIXE' | 'VARIABLE';
+  frequence: "FIXE" | "VARIABLE";
   intervalle: number;
 }
 
 export interface RappelResponse {
   id: number;
   nom_medicament: string;
-  dateDebut: Date;
-  dateFin: Date;
-  dateRappel: Date;
-  dateCreation: Date;
+  dosage: string;
+  dateDebut: string;
+  dateFin: string;
+  dateRappel: string;
+  dateCreation: string;
   archive: boolean;
-  frequence: 'FIXE' | 'VARIABLE';
+  frequence: "FIXE" | "VARIABLE";
   intervalle: number;
+  statut: StatutRappel;
+  heureRappel: string;
 }
 
-export interface APIResponse<T> {
-  status: string;
-  data: T;
-  message: string;
+export type RappelMedical = RappelResponse;
+
+export interface RappelPayload {
+  nom_medicament: string;
+  dosage: string;
+  dateDebut: string;
+  dateFin?: string;
+  dateRappel: string;
+  frequence: "FIXE" | "VARIABLE";
+  intervalle: number;
 }

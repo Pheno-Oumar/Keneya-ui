@@ -20,3 +20,4 @@ describe('Accueil', () => {
     expect(component).toBeTruthy();
   });
 });
+

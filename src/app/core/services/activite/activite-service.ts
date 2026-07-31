@@ -1,19 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
-import { ActiviteInterface } from '../../../shared/models/Activite';
+import { ActiviteInterface, ActiviteResponseInterface } from '../../../shared/models/Activite';
+import { Observable } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 
 @Service()
-export class activiteService {
-    private apiUrl = "http://localhost:8090/activites";
+export class ActiviteService {
+    private apiUrl = `${environment.apiUrl}/activites`;
 
     private http = inject(HttpClient);
 
     ajouter(categorie: ActiviteInterface) {
         return this.http.post(`${this.apiUrl}`, categorie, { withCredentials: true })
     }
-    // getall(): Observable<CategorieActiviteResponseInterface> {
-    //     return this.http.get<CategorieActiviteResponseInterface>(`${this.apiUrl}/categorie-activites`, { withCredentials: true })
-    //}
+    getAll(): Observable<ActiviteResponseInterface> {
+         return this.http.get<ActiviteResponseInterface>(`${this.apiUrl}`, { withCredentials: true })
+    }
 
     delete(id: number) {
         console.log("l'id dans le service: " + id)
@@ -24,3 +26,4 @@ export class activiteService {
         return this.http.put(`${this.apiUrl}/${id}`, categorie, { withCredentials: true })
     }
 }
+

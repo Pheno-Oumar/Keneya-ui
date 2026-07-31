@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { CategorieActiviteInterface } from '../../../shared/models/CategorieActivite';
 import { CategorieActiviteResponseInterface } from '../../../shared/models/CategorieActiviteResponse';
 import { Observable } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CategorieActiviteService {
-    private apiUrl = "http://localhost:8090";
+    private apiUrl = `${environment.apiUrl}`;
 
     private http = inject(HttpClient);
 
@@ -28,3 +29,4 @@ export class CategorieActiviteService {
         return this.http.put(`${this.apiUrl}/categorie-activites/${id}`,categorie, { withCredentials: true })
     }
 }
+

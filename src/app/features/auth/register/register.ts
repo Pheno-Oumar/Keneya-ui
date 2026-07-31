@@ -4,14 +4,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from "@angular/material/button";
-import { AuthService } from '../../../core/services/auth-service';
+import { AuthService } from '../../../core/auth/auth-service';
 import { RegisterInterface } from '../../../shared/models/register';
 import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-register',
   imports: [MatCardModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatButtonModule, RouterLink],
   templateUrl: './register.html',
-  styleUrl: './register.css',
+  styleUrls: ['./register.css'],
 })
 export class Register {
 
@@ -45,3 +45,6 @@ export class Register {
   }
 
 }
+
+
+
