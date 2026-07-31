@@ -34,7 +34,7 @@ export class CategorieConseilComponent implements OnInit{
     this.service.getCategories().subscribe({
       next: (response) => {
         console.log("Réponse :", response);
-        this.dataSource.data = response.data;
+        this.dataSource.data = response;
       },
       error: (err) => {
         console.error(err);

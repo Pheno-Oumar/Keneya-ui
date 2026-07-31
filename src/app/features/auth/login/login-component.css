@@ -83,7 +83,7 @@ mat-card {
         height: 50px;
         font-size: 16px;
         border-radius: 8px;
-        background-color: #4CAF50 !important;
+        background-color: #43A37A !important;
         color: white !important;
         margin-top: 5px;
     }
@@ -95,7 +95,7 @@ mat-card {
         color: #000;
 
         a {
-            color: #00897B;
+            color: #43A37A;
             font-weight: 500;
             cursor: pointer;
             text-decoration: none;

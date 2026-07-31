@@ -16,7 +16,8 @@ export class AgentSidenav {
   menuItems: MenuItem[] = [
     { label: 'Tableau de board', icon: 'home', route: '/agent' },
     { label: 'Publications', icon: 'category', route: '/agent/publications' },
-    { label: 'Statistiques', icon: 'bar_chart', route: '/agent/statistiques' },
+    { label: 'Conseils', icon: 'bar_chart', route: '/agent/conseils' },
+    { label: 'Activites', icon: 'bar_chart', route: '/agent/activites' },
   ];
 
   deconnexion(): void { 

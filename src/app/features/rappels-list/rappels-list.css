@@ -1,0 +1,115 @@
+.page-liste-rappels {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px 28px;
+}
+
+.entete-liste-rappels {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.entete-liste-rappels h1 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.entete-liste-rappels .bouton-ajouter {
+  background-color: #43A37A;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.entete-liste-rappels .bouton-ajouter mat-icon {
+  margin-right: 4px;
+}
+
+::ng-deep .mat-mdc-tab-labels {
+  gap: 24px;
+}
+
+.liste-rappels {
+  margin-top: 16px;
+}
+
+.rappel-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 4px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.rappel-item:last-child {
+  border-bottom: none;
+}
+
+.cercle-validation {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #22c55e;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.cercle-validation.coche {
+  background: #22c55e;
+}
+
+.rappel-heure {
+  font-weight: 600;
+  width: 56px;
+  flex-shrink: 0;
+}
+
+.rappel-info {
+  flex: 1;
+}
+
+.rappel-info .rappel-nom {
+  font-weight: 500;
+}
+
+.rappel-info .rappel-dosage {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.badge-statut {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.badge-statut.statut-a-prendre {
+  color: #22c55e;
+}
+
+.etat-vide,
+.etat-chargement {
+  color: #6b7280;
+  padding: 24px 0;
+  text-align: center;
+}
+
+.encart-conseil {
+  margin-top: 20px;
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 13px;
+}
+
+.encart-conseil strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.encart-conseil p {
+  margin: 0;
+  color: #6b7280;
+}

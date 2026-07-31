@@ -8,7 +8,7 @@ import { Publication } from '../../../shared/models/Publication';
 })
 export class PublicationService {
   private http = inject(HttpClient);
-  private baseUrl = 'http://localhost:8090/publications';
+  private baseUrl = 'http://localhost:8080/publications';
 
   
   // Si ton backend renvoie un objet avec une propriété "content" (Spring Boot Pageable)

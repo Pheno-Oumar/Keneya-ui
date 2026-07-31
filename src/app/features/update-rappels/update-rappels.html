@@ -1,0 +1,60 @@
+<div class="page-tableau-rappels">
+  <header class="entete-tableau-rappels">
+    <h1>Mes rappels médicaux</h1>
+    <button mat-flat-button color="primary" class="bouton-ajouter" (click)="ouvrirDialogAjout()">
+      <mat-icon>add</mat-icon>
+      Ajouter un rappel
+    </button>
+  </header>
+
+  <table mat-table [dataSource]="rappels" class="tableau-rappels" *ngIf="!chargement; else gabaritChargement">
+    <ng-container matColumnDef="nomMedicament">
+      <th mat-header-cell *matHeaderCellDef>Nom médicament</th>
+      <td mat-cell *matCellDef="let r">
+        <div class="nom-medicament">{{ r.nomMedicament }}</div>
+        <div class="dosage-medicament">{{ r.dosage }}</div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dateDebut">
+      <th mat-header-cell *matHeaderCellDef>Date début</th>
+      <td mat-cell *matCellDef="let r">{{ r.dateDebut }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="dateRappel">
+      <th mat-header-cell *matHeaderCellDef>Date rappel</th>
+      <td mat-cell *matCellDef="let r">{{ r.dateRappel }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="frequence">
+      <th mat-header-cell *matHeaderCellDef>Fréquence</th>
+      <td mat-cell *matCellDef="let r">{{ r.frequence }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="intervalle">
+      <th mat-header-cell *matHeaderCellDef>Intervalle</th>
+      <td mat-cell *matCellDef="let r">{{ r.intervalle }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="statut">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let r">
+        <span class="badge-statut" [class.statut-a-prendre]="r.statut === 'a_prendre'">
+          {{ r.statut === 'a_prendre' ? 'A prendre' : (r.statut === 'pris' ? 'Pris' : 'Terminé') }}
+        </span>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="colonnesAffichees"></tr>
+    <tr mat-row *matRowDef="let row; columns: colonnesAffichees"></tr>
+  </table>
+
+  <ng-template #gabaritChargement>
+    <p class="etat-chargement">Chargement des rappels...</p>
+  </ng-template>
+
+  <div class="encart-conseil">
+    <strong>Conseil</strong>
+    <p>Il ne faut pas modifier vos rappels médicaux que sur l'ordre de médecin spécialiste</p>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="dialog-rappel">
+  <header class="entete-dialog-rappel">
+    <h2>Ajout d'un nouveau rappel</h2>
+    <button mat-icon-button (click)="annuler()" aria-label="Fermer">
+      <span>&times;</span>
+    </button>
+  </header>
+
+  <form [formGroup]="formulaire" (ngSubmit)="enregistrer()" class="formulaire-dialog-rappel">
+    <div class="ligne-formulaire deux-colonnes">
+      <mat-form-field appearance="outline">
+        <mat-label>Nom</mat-label>
+        <input matInput formControlName="nomMedicament" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Date de début</mat-label>
+        <input matInput [matDatepicker]="selecteurDebut" formControlName="dateDebut" />
+        <mat-datepicker-toggle matIconSuffix [for]="selecteurDebut"></mat-datepicker-toggle>
+        <mat-datepicker #selecteurDebut></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="ligne-formulaire deux-colonnes">
+      <mat-form-field appearance="outline">
+        <mat-label>Date de fin</mat-label>
+        <input matInput [matDatepicker]="selecteurFin" formControlName="dateFin" />
+        <mat-datepicker-toggle matIconSuffix [for]="selecteurFin"></mat-datepicker-toggle>
+        <mat-datepicker #selecteurFin></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Date de rappel</mat-label>
+        <input matInput [matDatepicker]="selecteurRappel" formControlName="dateRappel" />
+        <mat-datepicker-toggle matIconSuffix [for]="selecteurRappel"></mat-datepicker-toggle>
+        <mat-datepicker #selecteurRappel></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="ligne-formulaire deux-colonnes">
+      <mat-form-field appearance="outline">
+        <mat-label>Intervalle</mat-label>
+        <input matInput formControlName="intervalle" placeholder="ex: 8h" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Fréquence</mat-label>
+        <input matInput formControlName="frequence" placeholder="Fixe / Variable" />
+      </mat-form-field>
+    </div>
+
+    <div class="actions-dialog-rappel">
+      <button mat-stroked-button type="button" (click)="annuler()">Annuler</button>
+      <button mat-flat-button color="primary" type="submit" [disabled]="enregistrement">
+        Enregistrer
+      </button>
+    </div>
+  </form>
+</div>

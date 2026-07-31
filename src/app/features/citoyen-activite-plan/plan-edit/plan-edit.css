@@ -1,0 +1,136 @@
+/* Réutilise les styles de add-plan.component.css, plus ceux-ci : */
+.session-row { 
+    display: flex;
+    width: 100%;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.input-box { 
+    border: 1px solid #ddd;
+    border-radius: 8px; padding: 12px;
+    display: flex; align-items: center;
+    background: white; 
+}
+
+.day-box {
+    flex: 1; 
+
+}
+.time-box {
+     
+    flex: 1; 
+    justify-content: space-between; 
+}
+
+.input-box mat-icon {
+    margin-right: 10px;
+    color: #4caf50; 
+}
+
+.delete-icon {
+    color: black !important;
+    cursor: pointer;
+}
+.reorder-icons { 
+    display: flex;
+    flex-direction: column;
+    color: black;
+    font-weight: bold; 
+    cursor: pointer; 
+}
+
+.btn-enregistrer-active { background-color: #a8d5ba !important;
+    width: 150px;
+    color: white; 
+}
+
+.modal-container {
+  padding: 40px;         
+  width: 100%;             
+  box-sizing: border-box;  
+}
+
+.full-width {
+  width: 100%;             
+}
+
+.modal-container {
+  padding: 30px;
+  min-width: 550px; 
+  border-radius: 25px !important;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.session-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;    
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.input-box {
+  flex: 1;       
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  background: white;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 25px;    
+  margin-top: 30px;
+}
+
+/* Le conteneur doit être relatif pour servir de repère à la croix */
+.modal-header {
+  position: relative; 
+  width: 100%;
+  text-align: center; /* Centre le titre H1 */
+  margin-bottom: 30px;
+  padding-top: 10px;  /* Un peu d'espace en haut */
+}
+
+.modal-header h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* La croix de fermeture */
+.close-icon {
+  position: absolute; /* Sort l'icône du flux normal */
+  top: 0;             /* Aligne tout en haut du header */
+  right: 0;           /* Aligne tout à droite du header */
+  cursor: pointer;
+  font-size: 28px;    /* Taille de la croix */
+  width: 28px;
+  height: 28px;
+  color: #888;
+  transition: color 0.2s;
+}
+
+.close-icon:hover {
+  color: #333; /* Devient plus sombre au survol */
+}
+
+.btn-save {
+  background-color: #a8d5ba !important;
+  color: white !important;
+  min-width: 160px;
+}
+
+.btn-cancel {
+  min-width: 160px;
+  border: 1px solid #ddd !important;
+}

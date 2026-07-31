@@ -1,0 +1,50 @@
+.dialog-rappel {
+  padding: 20px 24px;
+  min-width: 420px;
+}
+
+.entete-dialog-rappel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.entete-dialog-rappel h2 {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.entete-dialog-rappel button {
+  font-size: 20px;
+  line-height: 1;
+  color: #9ca3af;
+}
+
+.formulaire-dialog-rappel {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ligne-formulaire.deux-colonnes {
+  display: flex;
+  gap: 16px;
+}
+
+.ligne-formulaire.deux-colonnes mat-form-field {
+  flex: 1;
+}
+
+.actions-dialog-rappel {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.actions-dialog-rappel button[mat-flat-button] {
+  background-color: #43A37A;
+  color: #fff;
+}

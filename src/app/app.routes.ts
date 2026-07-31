@@ -13,10 +13,11 @@ import { CategorieActiviteComponent } from './shared/component/categorie-activit
 import { CategorieConseilComponent } from './shared/component/categorie-conseil-component/categorie-conseil-component';
 import { AgentComponent } from './shared/component/agent-component/agent-component';
 import { AgentLayout } from './layout/agent-layout/agent-layout/agent-layout';
-import { ConseilComponent } from './shared/component/activite-component/activite-component';
+// import { ConseilComponent } from './shared/component/activite-component/activite-component';
 import { DahbordAdminComponent } from './shared/component/dahbord-admin-component/dahbord-admin-component';
 import { PublicationComponent } from './shared/component/publication-component/publication-component';
-
+import { ProfileAdmin } from './features/profil_admin/profil_admin';
+import { ProfilCitoyen } from './features/profile_citoyen/profile_citoyen';
 export const routes: Routes = [
   {
     path: '',
@@ -34,7 +35,6 @@ export const routes: Routes = [
     path: 'citoyen',
     component: CitoyenLayout,
     canActivate: [authGuardGuard],
-
     children: [
       {
         path: '',
@@ -48,38 +48,95 @@ export const routes: Routes = [
         path: 'rappels',
         component: RappelPage,
       },
+      {
+        path: 'profilCitoyen',
+        component: ProfilCitoyen,
+      },
     ],
   },
   {
-    path: "admin", component: AdminLayout,
+    path: 'admin',
+    component: AdminLayout,
     children: [
       {
-        path: "", component: Citoyen
-      }
-      , {
-        path: "categories-activite", component: CategorieActiviteComponent
+        path: '',
+        component: Citoyen,
       },
       {
-        path: "categories-conseil", component: CategorieConseilComponent
+        path: 'categories-activite',
+        component: CategorieActiviteComponent,
       },
       {
-        path: "agents", component: AgentComponent
-      }
-    ]
+        path: 'categories-conseil',
+        component: CategorieConseilComponent,
+      },
+      {
+        path: 'agents',
+        component: AgentComponent,
+      },
+      {
+        path: 'profile',
+        component: ProfilCitoyen,
+      },
+    ],
   },
   {
-    path: "agent", component: AgentLayout,
+    path: 'agent',
+    component: AgentLayout,
     children: [
       {
-        path: "", component: Citoyen
-      }
-      , {
-        path: "publications", component: PublicationComponent
+        path: '',
+        component: Citoyen,
       },
       {
-        path: "categories-conseil", component: CategorieConseilComponent
+        path: 'publications',
+        component: PublicationComponent,
       },
-     
-    ]
-  }
+      {
+        path: 'categories-conseil',
+        component: CategorieConseilComponent,
+      },
+      {
+        path: 'profile',
+        component: ProfilCitoyen,
+      },
+    ],
+  },
+  {
+    path: 'Profile_Admin',
+    component: ProfileAdmin,
+  },
+  {
+    path: 'Profile_Citoyen',
+    component: ProfilCitoyen,
+  },
+];
+
+import { RappelsList } from './features/rappels-list/rappels-list';
+
+export const route: Routes = [
+    {
+        path: '', component: Accueil
+    },
+    {
+        path: "login", component: LoginComponent
+    },
+    {
+        path: "register", component: Register
+    },
+    {
+        path: "citoyen", component: CitoyenLayout ,
+         children:[
+            {
+                path: "", component: Citoyen
+            }
+            ,{
+                path: "test" , component:Test
+            }
+            
+        ]
+        },{ 
+                path: 'rappels', 
+                component: RappelsList 
+            },
 ];
