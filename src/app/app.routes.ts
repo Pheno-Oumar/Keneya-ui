@@ -7,6 +7,7 @@ import { CitoyenLayout } from './layout/citoyen-layout/citoyen-layout/citoyen-la
 import { Citoyen } from './features/dashboard/citoyen/citoyen';
 import { Test } from './features/test/test';
 import { RappelsList } from './features/rappels-list/rappels-list';
+import { AgentsListComponent } from './features/agents-list/agents-list';
 
 export const routes: Routes = [
     {
@@ -32,5 +33,8 @@ export const routes: Routes = [
         },{ 
                 path: 'rappels', 
                 component: RappelsList 
+            },{
+                path: 'agents',
+                component: AgentsListComponent
             },
 ];
