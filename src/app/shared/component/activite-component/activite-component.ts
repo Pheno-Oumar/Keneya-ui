@@ -17,6 +17,7 @@ import { ActivitetFormDialog } from '../dialogs/activite-form-dialog/activite-fo
 import { ActiviteService } from '../../../core/services/activite/activite-service';
 import { ActiviteResponse, TypeNiveauEnum } from '../../models/Activite';
 import { ActiviteDetailDialog } from '../dialogs/activite-detail-dialog/activite-detail-dialog';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-activite-component',
@@ -41,6 +42,7 @@ import { ActiviteDetailDialog } from '../dialogs/activite-detail-dialog/activite
 export class ActiviteComponent {
   private dialog = inject(MatDialog);
   private service = inject(ActiviteService);
+  private notification = inject(NotificationService);
 
   displayedColumns: string[] = [
     'idActivites',
@@ -232,9 +234,12 @@ export class ActiviteComponent {
           this.allActivites = this.allActivites.filter(a => a.idActivites !== activite.idActivites);
           this.updateDataSource();
           this.calculateStats();
+          this.notification.success("Activité supprimée avec succès");
         },
+      
         error: (error) => {
           console.error('Erreur lors de la suppression', error);
+          this.notification.error("Erreur lors de la suppression");
         }
       });
     }

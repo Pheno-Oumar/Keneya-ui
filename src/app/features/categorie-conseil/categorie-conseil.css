@@ -1,0 +1,138 @@
+/* Layout & Conteneur */
+.categorie-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+}
+
+/* En-tête */
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-left h2 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.btn-back {
+  color: #555555 !important;
+}
+
+.btn-add {
+  background-color: #20ad73 !important;
+  color: #ffffff !important;
+  border-radius: 8px !important;
+  padding: 8px 18px !important;
+  font-weight: 600 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+/* Grille & Cartes */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.category-card {
+  border-radius: 12px !important;
+  border-top: 5px solid #20ad73 !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
+  background-color: #ffffff !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title-row h3 {
+  margin: 0 0 12px 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.category-card p {
+  color: #666666;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.card-actions-right {
+  display: flex !important;
+  justify-content: flex-end !important;
+  padding: 8px 16px !important;
+  border-top: 1px solid #f0f0f0;
+}
+
+.admin-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Style des boutons d'actions (Icônes seules) */
+.btn-edit {
+  color: #0288d1 !important;
+}
+
+.btn-archive {
+  color: #757575 !important;
+  transition: color 0.2s ease, background-color 0.2s ease !important;
+}
+
+/* Survol rouge discret pour le bouton d'archivage */
+.btn-archive:hover {
+  color: #d32f2f !important;
+  background-color: rgba(211, 47, 47, 0.08) !important;
+}
+
+/* Formulaire Overlay */
+.overlay-form {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+}
+
+.form-card {
+  background-color: #ffffff;
+  padding: 32px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 480px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 16px;
+}

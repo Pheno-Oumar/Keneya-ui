@@ -163,10 +163,7 @@
 </mat-dialog-content>
 
 <mat-dialog-actions class="dialog-actions" align="end">
-    <button mat-button (click)="close()" class="close-btn">
-        <mat-icon>close</mat-icon>
-        Fermer
-    </button>
+    
     <button mat-raised-button color="primary" (click)="modifier()" *ngIf="!data.readonly">
         <mat-icon>edit</mat-icon>
         Modifier

@@ -10,16 +10,15 @@ import { RappelPage } from './features/rappel-page/rappel-page';
 import { authGuardGuard } from './core/guards/auth.guard-guard';
 import { AdminLayout } from './layout/admin-layout/admin-layout/admin-layout';
 import { CategorieActiviteComponent } from './shared/component/categorie-activite-component/categorie-activite-component';
-import { CategorieConseilComponent } from './shared/component/categorie-conseil-component/categorie-conseil-component';
+import { CategorieConseil } from './features/categorie-conseil/categorie-conseil';
 import { AgentComponent } from './shared/component/agent-component/agent-component';
 import { AgentLayout } from './layout/agent-layout/agent-layout/agent-layout';
-import { ConseilComponent } from './shared/component/conseil-component/conseil-component';
+// import { ConseilComponent } from '../../conseil-component/conseil-component';
 import { PublicationComponent } from './shared/component/publication-component/publication-component';
 import { ActiviteComponent } from './shared/component/activite-component/activite-component';
 import { DahbordAdminComponent } from './shared/component/dahbord-admin-component/dahbord-admin-component';
 import { DahbordAgentComponent } from './shared/component/dahbord-agent-component/dahbord-agent-component';
 import { PublicationAdminComponent } from './shared/component/publication-admin-component/publication-admin-component';
-import { ConseilAdminComponent } from './shared/component/conseil-admin-component/conseil-admin-component';
 import { ActiviteCitoyenComponent } from './shared/component/activite-citoyen-component/activite-citoyen-component';
 import { ActivitePanierComponent } from './shared/component/activite-panier-component/activite-panier-component';
 import { CitoyenPublication } from './shared/component/citoyen-publication/citoyen-publication';
@@ -80,17 +79,15 @@ export const routes: Routes = [
         path: "categories-activite", component: CategorieActiviteComponent
       },
       {
-        path: "categories-conseil", component: CategorieConseilComponent
+        path: "categories-conseil", component: CategorieConseil
       },
       {
         path: "agents", component: AgentComponent
       },
       {
         path: "publications", component: PublicationAdminComponent
-      },
-      {
-        path: "conseils", component: ConseilAdminComponent
       }
+      
     ]
   },
   {
@@ -103,7 +100,8 @@ export const routes: Routes = [
         path: "publications", component: PublicationComponent
       },
       {
-        path: "conseils", component: ConseilComponent
+        path: "conseils", component: CategorieConseil
+
       },
       {
         path: "activites", component: ActiviteComponent

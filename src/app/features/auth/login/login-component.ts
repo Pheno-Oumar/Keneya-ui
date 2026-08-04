@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../../../core/services/auth-service';
 import { RouterLink, Router } from '@angular/router';
+import { NotificationService } from '../../../shared/services/notification.service';
 
 @Component({
   selector: 'app-login-component',
@@ -30,6 +31,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   isLoading = false;
   errorMessage = '';
+  notification = inject(NotificationService);
 
   constructor(
     private fb: FormBuilder,
@@ -57,6 +59,7 @@ export class LoginComponent {
           this.isLoading = false;
           localStorage.setItem('role', response.data);
           console.log(localStorage.getItem('role'));
+          this.notification.success("Connexion réussie avec succès");
 
           if (response.success === true) {
             console.log(' Connexion réussie ! Le cookie de session est stocké par le navigateur.',
@@ -86,6 +89,7 @@ export class LoginComponent {
           } else {
             this.errorMessage = 'Erreur du serveur. Veuillez réessayer plus tard.';
           }
+          this.notification.error("Connnexion échouée");
         },
       });
     }

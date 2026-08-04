@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Service } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ActiviteInterface, ActiviteResponseInterface } from '../../../shared/models/Activite';
 import { Observable } from 'rxjs';
 
-@Service()
+@Injectable({
+  providedIn: 'root' 
+})
 export class ActiviteService {
     private apiUrl = "http://localhost:8090/activites";
 

@@ -7,6 +7,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { AuthService } from '../../../core/services/auth-service';
 import { RegisterInterface } from '../../../shared/models/register';
 import { Router, RouterLink } from '@angular/router';
+import { NotificationService } from '../../../shared/services/notification.service';
 @Component({
   selector: 'app-register',
   imports: [MatCardModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatButtonModule, RouterLink],
@@ -18,6 +19,7 @@ export class Register {
   private authService = inject(AuthService);
   private response: object | undefined;
   private router = inject(Router);
+  private notification = inject(NotificationService);
   form = new FormGroup({
     nom: new FormControl('', [Validators.required, Validators.minLength(3)]),
     prenom: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -36,8 +38,11 @@ export class Register {
           next: response => {
             this.response = response;
             this.router.navigate(["/login"]);
+            this.notification.success("Inscription réussie avec succès");
           },
-          error: err => { console.log(err) },
+          error: err => { console.log(err) 
+            this.notification.error("Erreur veuillez réprendre");
+          },
           complete: () => { console.log("Requete terminer") }
         }
       );

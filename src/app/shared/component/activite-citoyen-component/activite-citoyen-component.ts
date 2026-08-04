@@ -14,7 +14,7 @@ import { ActiviteResponse } from '../../models/Activite';
 import { ActiviteService } from '../../../core/services/activite/activite-service';
 import { ActiviteDetailDialog } from '../dialogs/activite-detail-dialog/activite-detail-dialog';
 import { CitoyenActiviteService } from '../../../core/services/citoyen-activite/citoyen-activite-service';
-
+import { NotificationService } from '../../services/notification.service';
 @Component({
   selector: 'app-activite-citoyen-component',
   standalone: true,
@@ -37,6 +37,7 @@ export class ActiviteCitoyenComponent implements OnInit {
   private dialog = inject(MatDialog);
   private service = inject(ActiviteService);
   private citoyenActiviteService = inject(CitoyenActiviteService);
+  private notification = inject(NotificationService);
 
   // Liste des activités
   allActivites: ActiviteResponse[] = [];
@@ -87,6 +88,7 @@ export class ActiviteCitoyenComponent implements OnInit {
       },
       error: (error) => {
         console.error('Erreur lors du chargement des activités', error);
+        this.notification.error("Erreur lors du chargement des activités");
         this.showToastMessage('Erreur lors du chargement des activités', 'error');
         this.isLoading = false;
       }

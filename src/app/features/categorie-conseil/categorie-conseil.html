@@ -1,0 +1,74 @@
+<div class="categorie-container">
+  
+  <!-- En-tête -->
+  <div class="header-section">
+    <h2>Gestion des catégories de conseils</h2>
+    
+    <button mat-flat-button class="btn-add" (click)="ouvrirFormulaire()">
+      <mat-icon>add</mat-icon> Ajouter une catégorie
+    </button>
+  </div>
+
+  <!-- Formulaire Modal Overlay -->
+  <div class="overlay-form" *ngIf="showForm">
+    <div class="form-card">
+      <h3>{{ isEditing ? 'Modifier la catégorie' : 'Créer une catégorie' }}</h3>
+      
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nom de la catégorie</mat-label>
+        <input matInput [(ngModel)]="currentCategorie.nom" name="nom" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea matInput [(ngModel)]="currentCategorie.description" name="description" rows="3" required></textarea>
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button mat-button (click)="fermerFormulaire()">Annuler</button>
+        <button mat-flat-button color="primary" (click)="enregistrer()">Sauvegarder</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grille des cartes -->
+  <div class="categories-grid">
+    
+    <mat-card class="category-card" *ngFor="let cat of categories">
+      
+      <mat-card-content>
+        <div class="title-row">
+          <h3>{{ cat.nom }}</h3>
+        </div>
+        <p>{{ cat.description }}</p>
+      </mat-card-content>
+      
+      <mat-card-actions class="card-actions-right">
+        <div class="admin-actions-group">
+          
+          <!-- Bouton Éditer (icône seule) -->
+          <button 
+            mat-icon-button 
+            class="btn-edit" 
+            (click)="ouvrirFormulaire(cat)"
+            title="Modifier">
+            <mat-icon>edit</mat-icon>
+          </button>
+          
+          <!-- Bouton Archiver (icône seule) -->
+          <button 
+            mat-icon-button 
+            class="btn-archive" 
+            (click)="supprimer(cat.id!)" 
+            title="Archiver cette catégorie">
+            <mat-icon>archive</mat-icon>
+          </button>
+
+        </div>
+      </mat-card-actions>
+
+    </mat-card>
+
+  </div>
+
+</div>
