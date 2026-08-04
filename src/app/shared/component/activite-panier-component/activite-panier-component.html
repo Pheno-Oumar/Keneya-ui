@@ -1,0 +1,205 @@
+<div class="mat-typography container">
+    <!-- En-tête avec Material Design -->
+    <mat-toolbar color="primary" class="header-toolbar">
+        <span class="toolbar-title">
+            <mat-icon>shopping_cart</mat-icon>
+            Mon panier d'activités
+        </span>
+        <span class="spacer"></span>
+        <span class="toolbar-stats">
+            {{ selectedActivites.length }} activité{{ selectedActivites.length > 1 ? 's' : '' }} sélectionnée{{
+            selectedActivites.length > 1 ? 's' : '' }}
+        </span>
+    </mat-toolbar>
+
+    <!-- En-tête du panier -->
+    <div class="panier-header">
+        <div class="panier-info">
+            <h2>Vos activités sélectionnées</h2>
+            <p *ngIf="selectedActivites.length === 0; else panierCount">
+                Vous n'avez pas encore sélectionné d'activités
+            </p>
+            <ng-template #panierCount>
+                <p>Vous avez sélectionné <strong>{{ selectedActivites.length }}</strong> activité{{
+                    selectedActivites.length > 1 ? 's' : '' }}</p>
+            </ng-template>
+        </div>
+        <div class="panier-actions-top">
+            <button mat-stroked-button color="warn" (click)="viderPanier()" *ngIf="selectedActivites.length > 0">
+                <mat-icon>delete_sweep</mat-icon>
+                Vider le panier
+            </button>
+        </div>
+    </div>
+
+    <!-- Liste des activités sélectionnées -->
+    <div class="panier-content" *ngIf="selectedActivites.length > 0; else emptyPanier">
+        <mat-card class="panier-card">
+            <mat-card-content>
+                <!-- En-tête du tableau -->
+                <div class="table-header">
+                    <div class="col-col">#</div>
+                    <div class="col-activite">Activité</div>
+                    <div class="col-categorie">Catégorie</div>
+                    <div class="col-niveau">Niveau</div>
+                    <div class="col-date">Date</div>
+                    <div class="col-duree">Durée</div>
+                    <div class="col-actions">Actions</div>
+                </div>
+
+                <!-- Lignes des activités -->
+                <div class="table-body">
+                    <div class="table-row" *ngFor="let activite of selectedActivites; let i = index">
+                        <div class="col-col">
+                            <span class="row-number">{{ i + 1 }}</span>
+                        </div>
+                        <div class="col-activite">
+                            <div class="activite-info">
+                                <span class="activite-nom">{{ activite.nom }}</span>
+                                <span class="activite-description" *ngIf="activite.description">
+                                    {{ truncateDescription(activite.description, 50) }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-categorie">
+                            <mat-chip color="primary" selected>
+                                {{ activite.categorieActivite }}
+                            </mat-chip>
+                        </div>
+                        <div class="col-niveau">
+                            <mat-chip [color]="getNiveauColor(activite.niveau)" selected>
+                                {{ getNiveauLabel(activite.niveau) }}
+                            </mat-chip>
+                        </div>
+                        <div class="col-date">
+                            <mat-icon class="date-icon">event</mat-icon>
+                            {{ formatDate(activite.date) }}
+                        </div>
+                        <div class="col-duree">
+                            <mat-icon class="duree-icon">timer</mat-icon>
+                            {{ formatDuree(activite.duree) }}
+                        </div>
+                        <div class="col-actions">
+                            <button mat-icon-button color="warn" (click)="retirerDuPanier(activite)"
+                                matTooltip="Supprimer">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Résumé du panier -->
+                <div class="panier-summary">
+                    <div class="summary-left">
+                        <div class="summary-item">
+                            <span class="summary-label">Total activités :</span>
+                            <span class="summary-value">{{ selectedActivites.length }}</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Durée totale :</span>
+                            <span class="summary-value">{{ getTotalDuree() }}</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Catégories :</span>
+                            <span class="summary-value">{{ getCategoriesCount() }}</span>
+                        </div>
+                    </div>
+                    <div class="summary-right">
+                        <button mat-raised-button color="primary" (click)="validerSelection()" class="validate-btn">
+                            <mat-icon>check_circle</mat-icon>
+                            Valider la sélection
+                        </button>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <!-- État vide -->
+    <ng-template #emptyPanier>
+        <div class="empty-state mat-elevation-z1">
+            <mat-icon class="empty-icon">shopping_cart</mat-icon>
+            <h3>Votre panier est vide</h3>
+            <p>Vous n'avez pas encore sélectionné d'activités.</p>
+            <p class="empty-sub">Parcourez les activités disponibles et sélectionnez celles qui vous intéressent.</p>
+            <button mat-raised-button color="primary" routerLink="/activites" class="browse-btn">
+                <mat-icon>explore</mat-icon>
+                Parcourir les activités
+            </button>
+        </div>
+    </ng-template>
+
+    <!-- Bouton flottant pour parcourir les activités -->
+    <button mat-fab color="primary" class="fab-browse" routerLink="/activites" *ngIf="selectedActivites.length === 0">
+        <mat-icon>explore</mat-icon>
+    </button>
+
+    <!-- Bouton flottant pour valider -->
+    <button mat-fab color="accent" class="fab-validate" (click)="validerSelection()"
+        *ngIf="selectedActivites.length > 0">
+        <mat-icon>check_circle</mat-icon>
+        <span class="fab-badge">{{ selectedActivites.length }}</span>
+    </button>
+</div>
+
+<!-- Modal de validation -->
+<div class="modal-overlay" *ngIf="showValidationModal">
+    <div class="modal-container">
+        <mat-card class="modal-card">
+            <mat-card-header>
+                <mat-card-title>
+                    <mat-icon class="modal-icon">verified</mat-icon>
+                    Confirmer la sélection
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p>Vous êtes sur le point de valider la sélection de <strong>{{ selectedActivites.length }}</strong>
+                    activité{{ selectedActivites.length > 1 ? 's' : '' }}.</p>
+
+                <div class="modal-activites">
+                    <div class="modal-activite-item" *ngFor="let activite of selectedActivites; let i = index">
+                        <span class="modal-number">{{ i + 1 }}</span>
+                        <span class="modal-activite-nom">{{ activite.nom }}</span>
+                        <mat-chip [color]="getNiveauColor(activite.niveau)" selected>
+                            {{ getNiveauLabel(activite.niveau) }}
+                        </mat-chip>
+                    </div>
+                </div>
+
+                <div class="modal-summary">
+                    <div class="modal-summary-item">
+                        <span>Total :</span>
+                        <strong>{{ selectedActivites.length }} activité{{ selectedActivites.length > 1 ? 's' : ''
+                            }}</strong>
+                    </div>
+                    <div class="modal-summary-item">
+                        <span>Durée totale :</span>
+                        <strong>{{ getTotalDuree() }}</strong>
+                    </div>
+                </div>
+
+                <p class="modal-confirmation-text">Voulez-vous confirmer cette sélection ?</p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button (click)="closeValidationModal()" class="modal-cancel-btn">
+                    Annuler
+                </button>
+                <button mat-raised-button color="primary" (click)="confirmerValidation()" class="modal-confirm-btn">
+                    <mat-icon>check_circle</mat-icon>
+                    Confirmer
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
+
+<!-- Toast notification -->
+<div class="toast-container" *ngIf="showToast">
+    <div class="toast-message" [class]="toastType">
+        <mat-icon>{{ toastIcon }}</mat-icon>
+        <span>{{ toastMessage }}</span>
+        <button mat-icon-button (click)="hideToast()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</div>

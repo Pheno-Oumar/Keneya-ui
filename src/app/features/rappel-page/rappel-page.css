@@ -4,8 +4,6 @@
   justify-content: space-between;
 }
 
-
-
 .new-reminder {
   background-color: #2d7ff9;
   color: white;
@@ -15,8 +13,6 @@
   cursor: pointer;
 }
 
-
-
 main {
   padding: 30px;
 }
@@ -24,59 +20,160 @@ main {
 h2 {
   margin-bottom: 20px;
 }
+.card-section{
+	row-gap: 20px;
+}
+.rappel-badge-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 14px 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 
-.card {
-  background-color: white;
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 15px;
+.rappel-mini-card__delete {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 2;
+  color: #ed2121;
+  cursor: pointer;
+}
+.rappel-mini-card {
+  position: relative;
+}
+
+.rappel-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff7ed;
+  color: #c2410c;
+  border: 1.5px solid #fdba74;
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(194, 65, 12, 0.15);
+}
+
+.rappel-badge__icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: #ea580c;
+}
+.rappel-dates {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.label {
-  display: inline-block;
-  margin: 5px 0;
-  font-weight: bold;
+.rappel-badge__date {
+  white-space: nowrap;
 }
 
-.action {
-  border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  color: white;
+.notifications-overlay {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  width: min(420px, calc(100vw - 40px));
 }
 
-.green {
-  background-color: #4caf50;
-}
-.blue {
-  background-color: #2d7ff9;
-}
-.orange {
-  background-color: #ff9800;
-}
-.gray {
-  background-color: #ccc;
-  color: #333;
+.notifications {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .notification {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  padding: 15px 20px;
-  width: 280px;
-}
-
-.notif-actions {
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #fff8e1, #ffffff);
+  border: 1px solid rgba(255, 193, 7, 0.25);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  animation: slideIn 0.25s ease;
 }
+
+.notification-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+}
+
+.notification-icon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff3cd;
+  color: #b7791f;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.notification-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.notification-title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #8a5a00;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.notification-message {
+  margin: 0;
+  font-size: 14px;
+  color: #3d3d3d;
+  line-height: 1.45;
+}
+
+.notification-close {
+  border: none;
+  background: transparent;
+  color: #8a5a00;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 8px;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.notification-close:hover {
+  background: rgba(138, 90, 0, 0.1);
+  color: #5f3d00;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+

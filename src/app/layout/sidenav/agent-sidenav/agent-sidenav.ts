@@ -17,7 +17,7 @@ export class AgentSidenav {
     { label: 'Tableau de board', icon: 'home', route: '/agent' },
     { label: 'Publications', icon: 'category', route: '/agent/publications' },
     { label: 'Conseils', icon: 'bar_chart', route: '/agent/conseils' },
-    { label: 'Activites', icon: 'bar_chart', route: '/agent/activites' },
+    { label: 'Activites', icon: 'list', route: '/agent/activites' },
   ];
 
   deconnexion(): void { 

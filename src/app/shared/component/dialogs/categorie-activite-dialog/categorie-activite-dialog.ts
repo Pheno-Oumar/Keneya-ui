@@ -1,13 +1,13 @@
-import { Component,inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule,MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatActionList } from "@angular/material/list";
 import { CategorieActiviteService } from '../../../../core/services/categorie-activite/categorie-activite-service';
-import {CategorieActiviteInterface} from '../../../models/CategorieActivite';
+import { CategorieActiviteInterface } from '../../../models/CategorieActivite';
 
 @Component({
   selector: 'app-categorie-activite-dialog',
@@ -18,35 +18,57 @@ import {CategorieActiviteInterface} from '../../../models/CategorieActivite';
 export class CategorieActiviteDialog {
   private dialogRef = inject(MatDialogRef<CategorieActiviteDialog>);
   private service = inject(CategorieActiviteService);
-
+   data = inject(MAT_DIALOG_DATA);
 
   form = new FormGroup({
-    libelle: new FormControl('',[Validators.required,Validators.minLength(3)]),
+    libelle: new FormControl('', [Validators.required, Validators.minLength(3)]),
     description: new FormControl('')
   });
 
-  ajouter(){
-    if(this.form.valid){
-      console.log("le formulaire est correct.")
-      const categorie: CategorieActiviteInterface= this.form.getRawValue() as unknown  as CategorieActiviteInterface;
-          this.service.ajouterCategorieActivite(categorie).subscribe(
-            {
-              next: response =>{
-                console.log(`la reponse de la requete ${response}`);
-                this.dialogRef.close(true);
-              },
-              error: err =>{
-                console.log(err);
-              },
-              complete: () =>{
-                console.log("request terminer");
-              }
-            }
-          );
+  ngOnInit() {
+
+    if (this.data?.mode === 'edit') {
+
+      this.form.patchValue({
+        libelle: this.data.categorie.libelle,
+        description: this.data.categorie.description
+      });
+
     }
+
   }
 
-  close(){
+  enregistrer() {
+
+    if (this.form.invalid) {
+      return;
+    }
+
+    const categorie = this.form.getRawValue() as CategorieActiviteInterface;
+
+    if (this.data?.mode === 'edit') {
+
+      this.service
+        .modifier(this.data.categorie.id, categorie)
+        .subscribe({
+          next: () => this.dialogRef.close(true),
+          error: err => console.log(err)
+        });
+
+    } else {
+
+      this.service
+        .ajouterCategorieActivite(categorie)
+        .subscribe({
+          next: () => this.dialogRef.close(true),
+          error: err => console.log(err)
+        });
+
+    }
+
+  }
+
+  close() {
     this.dialogRef.close();
   }
 }

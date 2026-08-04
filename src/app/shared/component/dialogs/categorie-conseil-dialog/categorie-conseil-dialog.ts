@@ -49,6 +49,6 @@ export class CategorieConseilDialog {
   }
 
   close(){
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 }

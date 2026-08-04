@@ -8,18 +8,21 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { AgentFormDialog } from '../dialogs/agent-form-dialog/agent-form-dialog';
 import { AgentService } from '../../../core/services/agent/agent-service';
-import { AgentResponseInterface } from '../../models/agent';
+import { AgentDTOResponse, AgentResponseInterface } from '../../models/agent';
+import { AgentDetailDialog } from '../dialogs/agent-detail-dialog/agent-detail-dialog';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-agent-component',
   imports: [
-    MatButtonModule, 
+    MatButtonModule,
     MatDialogModule,
     MatTableModule,
     MatToolbarModule,
     MatIconModule,
     MatTooltipModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+     CommonModule
   ],
   templateUrl: './agent-component.html',
   styleUrl: './agent-component.css',
@@ -27,10 +30,10 @@ import { AgentResponseInterface } from '../../models/agent';
 export class AgentComponent {
   private dialog = inject(MatDialog);
   private service = inject(AgentService);
-  
+
   displayedColumns: string[] = ['id', 'nom', 'prenom', 'email', 'telephone', 'actions'];
   dataSource = new MatTableDataSource<AgentResponseInterface>([]);
-  
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   get agents(): AgentResponseInterface[] {
@@ -45,46 +48,59 @@ export class AgentComponent {
   }
 
   ngOnInit() {
-    this.service.getAll().subscribe({
-      next: response => {
-        this.agents = response.data;
-      },
-      error: error => {
-        console.error('Erreur lors du chargement des agents', error);
-      }
-    });
-  }
+  this.service.getAll().subscribe({
+    next: response => {
+      this.dataSource.data = response.data;
+    }
+  });
+}
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
+ngAfterViewInit() {
+  this.dataSource.paginator = this.paginator;
+}
 
   ajouter() {
     this.dialog.open(AgentFormDialog, {
       width: '600px',
       maxHeight: '100%',
+    }).afterClosed().subscribe((result)=>{
+      if(result === true){
+        this.ngOnInit();
+      }
     });
+    
   }
 
-  modifier(agent: AgentResponseInterface) {
-    this.dialog.open(AgentFormDialog, {
-      width: '600px',
-      maxHeight: '100%',
-      data: { agent, mode: 'edit' }
-    });
-  }
+  // modifier(agent: AgentResponseInterface) {
+  //   this.dialog.open(AgentFormDialog, {
+  //     width: '600px',
+  //     maxHeight: '100%',
+  //     data: { agent, mode: 'edit' }
+  //   });
+  // }
 
-  detail(agent: AgentResponseInterface) {
-    this.dialog.open(AgentFormDialog, {
-      width: '600px',
-      maxHeight: '100%',
-      data: { agent, mode: 'detail' }
-    });
-  }
+  detail(agent: AgentDTOResponse) {
+  const dialogRef = this.dialog.open(AgentDetailDialog, {
+    width: '750px',
+    maxWidth: '95vw',
+    maxHeight: '90vh',
+    panelClass: 'custom-dialog-container',
+    data: { 
+      agent: agent,
+      readonly: false
+    }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result?.updated || result?.deleted) {
+      this.ngOnInit(); 
+    }
+  });
+}
 
   supprimer(agent: AgentResponseInterface) {
     if (confirm(`Voulez-vous vraiment supprimer l'agent ${agent.nom} ${agent.prenom} ?`)) {
-      this.service.delete(agent.id).subscribe({
+      this.service.archiver(agent.id).subscribe({
         next: () => {
           this.agents = this.agents.filter(a => a.id !== agent.id);
         },

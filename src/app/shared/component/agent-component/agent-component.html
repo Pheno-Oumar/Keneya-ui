@@ -9,7 +9,7 @@
     </mat-toolbar>
 
     <div class="table-wrapper">
-        <mat-table [dataSource]="agents" class="mat-elevation-z2">
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z2">
 
             <ng-container matColumnDef="id">
                 <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
@@ -40,10 +40,6 @@
                 <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
                 <mat-cell *matCellDef="let agent">
                     <div class="actions-container">
-                        <button mat-mini-fab color="primary" (click)="modifier(agent)" matTooltip="Modifier"
-                            aria-label="Modifier l'agent">
-                            <mat-icon>edit</mat-icon>
-                        </button>
                         <button mat-mini-fab color="accent" (click)="detail(agent)" matTooltip="Détail"
                             aria-label="Voir les détails">
                             <mat-icon>visibility</mat-icon>

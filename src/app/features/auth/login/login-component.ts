@@ -42,10 +42,15 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+<<<<<<< HEAD
     private router: Router
+=======
+    private router: Router,
+>>>>>>> 9223e7748230b867f05cfe1c2ab64c706a0f911e
   ) {
 
     this.loginForm = this.fb.group({
+<<<<<<< HEAD
       email: [
         '',
         [
@@ -62,17 +67,65 @@ export class LoginComponent {
           Validators.maxLength(64)
         ]
       ]
+=======
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(64)
+        
+      ]],
+>>>>>>> 9223e7748230b867f05cfe1c2ab64c706a0f911e
     });
 
   }
 
   login(): void {
 
+<<<<<<< HEAD
     this.errorMessage = '';
 
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
+=======
+      this.authService.login(this.loginForm.value).subscribe({
+        next: (response: any) => {
+          this.isLoading = false;
+          localStorage.setItem('role', response.data);
+          console.log(localStorage.getItem('role'));
+
+          if (response.success === true) {
+            console.log(' Connexion réussie ! Le cookie de session est stocké par le navigateur.',
+            );
+          } else {
+            this.errorMessage = response.message || 'Identifiants incorrects.';
+          }
+          const role = response.data.role
+          if (role == "CITOYEN") {
+            this.router.navigate(['/citoyen']);
+          } else if (role == "ADMIN") {
+            this.router.navigate(['/admin']);
+          }
+          else if (role== "AGENT") {
+            this.router.navigate(['/agent']);
+          }
+          else {
+            this.router.navigate(['/agent']);
+          }
+
+        },
+        error: (error: HttpErrorResponse) => {
+          this.isLoading = false;
+
+          if (error.status === 401 || error.status === 403) {
+            this.errorMessage = 'Email ou mot de passe incorrect.';
+          } else {
+            this.errorMessage = 'Erreur du serveur. Veuillez réessayer plus tard.';
+          }
+        },
+      });
+>>>>>>> 9223e7748230b867f05cfe1c2ab64c706a0f911e
     }
 
     this.isLoading = true;

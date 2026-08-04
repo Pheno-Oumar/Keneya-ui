@@ -21,6 +21,11 @@ export class ActiviteService {
         return this.http.delete(`${this.apiUrl}/${id}`, { withCredentials: true })
     }
 
+    archiver(id: number) {
+        console.log("l'id dans le service: " + id)
+        return this.http.patch(`${this.apiUrl}/${id}/archiver`,{}, { withCredentials: true })
+    }
+
     modifier(id: number, categorie: ActiviteInterface) {
         return this.http.put(`${this.apiUrl}/${id}`, categorie, { withCredentials: true })
     }

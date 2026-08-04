@@ -1,5 +1,5 @@
 /* Import du thème Material */
-@import '@angular/material/prebuilt-themes/indigo-pink.css';
+/*@import '@angular/material/prebuilt-themes/indigo-pink.css';*/
 
 /* Conteneur principal */
 .container {
@@ -15,7 +15,7 @@
     border-radius: 8px 8px 0 0;
     margin-bottom: 20px;
     padding: 0 24px;
-    background: linear-gradient(135deg, #3f51b5 0%, #5c6bc0 100%);
+    background: linear-gradient(135deg, #43A37A 0%, #43A37A 100%);
 }
 
 .toolbar-title {

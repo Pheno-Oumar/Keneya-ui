@@ -38,6 +38,7 @@
             </div>
             }
 
+<<<<<<< HEAD
             <a routerLink="/rappels" class="voir-tous">Voir tous les rappels</a>
         </div>
     </div>
@@ -49,4 +50,89 @@
     <div class="grid-bas">
         <div class="carte carte-placeholder carte-large"><!-- ex: statistiques / conseils --></div>
     </div>
+=======
+	<div class="grid-bas">
+
+		<mat-card class="publication-card" appearance="outlined">
+			<mat-card-header class="publication-card__header">
+				<div mat-card-avatar class="publication-card__avatar">
+					<mat-icon>campaign</mat-icon>
+				</div>
+
+				<mat-card-title class="publication-card__title">
+					Dernière publication
+				</mat-card-title>
+
+				<mat-card-subtitle class="publication-card__subtitle">
+					{{ publication()?.source }}
+				</mat-card-subtitle>
+			</mat-card-header>
+
+			<mat-card-content class="publication-card__content">
+				<div class="publication-card__meta">
+					<span class="chip chip--date">{{publication()?.dateCreation | date}}</span>
+				</div>
+
+				<h3 class="publication-card__heading">{{publication()?.nomMaladie}}</h3>
+
+				<p class="publication-card__text">
+					<strong>Symptômes :</strong> {{publication()?.symptome}}
+				</p>
+
+				<p class="publication-card__text">
+					<strong>Conseil préventif :</strong> {{publication()?.conseilPreventif}}
+				</p>
+			</mat-card-content>
+
+			<mat-card-actions align="end" class="publication-card__actions">
+				<a mat-stroked-button color="primary" routerLink="/citoyen/publications">
+					Voir plus
+				</a>
+			</mat-card-actions>
+		</mat-card>
+	</div>
+
+	<div class="grid-bas">
+		<mat-card class="conseil-card" appearance="outlined">
+			<mat-card-header class="conseil-card__header">
+				<div mat-card-avatar class="conseil-card__avatar">
+					<mat-icon>lightbulb</mat-icon>
+				</div>
+
+				<mat-card-title class="conseil-card__title">
+					Dernier Conseil
+				</mat-card-title>
+
+				<mat-card-subtitle class="conseil-card__subtitle">
+					Ministère Santé Mali
+				</mat-card-subtitle>
+			</mat-card-header>
+
+			<mat-card-content class="conseil-card__content">
+				<div class="conseil-card__meta">
+					<span class="chip chip--type">Conseil</span>
+					<span class="chip chip--date">24/07/2026</span>
+					<span class="chip chip--archive">Actif</span>
+				</div>
+
+				<h3 class="conseil-card__heading">Faire de l’exercice régulièrement</h3>
+
+				<p class="conseil-card__text">
+					<strong>Titre :</strong> Hypertension
+				</p>
+
+				<p class="conseil-card__text">
+					<strong>Contenu :</strong> Adopter une activité physique régulière aide à mieux contrôler la
+					tension.
+				</p>
+			</mat-card-content>
+
+			<mat-card-actions align="end" class="conseil-card__actions">
+				<a mat-stroked-button color="primary" routerLink="/citoyen/conseils">
+					Voir plus
+				</a>
+			</mat-card-actions>
+		</mat-card>
+	</div>
+>>>>>>> 9223e7748230b867f05cfe1c2ab64c706a0f911e
 </section>

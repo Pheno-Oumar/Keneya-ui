@@ -17,7 +17,9 @@ export class AdminSidenav {
     { label: 'Tableau de board', icon: 'home', route: '/admin/' },
     { label: 'Agents', icon: 'groups', route: '/admin/agents' },
     { label: 'Categories activite', icon: 'category', route: '/admin/categories-activite' },
-    { label: 'Categories conseil', icon: 'category', route: '/admin/categories-conseil' },
+    { label: 'Categories conseil', icon: 'folder', route: '/admin/categories-conseil' },
+    { label: 'Publications', icon: 'grid_view', route: '/admin/publications' },
+    { label: 'Conseils', icon: 'list', route: '/admin/conseils' },
     { label: 'Statistiques', icon: 'bar_chart', route: '/admin/statistiques' },
   ];
 
@@ -28,7 +30,7 @@ export class AdminSidenav {
       },
       error: (res) => console.log(res),
     });
-   }
+  }
 }
 interface MenuItem {
   label: string;

@@ -16,6 +16,7 @@ import { ActivitetFormDialog } from '../dialogs/activite-form-dialog/activite-fo
 //import { ActiviteDetailDialog } from '../dialogs/activite-detail-dialog/activite-detail-dialog';
 import { ActiviteService } from '../../../core/services/activite/activite-service';
 import { ActiviteResponse, TypeNiveauEnum } from '../../models/Activite';
+import { ActiviteDetailDialog } from '../dialogs/activite-detail-dialog/activite-detail-dialog';
 
 @Component({
   selector: 'app-activite-component',
@@ -181,7 +182,7 @@ export class ActiviteComponent {
       'DEBUTANT': 'primary',
       'INTERMEDIAIRE': 'accent',
       'AVANCE': 'warn'
-        };
+    };
     return colors[niveau] || 'primary';
   }
 
@@ -212,21 +213,21 @@ export class ActiviteComponent {
     });
   }
 
-  // detail(activite: ActiviteResponse) {
-  //   this.dialog.open(ActiviteDetailDialog, {
-  //     width: '700px',
-  //     maxWidth: '90vw',
-  //     maxHeight: '90vh',
-  //     data: {
-  //       activite: activite,
-  //       readonly: false
-  //     }
-  //   });
-  // }
+  detail(activite: ActiviteResponse) {
+    this.dialog.open(ActiviteDetailDialog, {
+      width: '700px',
+      maxWidth: '90vw',
+      maxHeight: '90vh',
+      data: {
+        activite: activite,
+        readonly: false
+      }
+    });
+  }
 
   supprimer(activite: ActiviteResponse) {
     if (confirm(`Voulez-vous vraiment supprimer l'activité "${activite.nom}" ?`)) {
-      this.service.delete(activite.idActivites).subscribe({
+      this.service.archiver(activite.idActivites).subscribe({
         next: () => {
           this.allActivites = this.allActivites.filter(a => a.idActivites !== activite.idActivites);
           this.updateDataSource();

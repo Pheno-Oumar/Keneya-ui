@@ -1,0 +1,54 @@
+.header{
+    display: flex;
+    height: 90px;
+    margin-top: 10px;
+    background-color: #43A37A;
+}
+
+.spacer{
+    flex: 1;
+}
+.titre{
+    font-weight: bold;
+}
+.icon-account{
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: white;
+}
+
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.icon{
+    color: #43A37A;
+    width: 48px;
+    height: 48px;
+    font-size: 48px;
+}
+
+.card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 180px;
+}
+.blaid{
+    display: flex;
+    gap: 20px;
+}
+
+mat-list :nth-child(n){
+    background-color: aliceblue;
+}
+.booby{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 20px;
+}

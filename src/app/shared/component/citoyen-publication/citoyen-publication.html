@@ -1,0 +1,28 @@
+<div class="container">
+
+
+	<main class="publications-list">
+		@for (pub of publication(); track pub.id) {
+		<mat-card class="publication-card" appearance="outlined" (click)="ouvrirDetail(pub)">
+			<mat-card-header>
+				<div class="header-row">
+					<mat-card-title>{{ pub.nomMaladie }}</mat-card-title>
+					<span class="source-badge">{{ pub.source }}</span>
+				</div>
+			</mat-card-header>
+
+			<mat-card-content>
+				<p class="symptome-line">
+					<mat-icon inline>sick</mat-icon>
+					{{ pub.symptome }}
+				</p>
+				<p class="conseil-preview">{{ pub.conseilPreventif }}</p>
+			</mat-card-content>
+
+			<mat-card-footer class="card-footer">
+				<span class="date">{{ pub.dateCreation | date: 'dd MMM yyyy' }}</span>
+			</mat-card-footer>
+		</mat-card>
+		}
+	</main>
+</div>

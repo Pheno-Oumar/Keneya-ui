@@ -41,9 +41,6 @@ export class PublicationComponent implements OnInit {
   loadPublications(): void {
     this.pubService.getMyPublications().subscribe({
       next: (data: APIResponse<Publication[]>) => {
-        
-        // 1. On affiche la réponse exacte dans la console du navigateur pour l'analyser
-        console.log('Données reçues du backend :', data);
         this.publications.set(data.data)
         this.cdr.detectChanges(); // Forcer la détection des changements après la mise à jour du signal
 
@@ -89,9 +86,7 @@ export class PublicationComponent implements OnInit {
       // Mode Édition (Requête PUT vers le backend)
       this.pubService.updatePublication(this.formPublication).subscribe({
         next: (updatedPub) => {
-          this.publications.update( pubs => pubs.map(p =>
-            p.id === updatedPub.id ? { ...updatedPub, likes: p.likes, dislikes: p.dislikes } : p
-          ));
+          this.loadPublications()
           this.closeModal();
         },
         error: (err) => console.error('Erreur lors de la modification', err)
@@ -102,8 +97,7 @@ export class PublicationComponent implements OnInit {
 
       this.pubService.createPublication(this.formPublication).subscribe({
         next: (newPub) => {
-          // On ajoute la nouvelle publication en haut de la liste locale
-          this.publications.update( pubs => [{ ...newPub, likes: 0, dislikes: 0 }, ...pubs] )
+          this.loadPublications()
           this.isModalActive = false;
         },
         error: (err) => console.error("Erreur lors de l'ajout", err)

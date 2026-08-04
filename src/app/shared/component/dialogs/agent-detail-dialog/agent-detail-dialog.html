@@ -1,0 +1,178 @@
+<mat-toolbar color="primary" class="dialog-header">
+    <span class="dialog-title">
+        <mat-icon>person</mat-icon>
+        Détails de l'agent
+    </span>
+    <span class="spacer"></span>
+    <button mat-icon-button (click)="close()" aria-label="Fermer">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-toolbar>
+
+<mat-dialog-content class="dialog-content">
+    <div class="detail-container">
+
+        <!-- En-tête avec photo et identité -->
+        <div class="detail-header">
+            <div class="profile-section">
+                <div class="profile-avatar">
+                    <span class="avatar-text">{{ getInitials(data.agent.prenom, data.agent.nom) }}</span>
+                    <div class="status-indicator" [class.active]="!data.agent.archive">
+                        <mat-icon class="status-icon">{{ data.agent.archive ? 'cancel' : 'check_circle' }}</mat-icon>
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <h2 class="agent-name">{{ data.agent.prenom }} {{ data.agent.nom }}</h2>
+                    <div class="profile-badges">
+                        <mat-chip color="primary" selected>
+                            <mat-icon>badge</mat-icon>
+                            #{{ data.agent.id }}
+                        </mat-chip>
+                        <mat-chip [color]="data.agent.archive ? 'warn' : 'primary'" selected>
+                            <mat-icon>{{ data.agent.archive ? 'archive' : 'check_circle' }}</mat-icon>
+                            {{ data.agent.archive ? 'Archivé' : 'Actif' }}
+                        </mat-chip>
+                        <mat-chip color="accent" selected *ngIf="data.agent.specialite">
+                            <mat-icon>star</mat-icon>
+                            {{ data.agent.specialite }}
+                        </mat-chip>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Informations personnelles -->
+        <mat-card class="detail-card personal-card">
+            <mat-card-title>
+                <mat-icon>person_outline</mat-icon>
+                Informations personnelles
+            </mat-card-title>
+            <mat-card-content>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <mat-icon class="info-icon">badge</mat-icon>
+                        <div class="info-content">
+                            <span class="info-label">ID</span>
+                            <span class="info-value">#{{ data.agent.id }}</span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <mat-icon class="info-icon">person</mat-icon>
+                        <div class="info-content">
+                            <span class="info-label">Nom complet</span>
+                            <span class="info-value">{{ data.agent.prenom }} {{ data.agent.nom }}</span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <mat-icon class="info-icon">email</mat-icon>
+                        <div class="info-content">
+                            <span class="info-label">Email</span>
+                            <span class="info-value">{{ data.agent.email || 'Non renseigné' }}</span>
+                            <button mat-icon-button class="copy-btn" (click)="copyToClipboard(data.agent.email)"
+                                *ngIf="data.agent.email" matTooltip="Copier l'email">
+                                <mat-icon>content_copy</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <mat-icon class="info-icon">phone</mat-icon>
+                        <div class="info-content">
+                            <span class="info-label">Téléphone</span>
+                            <span class="info-value">{{ data.agent.telephone || 'Non renseigné' }}</span>
+                            <a [href]="'tel:' + data.agent.telephone" *ngIf="data.agent.telephone" matTooltip="Appeler">
+                                <mat-icon class="action-icon">phone_in_talk</mat-icon>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <mat-icon class="info-icon">star</mat-icon>
+                        <div class="info-content">
+                            <span class="info-label">Spécialité</span>
+                            <span class="info-value">{{ data.agent.specialite || 'Non renseignée' }}</span>
+                        </div>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <!-- Informations système -->
+        <mat-card class="detail-card system-card">
+            <mat-card-title>
+                <mat-icon>settings</mat-icon>
+                Informations système
+            </mat-card-title>
+            <mat-card-content>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <mat-icon class="info-icon">event</mat-icon>
+                        <div class="info-content">
+                            <span class="info-label">Date de création</span>
+                            <span class="info-value">{{ formatDate(data.agent.dateCreation) }}</span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <mat-icon class="info-icon">archive</mat-icon>
+                        <div class="info-content">
+                            <span class="info-label">Statut</span>
+                            <span class="info-value" [class.archived]="data.agent.archive"
+                                [class.active]="!data.agent.archive">
+                                {{ data.agent.archive ? 'Archivé' : 'Actif' }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="info-item" *ngIf="data.agent.dateModif">
+                        <mat-icon class="info-icon">update</mat-icon>
+                        <div class="info-content">
+                            <span class="info-label">Dernière modification</span>
+                            <span class="info-value">{{ formatDate(data.agent.dateModif) }}</span>
+                        </div>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <!-- Résumé des activités (si disponibles) -->
+        <mat-card class="detail-card" *ngIf="data.agent.statistiques">
+            <mat-card-title>
+                <mat-icon>analytics</mat-icon>
+                Statistiques
+            </mat-card-title>
+            <mat-card-content>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">{{ data.agent.statistiques.totalActivites || 0 }}</span>
+                        <span class="stat-label">Total activités</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">{{ data.agent.statistiques.activitesEnCours || 0 }}</span>
+                        <span class="stat-label">En cours</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">{{ data.agent.statistiques.activitesTerminees || 0 }}</span>
+                        <span class="stat-label">Terminées</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">{{ data.agent.statistiques.tauxParticipation || 0 }}%</span>
+                        <span class="stat-label">Taux de participation</span>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="dialog-actions" align="end">
+    <button mat-button (click)="close()" class="close-btn">
+        <mat-icon>close</mat-icon>
+        Fermer
+    </button>
+    <button mat-raised-button color="primary" (click)="modifier()" *ngIf="!data.readonly">
+        <mat-icon>edit</mat-icon>
+        Modifier
+    </button>
+    <button mat-raised-button color="warn" (click)="supprimer()" *ngIf="!data.readonly">
+        <mat-icon>delete</mat-icon>
+        Supprimer
+    </button>
+</mat-dialog-actions>
