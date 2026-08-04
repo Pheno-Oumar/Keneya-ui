@@ -11,9 +11,10 @@ export class FormsRappel implements OnInit {
   formRappel = new FormGroup({
     nom_medicament: new FormControl(''),
     frequence: new FormControl('FIXE'),
-    intervalle: new FormControl(),
+    intervalle: new FormControl<number | null>(null),
     dateDebut: new FormControl(''),
     dateFin: new FormControl(''),
+    dateRappel: new FormControl(''),
   });
   @Output() onCloseForm = new EventEmitter<boolean>();
   @Output() onSubmitForm = new EventEmitter<FormGroup>();

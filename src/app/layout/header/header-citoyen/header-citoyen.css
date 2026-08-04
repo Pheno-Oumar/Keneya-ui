@@ -141,7 +141,7 @@
   }
 }
 
-// Responsive
+/* Responsive */
 @media (max-width: 640px) {
   .page-header {
     padding: 16px 20px;

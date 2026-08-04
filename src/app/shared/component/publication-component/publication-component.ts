@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Publication } from '../../../shared/models/Publication';
@@ -15,6 +15,7 @@ import { APIResponse } from '../../models/APIResponse';
 export class PublicationComponent implements OnInit {
   // Injection du service
   private pubService = inject(PublicationService);
+   cdr = inject(ChangeDetectorRef);
   // Tableau dynamique lié à l'UI
   publications = signal<Publication[]>([]);
 
@@ -41,6 +42,7 @@ export class PublicationComponent implements OnInit {
     this.pubService.getMyPublications().subscribe({
       next: (data: APIResponse<Publication[]>) => {
         this.publications.set(data.data)
+        this.cdr.detectChanges(); // Forcer la détection des changements après la mise à jour du signal
 
       },
       error: (err) => { console.error('Erreur lors du chargement', err); }
