@@ -93,19 +93,19 @@ export class RappelPage implements OnInit, OnDestroy {
       });
     }, intervalMs);
   }
-  createRappel(rappel: Rappel) {
-    this.rappelService.createRappel(rappel).subscribe({
-      next: (response) => {
-        console.log('Rappel créé :', response);
-        this.chargerRappelsActifs();
-      },
-      error: (err) => console.error(err),
-      complete: () => {
-        console.log('Création de rappel terminée');
-        this.cdr.detectChanges();
-      },
-    });
-  }
+//   createRappel(rappel: Rappel) {
+//     this.rappelService.createRappel(rappel).subscribe({
+//       next: (response) => {
+//         console.log('Rappel créé :', response);
+//         this.chargerRappelsActifs();
+//       },
+//       error: (err) => console.error(err),
+//       complete: () => {
+//         console.log('Création de rappel terminée');
+//         this.cdr.detectChanges();
+//       },
+//     });
+//   }
 
   fermerNotification(id: number) {
     this.rappelService.marqueCommeLus(id).subscribe({
@@ -119,7 +119,7 @@ export class RappelPage implements OnInit, OnDestroy {
     const rappelData = form.value;
     this.rappelService.createRappel(rappelData).subscribe({
       next: () => {
-        console.log('rappel created successfully');
+        this.chargerRappelsActifs();
         this.showForm = false;
       },
       error: (err) => {

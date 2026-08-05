@@ -1,10 +1,11 @@
 import { Component, inject, Input, signal } from '@angular/core';
 import { AuthService } from '../../../core/services/auth-service';
 import { Utilisateur } from '../../../shared/models/utilisateur';
+import { RouterLink, RouterLinkActive } from "@angular/router";
 
 @Component({
   selector: 'app-header-citoyen',
-  imports: [],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './header-citoyen.html',
   styleUrl: './header-citoyen.css',
 })
