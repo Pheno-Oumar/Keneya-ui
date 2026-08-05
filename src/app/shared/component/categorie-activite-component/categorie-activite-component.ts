@@ -12,6 +12,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { CategorieActiviteService } from '../../../core/services/categorie-activite/categorie-activite-service';
 import { DetailCategorieActiviteDialog } from '../dialogs/detail-categorie-activite-dialog/detail-categorie-activite-dialog';
 import { SupprimerCategorieActiviteDialog } from '../dialogs/supprimer-categorie-activite-dialog/supprimer-categorie-activite-dialog';
+import { CategorieActiviteInterface } from '../../models/CategorieActivite';
 
 @Component({
   standalone: true,
@@ -45,7 +46,28 @@ export class CategorieActiviteComponent implements OnInit {
 
   ajouter() {
     this.dialog.open(CategorieActiviteDialog, {
-      disableClose: true
+      disableClose: true,
+      data: {
+        mode: 'add'
+      }
+    }).afterClosed().subscribe(result => {
+      if (result === true) {
+        this.ngOnInit();
+      }
+    });;
+
+  }
+  modifier(categorie: CategorieActiviteInterface) {
+    this.dialog.open(CategorieActiviteDialog, {
+      disableClose: true,
+      data: {
+        mode: 'edit',
+        categorie
+      }
+    }).afterClosed().subscribe(result => {
+      if (result === true) {
+        this.ngOnInit();
+      }
     });
   }
   detailCategorie(data: object) {

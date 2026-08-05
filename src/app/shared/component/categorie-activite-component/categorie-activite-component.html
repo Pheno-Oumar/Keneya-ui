@@ -1,5 +1,5 @@
 <div class="categories-container">
-    <!-- En-tête -->
+
     <mat-card class="header-card">
         <mat-card-header>
             <mat-card-title>
@@ -31,18 +31,15 @@
         </mat-card-content>
     </mat-card>
 
-    <!-- Tableau -->
     <mat-card class="table-card">
         <mat-card-content>
             <div class="table-container">
                 <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
-                    <!-- ID Column -->
                     <ng-container matColumnDef="id">
                         <th mat-header-cell *matHeaderCellDef> ID </th>
                         <td mat-cell *matCellDef="let produit"> #{{produit.id}} </td>
                     </ng-container>
 
-                    <!-- Nom Column -->
                     <ng-container matColumnDef="nom">
                         <th mat-header-cell *matHeaderCellDef> Nom </th>
                         <td mat-cell *matCellDef="let produit">
@@ -50,26 +47,27 @@
                         </td>
                     </ng-container>
 
-                    <!-- Description Column -->
                     <ng-container matColumnDef="description">
                         <th mat-header-cell *matHeaderCellDef> Description </th>
                         <td mat-cell *matCellDef="let produit">
-                            <span class="category-description">{{produit.description || 'Aucune description'}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic ut, harum exercitationem fuga tempora fugiat laboriosam veniam voluptatibus maxime dignissimos aut sequi est odit dolorum tenetur corrupti animi. Laboriosam, reiciendis? </span>
+                            <span class="category-description">{{produit.description || 'Aucune description'}} </span>
                         </td>
                     </ng-container>
 
-                    <!-- Actions Column -->
                     <ng-container matColumnDef="actions">
                         <th mat-header-cell *matHeaderCellDef> Actions </th>
                         <td mat-cell *matCellDef="let produit">
                             <div class="action-buttons">
-                                <button mat-icon-button color="primary" matTooltip="Voir les détails" (click)="detailCategorie(produit)">
+                                <button mat-icon-button color="primary" matTooltip="Voir les détails"
+                                    (click)="detailCategorie(produit)">
                                     <mat-icon>visibility</mat-icon>
                                 </button>
-                                <button mat-icon-button color="accent" matTooltip="Modifier">
+                                <button mat-icon-button color="accent" (click)="modifier(produit)"
+                                    matTooltip="Modifier">
                                     <mat-icon>edit</mat-icon>
                                 </button>
-                                <button mat-icon-button color="warn" (click)="supprimer(produit)" matTooltip="Supprimer">
+                                <button mat-icon-button color="warn" (click)="supprimer(produit)"
+                                    matTooltip="Supprimer">
                                     <mat-icon>delete</mat-icon>
                                 </button>
                             </div>
@@ -79,7 +77,6 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-                    <!-- Empty state -->
                     <tr class="mat-row" *matNoDataRow>
                         <td class="mat-cell" [attr.colspan]="displayedColumns.length">
                             <div class="empty-state">
@@ -95,7 +92,6 @@
                 </table>
             </div>
 
-            <!-- Pagination -->
             <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
             </mat-paginator>
         </mat-card-content>

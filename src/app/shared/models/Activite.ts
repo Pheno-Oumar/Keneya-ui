@@ -17,6 +17,7 @@ export interface ActiviteResponse {
     description: string;
     niveau: string;
     duree: string;
+    selected?: boolean;
 }
 
 export interface ActiviteResponseInterface {

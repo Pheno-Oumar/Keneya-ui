@@ -152,7 +152,7 @@ export class ConseilComponent {
 }
   supprimer(conseil: ConseilResponse) {
     if (confirm(`Voulez-vous vraiment supprimer le conseil "${conseil.titre}" ?`)) {
-      this.service.delete(conseil.id).subscribe({
+      this.service.archiver(conseil.id).subscribe({
         next: () => {
           this.allConseils = this.allConseils.filter(c => c.id !== conseil.id);
           this.updateDataSource();

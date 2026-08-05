@@ -23,8 +23,12 @@ export class CategorieActiviteService {
         console.log("l'id dans le service: " + id)
         return this.http.delete(`${this.apiUrl}/categorie-activites/${id}`, { withCredentials: true })
     }
+    archiver(id: number) {
+        console.log("l'id dans le service: " + id)
+        return this.http.patch(`${this.apiUrl}/categorie-activites/${id}/archiver`, {}, { withCredentials: true })
+    }
 
-    modifier(id: number,categorie: CategorieActiviteInterface) {
-        return this.http.put(`${this.apiUrl}/categorie-activites/${id}`,categorie, { withCredentials: true })
+    modifier(id: number, categorie: CategorieActiviteInterface) {
+        return this.http.put(`${this.apiUrl}/categorie-activites/${id}`, categorie, { withCredentials: true })
     }
 }

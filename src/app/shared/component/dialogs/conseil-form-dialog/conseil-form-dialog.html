@@ -1,7 +1,9 @@
-<form [formGroup]="form" (ngSubmit)="inscrire()">
-
-    <h1 mat-dialog-title>Créer un conseil</h1>
-
+<form [formGroup]="form" (ngSubmit)="enregistrer()">
+    <h1 mat-dialog-title>
+        {{ data?.mode === 'edit'
+        ? 'Modifier un conseil'
+        : 'Créer un conseil' }}
+    </h1>
     <mat-dialog-content>
 
         <mat-form-field appearance="outline">
@@ -41,7 +43,17 @@
     </mat-dialog-content>
 
     <mat-dialog-actions align="end">
-        <button type="submit"> Save</button>
+        <button mat-raised-button color="primary" type="submit">
+
+            <mat-icon>
+                {{ data?.mode === 'edit' ? 'edit' : 'save' }}
+            </mat-icon>
+
+            {{ data?.mode === 'edit'
+            ? 'Modifier'
+            : 'Enregistrer' }}
+
+        </button>
     </mat-dialog-actions>
 
 </form>
